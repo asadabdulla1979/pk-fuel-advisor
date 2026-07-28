@@ -364,7 +364,13 @@
   .fuelrow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
   @media(max-width:560px){.fuelrow{grid-template-columns:1fr}}
   .fuel{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}
-  .fuel .name{font-size:13px;color:var(--muted);font-weight:600}
+  .fuel .name{font-size:13px;color:var(--muted);font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .ftag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .ftag.fill{background:var(--green);color:#04140c}
+  .ftag.firm{background:#3a2f1a;color:var(--amber);border:1px solid #6b5a2f}
+  .ftag.neutral{background:var(--accent);color:#04101f}
+  .ftag.ease{background:#173226;color:var(--green);border:1px solid #2f6b4d}
+  .ftag.wait{background:var(--amber);color:#1a1404}
   .fuel .now{font-size:13px;color:var(--muted);margin-top:8px}
   .fuel .proj{font-size:30px;font-weight:700;letter-spacing:-.5px;margin-top:2px;font-variant-numeric:tabular-nums}
   .fuel .delta{font-size:14px;font-weight:600;margin-top:4px;font-variant-numeric:tabular-nums}
@@ -515,7 +521,7 @@
 
       <div class="fuelrow">
         <div class="fuel">
-          <div class="name">Petrol</div>
+          <div class="name">Petrol <span class="ftag" id="pTag"></span></div>
           <div class="now">Now: <span id="pNow">—</span></div>
           <div class="proj" id="pProj">—</div>
           <div class="delta" id="pDelta">—</div>
@@ -523,7 +529,7 @@
           <div class="cum" id="pCum">—</div>
         </div>
         <div class="fuel">
-          <div class="name">Diesel (HSD)</div>
+          <div class="name">Diesel (HSD) <span class="ftag" id="dTag"></span></div>
           <div class="now">Now: <span id="dNow">—</span></div>
           <div class="proj" id="dProj">—</div>
           <div class="delta" id="dDelta">—</div>
@@ -740,6 +746,7 @@
     $("pNow").textContent=rs(pA); $("dNow").textContent=rs(dA);
     $("pProj").textContent=rs(pP); $("dProj").textContent=rs(dP);
     setDelta("pDelta",pd); setDelta("dDelta",dd);
+    setFuelTag("pTag",pd); setFuelTag("dTag",dd);
     var rl=(Nrev===1)?"next revision":(Nrev+" revisions");
     $("pTank").innerHTML="<span class='"+cls(pd)+"'>"+signRs(pd*tank)+"</span> per "+tank+"L tank · "+rl;
     $("dTank").innerHTML="<span class='"+cls(dd)+"'>"+signRs(dd*tank)+"</span> per "+tank+"L tank · "+rl;
@@ -801,6 +808,15 @@
     el.className="delta "+cls(d);
     el.textContent=(d>0?"▲ ":d<0?"▼ ":"● ")+signRs(d)+"/L";
   }
+
+  function fuelRec(d){
+    if(d>2) return ["Fill now","fill"];
+    if(d>0.5) return ["Slightly firm","firm"];
+    if(d>=-0.5) return ["No rush","neutral"];
+    if(d>=-2) return ["Easing","ease"];
+    return ["Wait","wait"];
+  }
+  function setFuelTag(id,d){var r=fuelRec(d);var el=$(id);if(!el)return;el.textContent=r[0];el.className="ftag "+r[1];}
 
   paintStatic();
   render();
