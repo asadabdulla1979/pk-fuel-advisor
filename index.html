@@ -395,8 +395,13 @@
   .ftag.ease{background:#173226;color:var(--green);border:1px solid #2f6b4d}
   .ftag.wait{background:var(--amber);color:#1a1404}
   .fuel .now{font-size:13px;color:var(--muted);margin-top:8px}
+  .fuel .projlab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-top:10px}
   .fuel .proj{font-size:30px;font-weight:700;letter-spacing:-.5px;margin-top:2px;font-variant-numeric:tabular-nums}
   .fuel .delta{font-size:14px;font-weight:600;margin-top:4px;font-variant-numeric:tabular-nums}
+  .fuel .band{font-size:11.5px;color:#6f8299;margin-top:5px;font-variant-numeric:tabular-nums}
+  .pill.accpill{background:#2a2416;border-color:#6b5a2f;color:var(--amber);font-weight:600;
+    flex:0 0 auto;white-space:nowrap;text-align:left}
+  .pill.accpill b{color:var(--amber)}
   .up{color:var(--red)} .down{color:var(--green)} .flat{color:var(--muted)}
   .tank{font-size:12.5px;color:var(--muted);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
   .cum{font-size:12px;color:var(--amber);margin-top:6px}
@@ -545,17 +550,21 @@
       <div class="fuelrow">
         <div class="fuel">
           <div class="name">Petrol <span class="ftag" id="pTag"></span></div>
-          <div class="now">Now: <span id="pNow">—</span></div>
+          <div class="now">Today's price: <span class="k" id="pNow">—</span></div>
+          <div class="projlab" id="pProjLab">Tomorrow's price</div>
           <div class="proj" id="pProj">—</div>
           <div class="delta" id="pDelta">—</div>
+          <div class="band" id="pBand">—</div>
           <div class="tank" id="pTank">—</div>
           <div class="cum" id="pCum">—</div>
         </div>
         <div class="fuel">
           <div class="name">Diesel (HSD) <span class="ftag" id="dTag"></span></div>
-          <div class="now">Now: <span id="dNow">—</span></div>
+          <div class="now">Today's price: <span class="k" id="dNow">—</span></div>
+          <div class="projlab" id="dProjLab">Tomorrow's price</div>
           <div class="proj" id="dProj">—</div>
           <div class="delta" id="dDelta">—</div>
+          <div class="band" id="dBand">—</div>
           <div class="tank" id="dTank">—</div>
           <div class="cum" id="dCum">—</div>
         </div>
@@ -661,6 +670,32 @@
   function signRs(x){var s=x>0?"+":x<0?"−":"";return s+"Rs "+Math.abs(x).toLocaleString("en-PK",{minimumFractionDigits:2,maximumFractionDigits:2})}
   function mean(a){var s=0;for(var i=0;i<a.length;i++)s+=a[i];return a.length?s/a.length:0}
 
+  // ---- Accuracy / error margin -------------------------------------------------
+  // Typical miss per fuel = MAE from the scored prediction log. Used for the header
+  // chip and the "likely range" under each projected price. Widens as sqrt(N) for
+  // multi-revision projections, since errors compound across revisions.
+  function maeFor(f){
+    var m=(f==="petrol")?A.petrolMAE:A.dieselMAE;
+    return (m!=null&&!isNaN(m))?Math.abs(m):null;
+  }
+  function bandFor(f,Nrev){
+    var m=maeFor(f); if(m==null) return null;
+    return m*Math.sqrt(Math.max(1,Nrev));
+  }
+  // Label for the projected price. OGRA freezes prices Sat/Sun, so the next change
+  // after a Friday price is Monday's. If the page is being read on a later day than
+  // the last auto-update, fall back to the neutral "next revision" wording.
+  function nextRevLabel(Nrev){
+    if(Nrev>1) return "After "+Nrev+" revisions";
+    var stamp=STATE.lastUpdated||L.anchorEffectiveDate||"";
+    var now=new Date(), p=function(n){return (n<10?"0":"")+n};
+    var todayStr=now.getFullYear()+"-"+p(now.getMonth()+1)+"-"+p(now.getDate());
+    if(stamp!==todayStr) return "At the next revision";
+    var dow=now.getDay(); // 0 Sun … 6 Sat
+    if(dow===5||dow===6) return "Monday's price";
+    return "Tomorrow's price";
+  }
+
   // Roll the 7-working-day window forward N revisions, holding Brent at S; return the projected basis mean.
   function rolledBasis(S,Nrev){
     if(!WINDOW.length){ var b0=num("b0"); return {base:b0, proj:b0+(S-b0)*(1-Math.pow(6/7,Nrev))}; }
@@ -690,7 +725,17 @@
       ["","Brent <b>$"+(L.brentSpot!=null?L.brentSpot.toFixed(1):"—")+"</b>"],
       ["","USD/PKR <b>"+(L.fx!=null?L.fx.toFixed(2):"—")+"</b>"]
     ];
-    chips.forEach(function(c){var s=document.createElement("span");s.className="pill"+(c[0]?" "+c[0]:"");s.innerHTML=c[1];lb.appendChild(s);});
+    // Live error margin — recomputed from the scored prediction log every day.
+    var mp=maeFor("petrol"), md=maeFor("diesel");
+    if(mp!=null||md!=null){
+      var parts=[]; if(mp!=null) parts.push(mp); if(md!=null) parts.push(md);
+      var blend=mean(parts);
+      var n=A.nScored||0;
+      chips.push(["accpill","Typical miss <b>±Rs "+blend.toFixed(2)+"/L</b> · "+n+" call"+(n===1?"":"s")+" scored"]);
+    }
+    chips.forEach(function(c){var s=document.createElement("span");s.className="pill"+(c[0]?" "+c[0]:"");s.innerHTML=c[1];
+      if(c[0]==="accpill") s.title="Average absolute error of this model's scored predictions so far (petrol "+(mp!=null?"±Rs "+mp.toFixed(2):"n/a")+", diesel "+(md!=null?"±Rs "+md.toFixed(2):"n/a")+"). Updates every day as more calls are graded.";
+      lb.appendChild(s);});
     $("footStamp").textContent="Last auto-update: "+stamp+". Re-anchored to the newest official price each morning.";
 
     function chgTxt(cur,prev){ if(cur==null||prev==null) return ""; var dch=cur-prev; var c=cls(dch); var ar=dch>0?"▲":dch<0?"▼":"●"; return " <span class='"+c+"'>"+ar+" "+signRs(dch)+" vs "+rs(prev)+"</span>"; }
@@ -767,9 +812,17 @@
     var pP3=projS(pA,kP,ckP,S,3,num("lvP")), dP3=projS(dA,kD,ckD,S,3,num("lvD"));
 
     $("pNow").textContent=rs(pA); $("dNow").textContent=rs(dA);
+    var projLab=nextRevLabel(Nrev);
+    $("pProjLab").textContent=projLab; $("dProjLab").textContent=projLab;
     $("pProj").textContent=rs(pP); $("dProj").textContent=rs(dP);
-    setDelta("pDelta",pd); setDelta("dDelta",dd);
+    setDelta("pDelta",pd,"vs today"); setDelta("dDelta",dd,"vs today");
     setFuelTag("pTag",pd); setFuelTag("dTag",dd);
+    // Likely range = projection ± the model's typical miss for that fuel.
+    function paintBand(id,proj,f){
+      var b=bandFor(f,Nrev);
+      $(id).textContent = (b==null) ? "" : "Likely range "+rs(proj-b)+" – "+rs(proj+b)+" (±"+b.toFixed(2)+")";
+    }
+    paintBand("pBand",pP,"petrol"); paintBand("dBand",dP,"diesel");
     var rl=(Nrev===1)?"next revision":(Nrev+" revisions");
     $("pTank").innerHTML="<span class='"+cls(pd)+"'>"+signRs(pd*tank)+"</span> per "+tank+"L tank · "+rl;
     $("dTank").innerHTML="<span class='"+cls(dd)+"'>"+signRs(dd*tank)+"</span> per "+tank+"L tank · "+rl;
@@ -826,10 +879,10 @@
     $("aMAE").textContent=(mae==null)?"—":("Rs "+Number(mae).toFixed(2));
   }
 
-  function setDelta(id,d){
+  function setDelta(id,d,suffix){
     var el=$(id);
     el.className="delta "+cls(d);
-    el.textContent=(d>0?"▲ ":d<0?"▼ ":"● ")+signRs(d)+"/L";
+    el.textContent=(d>0?"▲ ":d<0?"▼ ":"● ")+signRs(d)+"/L"+(suffix?" "+suffix:"");
   }
 
   function fuelRec(d){
@@ -852,62 +905,102 @@
 const { chromium } = require('playwright');
 
 const d = {
-  "date": "Friday, 24 July 2026",
-  "fileDate": "2026-07-24",
-  "headline": "Brent tops $100 — fill now (model rebuilt)",
+  "date": "Wednesday, 29 July 2026",
+  "fileDate": "2026-07-29",
+  "headline": "Prices turn up again — cracks, not crude, are driving it",
   "tank": 55,
   "live": {
-    "petrolAnchor": 331.52, "dieselAnchor": 378.66,
-    "petrolPrev": 327.12, "dieselPrev": 375.04,
-    "brentSpot": 100.4, "basis": 88.66, "fx": 278.25, "effective": "24 Jul 2026",
-    "window": [84, 85, 87, 88, 89.5, 91.1, 96]
+    "petrolAnchor": 335.81, "dieselAnchor": 388.38,
+    "petrolPrev": 334.18, "dieselPrev": 386.83,
+    "brentSpot": 87, "basis": 91.23, "fx": 278.8, "effective": "29 Jul 2026",
+    "window": [88, 89.5, 91.1, 96, 100.4, 86.6, 87]
   },
-  "calib": { "kP": 1.0, "kD": 1.0, "ckP": 0.5, "ckD": 1.0 },
+  "calib": { "kP": 1.0, "kD": 1.0, "ckP": 0.9, "ckD": 1.05 },
+  "mae": { "p": 2.42, "dl": 0.71 },
   "verdict": {
-    "cls": "fill", "tag": "Fill now",
-    "head": "Fill up before the next hike",
-    "body": "Next revision: petrol ~+Rs 4.60/L to Rs 336.12 and diesel ~+Rs 5.10/L to Rs 383.76 (≈ Rs 253 / Rs 281 per 55 L tank). If Brent holds ~$100, they keep climbing to about +Rs 12.80 / +Rs 14.30 over ~3 revisions. Filling today locks in the lower rate.",
-    "timing": "2-day ▲ Rising · 4-day ▲ Rising · 1-week ◆ Firm — no case to wait; if anything, fill sooner."
+    "cls": "neutral", "tag": "No urgency — mild upward tilt",
+    "head": "Small rises ahead, not worth a special trip",
+    "body": "OGRA raised petrol Rs 1.63 to Rs 335.81 and diesel Rs 1.55 to Rs 388.38 today — driven by refining margins, not crude. The next revision adds roughly +Rs 0.65/L petrol (to Rs 336.46) and +Rs 0.80/L diesel (to Rs 389.18), about Rs 36 and Rs 44 on a 55 L tank. If Brent holds ~$87 the cumulative over ~3 revisions is only +Rs 0.80 petrol / +Rs 1.25 diesel, because the late-July $96–100 days rolling out of the window offset the firmer cracks. Top up if you're passing a pump; there's no case to wait.",
+    "timing": "2-day ▲ Rising · 4-day ◆ Firm · 1-week ◆ Firm — the easing case has closed; risk is skewed slightly up."
   },
-  "petrol": { "cls": "fill", "tag": "Fill now", "arrow": "▲", "dir": "up", "delta": "+Rs 4.60/L", "tankLine": "Next rev Rs 336.12 · ≈ +Rs 253 / 55 L · hold $100 → +Rs 12.80 (3 rev)" },
-  "diesel": { "cls": "fill", "tag": "Fill now", "arrow": "▲", "dir": "up", "delta": "+Rs 5.10/L", "tankLine": "Next rev Rs 383.76 · ≈ +Rs 281 / 55 L · hold $100 → +Rs 14.30 (3 rev)" },
+  "petrol": { "cls": "neutral", "tag": "Top up", "tankLine": "≈ +Rs 36 on a 55 L tank · if Brent holds $87: Rs 336.61 after 3 revisions" },
+  "diesel": { "cls": "neutral", "tag": "Top up", "tankLine": "≈ +Rs 44 on a 55 L tank · if Brent holds $87: Rs 389.63 after 3 revisions" },
   "horizons": [
-    { "t": "Next 2 days", "s": "up", "label": "▲ Rising", "n": "Hormuz interdictions, Houthi attacks on two Saudi tankers and Kazakhstan's CPC export halt keep Brent bid near $100." },
-    { "t": "Next 4 days", "s": "up", "label": "▲ Rising", "n": "Momentum-driven; analysts see Brent holding above $100 while disruptions persist, though the move is stretched." },
-    { "t": "Next 1 week", "s": "firm", "label": "◆ Firm", "n": "Two-sided: EIA/Goldman still see normalization toward $70–80 later in 2026 on de-escalation; near-term firm." }
+    { "t": "Next 2 days", "s": "up", "label": "▲ Rising", "n": "Brent rebounded 4%+ to ~$87 as US-Iran strikes resumed, drones hit Saudi Eastern Region oil facilities for a second day and API crude stocks fell 3.3 mb." },
+    { "t": "Next 4 days", "s": "firm", "label": "◆ Firm", "n": "Two-sided: Russia's diesel-export ban lapses 31 Jul (crack-easing) against Gulf refinery outages and the collapse of Oman's Hormuz proposal." },
+    { "t": "Next 1 week", "s": "firm", "label": "◆ Firm", "n": "EIA ~$74 Q3, JPMorgan $86 Q3 / $80 Q4 and OPEC+ barrels still point lower — but that was conditional on a de-escalation that has just reversed." }
   ],
-  "why": "Fill now — with Brent near $100, each daily OGRA revision rolls more crude into the pump, so petrol and diesel keep grinding higher for several days. <span class='amber'>Diesel still leans firmest while Russia's export ban runs, though the crack spike has faded from its early-July peak.</span>",
-  "newsSummary": "Brent surged ~7% to ~$100.6 on 23 Jul (highest since late May) and held ~$100.4 on 24 Jul, driven by Houthi attacks on two Saudi tankers, continued Hormuz-area interdictions, and Kazakhstan suspending CPC crude exports after drone strikes. OGRA rolls crude into the pump over ~7 working days, so increases keep coming while Brent stays elevated.",
-  "dieselCrack": "Diesel cracks are elevated but off their peak — Russia's 8–31 Jul export ban drove the ARA crack to ~$70/bbl and gasoil to a record $60.77/bbl premium earlier in July, but the per-revision diesel-crack contribution has since faded (last residual slightly negative). A small firm carry is kept.",
+  "why": "No urgency either way — the next revision moves both fuels less than Rs 1/L, and the crude and crack legs now pull against each other: the window is shedding the late-July $96–100 spike while refining margins firm. <span class='amber'>Today's hike came almost entirely from product cracks — Houthi strikes on Aramco's 400 kbd Jazan refinery and drones at Abqaiq — not from Brent.</span>",
+  "newsSummary": "Brent snapped a three-day, ~16% slide and jumped more than 4% to ~$87/bbl on 29 Jul after the US intercepted a surprise Iranian ballistic-missile attack on its Middle East bases, Iran-backed militias flew drones at Saudi Eastern Region oil facilities for a second consecutive day, and Iran rejected Oman's 50-50 Strait of Hormuz proposal. Pakistan's 29 Jul revision had already turned up — petrol +Rs 1.63, diesel +Rs 1.55 — but for a different reason: refining cracks, not crude.",
+  "dieselCrack": "Cracks widened across the whole barrel this week, not just diesel. With Brent down 4–5% on 28 Jul, RBOB gasoline still rose 1.2% and heating oil 1.0–2.8% — that divergence is what pushed petrol and diesel up almost identically on the 29 Jul revision. Drivers: the Houthi strike on Aramco's 400 kbd Jazan refinery, drones at Abqaiq, and Moscow's gasoline-export ban now extended to year-end. The offsetting relief is Russia's diesel-export ban lapsing 31 Jul, which is why the diesel crack carry (1.05/rev) is decayed harder than petrol's (0.90/rev).",
   "drivers": [
-    "Brent ~$100 — highest since late May — after a ~7% single-day surge on 23 Jul",
-    "Houthi attacks on two Saudi oil tankers enforcing a Red Sea / Saudi-port blockade",
-    "Continued tanker interdictions near the Strait of Hormuz",
-    "Kazakhstan suspends CPC crude exports after drone strikes on the terminal",
-    "Russia's diesel-export ban (8–31 Jul) keeping diesel firm",
-    "OGRA's daily review rolls crude into the pump over ~7 working days"
+    "Brent rebounded 4%+ to ~$87 on 29 Jul, snapping a three-day ~16% slide — the biggest such decline since 2020",
+    "US says it intercepted a surprise Iranian ballistic-missile attack on its Middle East bases; strikes have resumed",
+    "Drones hit Saudi Eastern Region oil facilities for a second day — Abqaiq and the East-West pipeline targeted, Jazan refinery (400 kbd) damaged",
+    "Iran rejected Oman's 50-50 Strait of Hormuz proposal, insisting on full control of the inbound lane",
+    "OGRA 29 Jul: petrol +Rs 1.63 to Rs 335.81, diesel +Rs 1.55 to Rs 388.38 — crack-driven, not crude-driven",
+    "Offsetting: Russia's diesel-export ban lapses 31 Jul; API crude stocks −3.3 mb; EIA still sees ~$74 Brent in Q3"
   ],
-  "waitAdvice": "Fill now — the next revision is up modestly for both fuels, and with Brent holding near $100 the cumulative rise over the next several revisions is material; no near-term case to wait.",
+  "waitAdvice": "Top up if convenient, but don't make a trip. The next revision costs about Rs 36 (petrol) or Rs 44 (diesel) on a full 55 L tank, and even three revisions at Brent ~$87 only add Rs 0.80–1.25/L. The easing case that held for the last two days has gone, so there is no reason to wait either.",
   "analysis": {
-    "title": "Model rebuilt — projection now rolls OGRA's 7-working-day window one day at a time",
-    "summary": "The diesel over-call grew three cycles running (0.66% → 1.57% → 2.15%), flagging a structural bias. Fix and backtest:",
+    "title": "Under-called both fuels as product cracks — not crude — drove the 29 Jul hike",
+    "summary": "The 28 Jul call read Brent's slide to ~$85 and projected small cuts. OGRA instead raised both fuels. The crude leg was right; the crack term was far too small.",
     "graded": [
-      { "date": "24 Jul", "fuel": "Diesel — old model", "predicted": 386.81, "actual": 378.66, "err": 8.15 },
-      { "date": "24 Jul", "fuel": "Diesel — roll model", "predicted": 381.32, "actual": 378.66, "err": 2.66 }
+      { "date": "29 Jul", "fuel": "Petrol — roll model", "predicted": 333.48, "actual": 335.81, "err": -2.33 },
+      { "date": "29 Jul", "fuel": "Diesel — roll model", "predicted": 386.78, "actual": 388.38, "err": -1.60 }
     ],
-    "backtestNote": "OGRA advances a 7-working-day product average, so only ~1/7 of the Brent spot-vs-basis gap feeds any single daily revision. The old model fed the whole gap, so it over-shot more the further Brent ran above the trailing average — the widening miss. The roll model's one-day crude increment for 24 Jul (+Rs4.00) vs the actual diesel move (+Rs3.62) leaves ~Rs0.1–0.7% error before crack, against the old +Rs8.15 (2.15%). The old '+Rs13 next-revision' call was really the ~3-revision cumulative if Brent holds $100.",
-    "root": "Daily OGRA revisions roll a 7-working-day Platts Gulf product average forward one day; projecting the whole crude gap into one revision overstates every revision during a run-up. Residual error is now product-crack volatility, not crude.",
+    "backtestNote": "Unlike the 28 Jul miss, this one is not a crude-timing artefact: the 7-working-day Platts window behind the 29 Jul price closes before this week's Brent swings, and both fuels moved almost identically (+Rs 1.63 / +Rs 1.55) on a crude leg of only −Rs 0.50. Two products with different crude betas moving in lockstep is a crack signature. Independent confirmation: on 28 Jul, with Brent down 4–5%, RBOB gasoline rose 1.2% and heating oil 1.0–2.8%.",
+    "root": "The model carried a near-zero petrol crack (−0.20/rev) and a modest diesel crack (0.45/rev) on the assumption that July's product squeeze was fading with Russia's export ban. Instead the squeeze broadened from diesel to gasoline as Gulf refining capacity itself came under attack. Refinery outages hit products directly and never show up in the Brent window, so the crack term has to carry them.",
     "fixes": [
-      "Projection advances the 7-working-day window by one day per revision (drop oldest, add today's Brent spot); 'if Brent holds' rolls it N days.",
-      "Pass-through k reset to 1.0 (basis is now a true average); per-fuel crack carried per revision and allowed to decay.",
-      "Single next-revision figure separated from the cumulative 'if Brent holds' figure — the old over-call was really the multi-revision cumulative.",
-      "Next step toward sub-1%: drive off Platts Gulf MS-92 / HSD product prices directly — pending a daily data source."
+      "Graded the 28 Jul call vs the 29 Jul revision: petrol off −Rs 2.33, diesel off −Rs 1.60; direction wrong on both.",
+      "Petrol crack lifted from −0.20 to +0.90/rev — the residual was product-side, and Moscow's gasoline-export ban now runs to year-end.",
+      "Diesel crack lifted from 0.45 to 1.05/rev, decayed below the raw 1.25 smoothing because Russia's diesel-export ban lapses 31 Jul.",
+      "k held at 1.0: the crude leg explained its share correctly, and only 3 roll cycles are scored (re-fit threshold is 4).",
+      "Direction hit-rate flagged at 50%. Both recent misses trace to shocks the Brent window cannot see — crude gapping (28 Jul) and refinery outages (29 Jul)."
     ]
   },
-  "accuracy": { "scored": 3, "avgErr": "old 1.79 / roll ~0.5", "dirRight": "100%", "note": "Three cycles graded on the OLD model (petrol Rs1.79, diesel Rs5.49 avg). The rebuilt roll model backtests the same revisions to roughly 0.1–1.3% with no directional bias; live scoring of the new model starts today." },
-  "footShort": "Model (v6): roll OGRA's 7-working-day Brent window one day per revision + FX + per-fuel crack/rev. Estimate, not the official OGRA number.<br>Sources: OGRA/Tribune · Trading Economics · S&amp;P Global/IndexBox · hamariweb.",
-  "footFull": "Since 1 Jul 2026 OGRA sets prices daily off a 7-working-day average of Platts Gulf assessments + fixed levies/margins (GST zero). v6 advances that window one day per revision (drop oldest, add today's spot) rather than projecting the whole crude gap, plus a decaying per-fuel crack term, self-correcting each morning. Estimate, not the official number.<br>Sources: OGRA/Tribune/Pakistan Observer · Trading Economics & Forbes/Fortune (Brent) · S&amp;P Global/IndexBox (refining margins) · hamariweb (FX)."
+  "accuracy": { "scored": 3, "avgErr": "P 2.42 / D 0.71", "dirRight": "50%", "note": "Three roll-model cycles graded. Petrol MAE Rs 2.42 (bias +Rs 0.87), diesel MAE Rs 0.71 (bias −Rs 0.36); direction right on 3 of 6 fuel-cycles, down from 75% after today's double miss. The crude leg was tiny (−Rs 0.50) while both fuels rose ~Rs 1.6 together, so the error is product-crack, not pass-through — k stays 1.0 and the crack terms absorb it." },
+  "footShort": "Model (v6): roll OGRA's 7-working-day Brent window one day per revision + FX + per-fuel crack/rev. Estimate, not the official OGRA number.<br>Sources: OGRA/ARY/Dunya · Trading Economics · CNBC/Bloomberg · hamariweb.",
+  "footFull": "Since 1 Jul 2026 OGRA sets prices daily off a 7-working-day average of Platts Gulf assessments + fixed levies/margins (GST zero). v6 advances that window one day per revision (drop oldest, add today's spot) rather than projecting the whole crude gap, plus a decaying per-fuel crack term, self-correcting each morning. Estimate, not the official number.<br>Sources: OGRA via ARY News &amp; Dunya News · Trading Economics, CNBC &amp; Bloomberg (Brent) · Trading Economics product futures (refining margins) · hamariweb (FX)."
 };
+
+
+// ---------------------------------------------------------------------------
+// Derived display fields. The daily job only has to set `d.mae` ({p,dl} = the
+// model's typical miss per fuel, in Rs/L, from the scored prediction log);
+// everything below is computed so an older-shaped `d` still renders correctly.
+// ---------------------------------------------------------------------------
+(function normalise(){
+  const LPBx = 158.987, mn = (a)=>a.reduce((s,x)=>s+x,0)/a.length;
+  const roll = (anchor,k,crack,S,N)=>{ let w=d.live.window.slice(); const b=mn(w);
+    for(let i=0;i<N;i++){w.shift();w.push(S);} return anchor+(mn(w)-b)*d.live.fx/LPBx*k+crack*N; };
+
+  // OGRA freezes prices Sat/Sun, so the next change after a Friday price is Monday's.
+  if(!d.projLabel){
+    const dt = new Date(d.fileDate+"T12:00:00"), dow = dt.getDay(); // 0 Sun … 6 Sat
+    d.projLabel = (dow===5||dow===6) ? "Monday's price" : "Tomorrow's price";
+  }
+  d.mae = d.mae || {};
+  if(!d.accChip){
+    const parts=[]; if(d.mae.p!=null) parts.push(Math.abs(d.mae.p)); if(d.mae.dl!=null) parts.push(Math.abs(d.mae.dl));
+    d.accChip = parts.length
+      ? `Typical miss ±Rs ${mn(parts).toFixed(2)}/L · ${d.accuracy.scored} call${d.accuracy.scored===1?"":"s"} scored`
+      : `Accuracy: ${d.accuracy.scored} call${d.accuracy.scored===1?"":"s"} scored`;
+  }
+  [["petrol","petrolAnchor","kP","ckP","p"],["diesel","dieselAnchor","kD","ckD","dl"]].forEach(([f,anch,kk,ck,mk])=>{
+    const o=d[f]; if(!o) return;
+    if(o.today==null) o.today = d.live[anch];
+    if(o.next ==null) o.next  = roll(d.live[anch], d.calib[kk], d.calib[ck], d.live.brentSpot, 1);
+    const ch = o.next - o.today;
+    if(!o.delta) o.delta = (ch>0?"+":ch<0?"−":"") + "Rs " + Math.abs(ch).toFixed(2) + "/L";
+    if(!o.arrow) o.arrow = ch>0?"▲":ch<0?"▼":"●";
+    if(!o.dir)   o.dir   = ch>0.005?"up":ch<-0.005?"down":"flat";
+    if(o.band==null){
+      const m = d.mae[mk];
+      o.band = (m==null) ? "" : `Likely range Rs ${(o.next-Math.abs(m)).toFixed(2)} – Rs ${(o.next+Math.abs(m)).toFixed(2)} (±${Math.abs(m).toFixed(2)})`;
+    }
+  });
+})();
 
 const CSS = `:root{--bg:#0f1720;--panel:#17212e;--panel2:#1e2c3c;--ink:#e8eef5;--muted:#93a4b7;--line:#2b3a4d;--accent:#5aa9ff;--green:#39d98a;--amber:#ffcb5c;--red:#ff6b6b}
 *{box-sizing:border-box;margin:0;padding:0}html,body{background:#0b1219;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -941,8 +1034,13 @@ const CSS = `:root{--bg:#0f1720;--panel:#17212e;--panel2:#1e2c3c;--ink:#e8eef5;-
 .v .fuel{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
 .v .tag{font-weight:800;letter-spacing:.03em;border-radius:999px;text-transform:uppercase;font-size:11px;padding:5px 11px}
 .v.fill .tag{background:var(--green);color:#04140c}.v.wait .tag{background:var(--amber);color:#1a1404}.v.neutral .tag{background:var(--accent);color:#04101f}
-.v .big{font-weight:800;color:var(--ink);margin-top:9px;font-variant-numeric:tabular-nums;letter-spacing:-.4px;font-size:23px}
-.v .sub{font-size:11px;color:var(--muted);margin-top:3px;font-variant-numeric:tabular-nums}.v .up{color:var(--red)}.v .down{color:var(--green)}
+.v .today{font-size:11.5px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}.v .today b{color:var(--ink);font-weight:700}
+.v .plab{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-top:9px}
+.v .big{font-weight:800;color:var(--ink);margin-top:2px;font-variant-numeric:tabular-nums;letter-spacing:-.4px;font-size:23px}
+.v .chg{font-size:12.5px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}
+.v .band{font-size:10.5px;color:#6f8299;margin-top:5px;font-variant-numeric:tabular-nums}
+.v .sub{font-size:11px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums;border-top:1px dashed rgba(255,255,255,.12);padding-top:6px}.v .up{color:var(--red)}.v .down{color:var(--green)}
+.accchip{display:inline-block;font-size:10.5px;font-weight:700;color:var(--amber);background:#2a2416;border:1px solid #6b5a2f;border-radius:999px;padding:4px 10px;margin-top:9px;letter-spacing:.02em}
 .hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.hzc{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 10px}
 .hzc .t{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700}.hzc .s{font-size:13.5px;font-weight:800;margin-top:6px;white-space:nowrap}
 .s.firm{color:var(--amber)}.s.flat{color:var(--muted)}.s.ease{color:var(--green)}.s.up{color:var(--red)}.hzc .n{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.32}
@@ -971,7 +1069,7 @@ function chgHtml(cur, prev) {
   const ar = dch > 0 ? "▲" : dch < 0 ? "▼" : "●", sg = dch > 0 ? "+" : dch < 0 ? "−" : "";
   return `<div class="tc ${cls}">${ar} ${sg}Rs ${Math.abs(dch).toFixed(2)} vs ${money(prev)}</div>`;
 }
-const V = (o) => `<div class="v ${o.cls}"><div class="vtop"><span class="fuel">${o.name}</span><span class="tag">${o.tag}</span></div><div class="big ${o.dir}">${o.arrow} ${o.delta}</div><div class="sub">${o.tankLine}</div></div>`;
+const V = (o) => `<div class="v ${o.cls}"><div class="vtop"><span class="fuel">${o.name}</span><span class="tag">${o.tag}</span></div><div class="today">Today's price <b>${money(o.today)}</b></div><div class="plab">${d.projLabel}</div><div class="big">${money(o.next)}</div><div class="chg ${o.dir}">${o.arrow} ${o.delta} vs today</div><div class="band">${o.band}</div><div class="sub">${o.tankLine}</div></div>`;
 const HZ = (h) => `<div class="hzc"><div class="t">${h.t}</div><div class="s ${h.s}">${h.label}</div><div class="n">${h.n}</div></div>`;
 const verds = `${V(Object.assign({name:"Petrol"},d.petrol))}${V(Object.assign({name:"Diesel (HSD)"},d.diesel))}`;
 const hzs = d.horizons.map(HZ).join("");
@@ -983,10 +1081,10 @@ const today = `<div class="sec"><div class="pl">Today's official price · effect
 <div class="tp"><div class="tl">Diesel (HSD)</div><div class="tv">${money(d.live.dieselAnchor)}</div>${chgHtml(d.live.dieselAnchor,d.live.dieselPrev)}</div>
 </div>
 <div class="ctx">Brent <b>$${d.live.brentSpot}</b> · 7-day basis $${d.live.basis} · USD/PKR <b>${d.live.fx}</b></div></div>`;
-const expected = `<div class="sec"><div class="pl">Expected at next OGRA revision (roll model)</div><div class="verdicts">${verds}</div></div>`;
+const expected = `<div class="sec"><div class="pl">${d.projLabel} — projected (roll model)</div><div class="verdicts">${verds}</div></div>`;
 
 const shortHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${CSS}</style></head><body><div class="card short" id="card">
-<div class="hd"><div class="brand">Pakistan Fuel Fill Advisor · Daily Brief</div><div class="ttl">${d.headline}</div><div class="date">${d.date}</div></div>
+<div class="hd"><div class="brand">Pakistan Fuel Fill Advisor · Daily Brief</div><div class="ttl">${d.headline}</div><div class="date">${d.date}</div><div class="accchip">${d.accChip}</div></div>
 <div class="body">${banner}${today}${expected}
 <div class="sec"><div class="h">Near-term oil-news signal</div><div class="hz">${hzs}</div><div class="why">${d.why}</div></div>
 <div class="foot">${d.footShort}</div></div></div></body></html>`;
@@ -1001,7 +1099,7 @@ const rows = offs.map(o => { const S=d.live.brentSpot+o;
 const a=d.analysis;
 const gradedRows = a.graded.map(g=>`<tr><td>${g.date}</td><td>${g.fuel}</td><td>${g.predicted.toFixed(2)}</td><td>${g.actual.toFixed(2)}</td><td class="${g.err>0.05?'r':g.err<-0.05?'g':''}">${errFmt(g.err)}</td></tr>`).join("");
 const fullHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${CSS}</style></head><body><div class="card full" id="card">
-<div class="hd"><div class="brand">Pakistan Fuel Fill Advisor · Full Brief</div><div class="ttl">${d.headline}</div><div class="date">${d.date} · tank ${d.tank} L</div></div>
+<div class="hd"><div class="brand">Pakistan Fuel Fill Advisor · Full Brief</div><div class="ttl">${d.headline}</div><div class="date">${d.date} · tank ${d.tank} L</div><div class="accchip">${d.accChip}</div></div>
 <div class="body">${banner}${today}${expected}
 <div class="sec"><div class="h">Near-term oil-news signal</div><div class="hz">${hzs}</div><div class="p mut">${d.newsSummary}</div><div class="p amber" style="font-size:12px">${d.dieselCrack}</div><ul class="dl">${d.drivers.map(x=>`<li>${x}</li>`).join("")}</ul><div class="p" style="margin-top:12px"><b>Timing:</b> ${d.waitAdvice}</div></div>
 <div class="sec"><div class="h">Self-analysis — the rebuild &amp; backtest</div><div class="anwrap"><span class="flag">Self-analysis</span><div class="p" style="margin-top:9px;font-weight:600">${a.title}</div><div class="p mut">${a.summary}</div><table><thead><tr><th>Backtest</th><th>Fuel / model</th><th>Predicted</th><th>Actual</th><th>Error</th></tr></thead><tbody>${gradedRows}</tbody></table><div class="p mut" style="margin-top:10px"><b style="color:var(--ink)">Why the fix matters:</b> ${a.backtestNote}</div><div class="p mut" style="margin-top:8px"><b style="color:var(--ink)">Root cause:</b> ${a.root}</div><ul class="dl">${a.fixes.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>
