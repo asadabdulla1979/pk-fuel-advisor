@@ -26,148 +26,144 @@
 <script type="application/json" id="advisor-state">
 {
   "version": 6,
-  "lastUpdated": "2026-07-29",
+  "lastUpdated": "2026-07-30",
   "tankDefault": 55,
   "live": {
-    "brentSpot": 87.0,
-    "basis7d": 91.23,
-    "fx": 278.8,
-    "petrolAnchor": 335.81,
-    "dieselAnchor": 388.38,
-    "anchorEffectiveDate": "2026-07-29",
-    "petrolPrev": 334.18,
-    "dieselPrev": 386.83
+    "brentSpot": 89.7,
+    "basis7d": 91.47,
+    "fx": 279.3,
+    "petrolAnchor": 335.06,
+    "dieselAnchor": 390.62,
+    "anchorEffectiveDate": "2026-07-30",
+    "petrolPrev": 335.81,
+    "dieselPrev": 388.38
   },
   "calibration": {
     "model": "incremental-7wd-roll",
     "window": [
-      88,
       89.5,
       91.1,
       96,
       100.4,
       86.6,
-      87.0
+      87.0,
+      89.7
     ],
-    "windowAsOf": "2026-07-29",
+    "windowAsOf": "2026-07-30",
     "kPetrol": 1,
     "kDiesel": 1,
-    "crackPetrol": 0.9,
-    "crackDiesel": 1.05,
-    "crackNote": "Both per-fuel crack terms jumped after the 29 Jul revision. The crude leg implied -Rs0.50/L, but OGRA raised petrol Rs1.63 and diesel Rs1.55 - leaving crack residuals of +Rs2.13 (petrol) and +Rs2.05 (diesel). Smoothed 50/50 that gives 0.97 / 1.25 per revision; decayed to 0.90 petrol and 1.05 diesel. Diesel gets the larger decay because Russia's 8-31 Jul diesel-export ban lapses in two days; petrol gets less because Moscow's gasoline-export ban runs to year-end and the Houthi strike on Aramco's 400kbd Jazan refinery (plus drones at Abqaiq) is directly product-crack bullish. Product markets confirm it: on 28 Jul gasoline +1.2% and heating oil +1.0-2.8% while Brent fell ~4-5%.",
-    "nObs": 6,
-    "method": "First cycle in which BOTH cracks blew out together, so the residual is read as a genuine product-crack shift rather than crude timing - the 7-working-day window behind the 29 Jul price ends before this week's crude swings, so a Brent-gap explanation does not fit. Window advanced one day (dropped 87.0, appended today's spot 87.0), so basis is unchanged at 91.23. Pass-through k held at 1.0: only 3 roll-model cycles are scored, below the 4-cycle re-fit threshold, and the miss is crack-shaped (both fuels moved together, crude leg was small) rather than a systematic pass-through error.",
+    "crackPetrol": 0.2,
+    "crackDiesel": 1.6,
+    "crackNote": "The two fuels have decoupled. The 30 Jul revision cut petrol Re0.75 but raised diesel Rs2.24 on a crude leg of only -Rs0.25, so residuals were -Rs0.50 petrol and +Rs2.49 diesel. Petrol crack smooths from 0.90 to 0.20/rev - gasoline's crack is roughly flat (RBOB -1.0% on 30 Jul against Brent -1.2%). Diesel smooths from 1.05 to 1.77, decayed to 1.60/rev: the raw signal is strong and now positive four cycles running, but Russia's diesel-export ban nominally lapses 31 Jul. Moscow has only said it will lift it 'once the market recovers', and Ukrainian drone strikes keep eroding Russian refining capacity, so the decay is deliberately mild.",
+    "nObs": 7,
+    "method": "Fourth roll-model cycle scored, so the >=4-cycle pass-through re-fit check was run - and declined. Petrol residuals alternate sign across the four cycles (-0.44, -3.95, +2.13, -0.50; mean -0.69), which is noise rather than a scaling error. Diesel residuals are positive in all four (+0.70, +0.42, +2.05, +2.49; mean +1.42) but the underlying crude legs switched sign between cycles, so no single k could absorb them - a persistent product crack can. Both k held at 1.0; the crack terms carry the divergence. Window advanced one day: dropped 88, appended today's spot 89.7, lifting the basis from 91.23 to 91.47.",
     "clampMin": 0.6,
     "clampMax": 2.4
   },
   "projection": {
-    "hold": 87.0,
+    "hold": 89.7,
     "nextRevision": {
-      "petrol": 336.46,
-      "diesel": 389.18,
-      "dPetrol": 0.65,
-      "dDiesel": 0.8,
-      "tankPetrol": 36,
-      "tankDiesel": 44
+      "petrol": 335.31,
+      "diesel": 392.27,
+      "dPetrol": 0.25,
+      "dDiesel": 1.65,
+      "tankPetrol": 14,
+      "tankDiesel": 91
     },
     "cumulativeIfHold3": {
-      "petrol": 336.61,
-      "diesel": 389.63,
-      "dPetrol": 0.8,
-      "dDiesel": 1.25
+      "petrol": 333.78,
+      "diesel": 393.54,
+      "dPetrol": -1.28,
+      "dDiesel": 2.92
     }
   },
   "accuracy": {
-    "petrolMAE": 2.42,
-    "dieselMAE": 0.71,
-    "petrolBias": 0.87,
-    "dieselBias": -0.36,
+    "petrolMAE": 2.17,
+    "dieselMAE": 0.89,
+    "petrolBias": 1.0,
+    "dieselBias": -0.63,
     "directionHitRate": 0.5,
-    "nScored": 3,
-    "note": "Three roll-model cycles now graded. The 29 Jul revision went against the call on both fuels: petrol predicted Rs333.48 vs actual Rs335.81 (off -Rs2.33) and diesel Rs386.78 vs Rs388.38 (off -Rs1.60). Petrol MAE Rs2.42 (bias +Rs0.87), diesel MAE Rs0.71 (bias -Rs0.36); direction now right on 3 of 6 fuel-cycles (50%), down from 75%. The crude leg was tiny (-Rs0.50) and both fuels rose ~Rs1.6 together, so the miss is product-crack, not pass-through - k stays 1.0 and the crack terms absorb it."
+    "nScored": 4,
+    "note": "Four roll-model cycles scored. The 30 Jul revision split the call: petrol predicted Rs336.46 vs actual Rs335.06 (off +Rs1.40, direction wrong) but diesel Rs389.18 vs Rs390.62 (off -Rs1.44, direction right and the size under-called). Petrol MAE Rs2.17 (bias +Rs1.00), diesel MAE Rs0.89 (bias -Rs0.63); direction right on 4 of 8 fuel-cycles (50%). The pass-through re-fit check at the 4-cycle threshold was run and declined - see calibration.method - so k stays 1.0 and the crack terms absorb the divergence."
   },
   "analysis": {
-    "asOf": "2026-07-29",
-    "title": "Under-called both fuels as product cracks - not crude - drove the 29 Jul hike",
-    "summary": "The 28 Jul call read Brent's slide to ~$85 and projected small cuts (petrol -Rs0.70, diesel -Rs0.05). OGRA instead raised petrol Rs1.63 to Rs335.81 and diesel Rs1.55 to Rs388.38. The crude leg was right - the one-day window roll implied -Rs0.50 for both - but refined-product cracks widened sharply across the barrel, leaving +Rs2.13 petrol and +Rs2.05 diesel unexplained. Brent has since rebounded ~4% to ~$87 as US-Iran hostilities resumed.",
+    "asOf": "2026-07-30",
+    "title": "Petrol and diesel have decoupled - one call right, one wrong, on the same crude",
+    "summary": "Yesterday's call had both fuels rising ~Rs0.65-0.80. OGRA instead cut petrol Re0.75 to Rs335.06 and raised diesel Rs2.24 to Rs390.62. With a crude leg of only -Rs0.25, that Rs3 spread between the two fuels is entirely product cracks - gasoline flat, gasoil still at record premiums.",
     "graded": [
       {
-        "date": "29 Jul",
+        "date": "30 Jul",
         "fuel": "Petrol - roll model",
-        "predicted": 333.48,
-        "actual": 335.81,
-        "err": -2.33
+        "predicted": 336.46,
+        "actual": 335.06,
+        "err": 1.4
       },
       {
-        "date": "29 Jul",
+        "date": "30 Jul",
         "fuel": "Diesel - roll model",
-        "predicted": 386.78,
-        "actual": 388.38,
-        "err": -1.6
+        "predicted": 389.18,
+        "actual": 390.62,
+        "err": -1.44
       }
     ],
-    "backtestNote": "Unlike the 28 Jul miss, this one is not a crude-timing artefact: the 7-working-day Platts window behind the 29 Jul price closes before this week's Brent swings, and both fuels moved almost identically (+Rs1.63 / +Rs1.55) on a crude leg of only -Rs0.50. That signature - equal moves across two products with different crude betas - is a crack shift. Independent confirmation: on 28 Jul, with Brent down 4-5%, RBOB gasoline rose 1.2% and heating oil 1.0-2.8%, i.e. cracks widened on both sides of the barrel as Houthi strikes hit Aramco's 400kbd Jazan refinery and drones reached Abqaiq.",
-    "rootCause": "The model carried a near-zero petrol crack (-0.20/rev) and a modest diesel crack (0.45/rev) on the assumption that the July product squeeze was fading with Russia's export ban. Instead the squeeze broadened from diesel to gasoline as Gulf refining capacity itself came under attack. Refinery outages hit products directly and do not show up in the Brent window, so the crack term - not the crude leg - has to carry them.",
+    "backtestNote": "The crude leg was small and shared (-Rs0.25 for both fuels), so the entire Rs2.99 gap between petrol's cut and diesel's rise is product-crack. Confirmation from the product futures: on 30 Jul RBOB gasoline fell 1.0% against Brent -1.2% (crack flat) while European gasoil held its record ~$60/bbl premium to Brent. The model was carrying too much petrol crack (0.90) and too little diesel crack (1.05); both have been re-fit toward what the residuals imply.",
+    "rootCause": "Treating the two fuels as sharing a crack regime. July's squeeze was never symmetric: Russia's diesel-export ban removed ~11% of seaborne diesel supply, while gasoline was only affected indirectly. The 28 Jul cycle - where both fuels rose together - misled the model into lifting the petrol crack, and the 30 Jul revision immediately unwound it.",
     "fix": [
-      "Graded the 28 Jul call vs the 29 Jul revision: petrol off -Rs2.33 and diesel off -Rs1.60; direction wrong on both (called down, prices rose).",
-      "Petrol crack lifted from -0.20 to +0.90/rev - the residual was product-side, and Moscow's gasoline-export ban now runs to year-end.",
-      "Diesel crack lifted from 0.45 to 1.05/rev, decayed harder than the raw 1.25 smoothing because Russia's diesel-export ban lapses 31 Jul.",
-      "k held at 1.0: the crude leg explained its share correctly, and only 3 roll cycles are scored (re-fit threshold is 4).",
-      "Direction hit-rate flagged: 3 of 6 fuel-cycles. Two consecutive misses now trace to shocks the Brent window cannot see - crude gapping (28 Jul) and refinery outages (29 Jul)."
+      "Graded the 29 Jul call: petrol off +Rs1.40 (direction wrong), diesel off -Rs1.44 (direction right, magnitude under-called).",
+      "Petrol crack cut 0.90 -> 0.20/rev; the 28 Jul spike now looks like a one-off rather than a regime change.",
+      "Diesel crack raised 1.05 -> 1.60/rev (smoothed 1.77, decayed for the 31 Jul ban lapse). Positive four cycles running.",
+      "Ran the >=4-cycle pass-through re-fit check and declined it: petrol residuals alternate sign, and diesel's crude legs switched sign between cycles, so no single k explains them. k stays 1.0.",
+      "Direction hit-rate 50% (4 of 8). The model is now calling diesel's direction well; petrol is the weak side, and its wide error band reflects that."
     ]
   },
   "news": {
-    "asOf": "2026-07-29",
-    "headline": "Brent rebounds to ~$87 as US-Iran fighting resumes and Gulf refineries are hit - next revision turns higher again",
-    "summary": "The easing case has closed. Brent snapped a three-day slide and jumped more than 4% to ~$87/bbl on 29 Jul after the US intercepted a surprise Iranian missile attack, Iran-backed militias flew drones at Saudi Eastern Region oil facilities for a second day, and Iran rejected Oman's 50-50 Hormuz proposal. Pakistan's 29 Jul revision had already turned up - petrol +Rs1.63 to Rs335.81, diesel +Rs1.55 to Rs388.38 - driven by refining cracks rather than crude. With the window's late-July $96-100 days still rolling off, the next single revision is a modest +Rs0.65 petrol / +Rs0.80 diesel; the crude and crack legs now pull in opposite directions.",
+    "asOf": "2026-07-30",
+    "headline": "Brent above $90 as US-Iran fighting widens - diesel keeps climbing while petrol drifts lower",
+    "summary": "Brent held above $90 on 30 Jul after rallying more than 8% the previous session, as fighting between the US and Iran widened. Trump pledged a strong response to an attack on US forces in Jordan, Tehran continues to insist on control of the Strait of Hormuz, and the conflict has spread into the Red Sea where the Houthis have threatened to blockade Saudi Arabia - prompting Riyadh to join US strikes on Tehran-backed militants in Iraq. US commercial crude inventories posted their largest draw since mid-June and the SPR fell for an 18th straight week to its lowest since 1983. Pakistan's 30 Jul revision split: petrol -Re0.75 to Rs335.06, diesel +Rs2.24 to Rs390.62.",
     "horizons": {
       "d2": {
         "signal": "up",
-        "note": "Brent back above $86 with a live risk premium: strikes on Abqaiq and the East-West pipeline, Jazan refinery damaged, API crude stocks -3.3 mb. Cracks firm on both fuels, so the next revision nudges up."
+        "note": "Brent above $90 with a hard risk premium: an attack on US forces in Jordan, a promised US response, Houthi threats to blockade Saudi Arabia, and the largest US crude draw since mid-June."
       },
       "d4": {
         "signal": "firm",
-        "note": "Two-sided. Russia's 8-31 Jul diesel-export ban lapses within days (crack-easing), but Gulf refinery outages and the collapse of the Hormuz talks pull the other way."
+        "note": "Russia's diesel-export ban nominally lapses 31 Jul, which would ease the gasoil crack - but Moscow will only lift it 'once the market recovers' and Ukrainian drone strikes keep taking Russian refining offline."
       },
       "w1": {
         "signal": "firm",
-        "note": "Forecasters still see normalisation - EIA ~$74 Q3, JPMorgan $86 Q3 / $80 Q4, OPEC+ adding barrels - but that is now conditional on de-escalation that just reversed. Trading Economics models see ~$101 by quarter-end. Range wide in both directions."
+        "note": "Two-sided but skewed up. EIA's ~$74 Q3 and JPMorgan's $86 assumed a de-escalation that keeps failing; Trading Economics models now imply ~$101 by quarter-end. OPEC+ barrels are the main offset."
       }
     },
-    "dieselCrack": "Cracks widened across the whole barrel this week, not just diesel. With Brent down 4-5% on 28 Jul, RBOB gasoline still rose 1.2% and heating oil 1.0-2.8% - that divergence is what pushed petrol and diesel up together on the 29 Jul revision. Drivers: the Houthi strike on Aramco's 400kbd Jazan refinery, drones at Abqaiq, and Moscow's gasoline-export ban now extended to year-end. The offsetting relief is Russia's diesel-export ban lapsing 31 Jul, which is why the diesel crack carry (1.05/rev) is decayed harder than petrol's (0.90/rev).",
-    "waitAdvice": "fill",
+    "dieselCrack": "This is now the dominant driver, and it is diesel-specific. Russia's ban took roughly 11% of seaborne diesel supply off the market, pushing European low-sulphur gasoil to an all-time-high premium of about $60.77/bbl over Brent. Gasoline is not in the same regime - RBOB fell 1.0% on 30 Jul against Brent's 1.2% - which is exactly why OGRA could cut petrol and raise diesel on the same day. The diesel crack carry is 1.60/rev; the 31 Jul ban lapse is the one catalyst that could unwind it, but Moscow has attached a condition to lifting it.",
+    "waitAdvice": "split",
     "drivers": [
-      "Brent rebounded more than 4% to ~$87 on 29 Jul, snapping a three-day, ~16% slide - the biggest such decline since 2020",
-      "US says it intercepted a surprise Iranian ballistic-missile attack on its Middle East bases; strikes have resumed",
-      "Iran-backed militias flew drones at Saudi Eastern Region oil facilities for a second day; Abqaiq and the East-West pipeline targeted, Jazan refinery (400kbd) hit",
-      "Iran rejected Oman's 50-50 Strait of Hormuz proposal, insisting on full control of the inbound lane",
-      "OGRA 29 Jul: petrol +Rs1.63 to Rs335.81, diesel +Rs1.55 to Rs388.38 - crack-driven, not crude-driven",
-      "Offsetting: Russia's diesel-export ban lapses 31 Jul; API crude stocks -3.3 mb; EIA still sees ~$74 Brent in Q3"
+      "Brent held above $90 on 30 Jul after rallying more than 8% the session before",
+      "Attack on US forces in Jordan; Trump pledged a strong response, and Iran still insists on controlling the Strait of Hormuz",
+      "Conflict widened into the Red Sea - Houthis threatened to blockade Saudi Arabia, and Riyadh joined US strikes on Tehran-backed militants in Iraq",
+      "US commercial crude inventories posted their largest draw since mid-June; the SPR fell for an 18th straight week to its lowest since 1983",
+      "OGRA 30 Jul: petrol -Re0.75 to Rs335.06 but diesel +Rs2.24 to Rs390.62 - a Rs3 divergence from a Rs0.25 crude leg",
+      "European gasoil still near a record ~$60.77/bbl premium to Brent; Russia's diesel-export ban nominally lapses 31 Jul"
     ],
     "sources": [
       {
-        "title": "Petrol price in Pakistan for July 29, 2026 - petrol +Rs1.63 to Rs335.81, diesel +Rs1.55 to Rs388.38 (ARY News)",
-        "url": "https://arynews.tv/petrol-price-in-pakistan-for-july-29-2026"
+        "title": "Petrol price drops Rs0.75, diesel up Rs2.24 on July 30 (Profit / Pakistan Today)",
+        "url": "https://profit.pakistantoday.com.pk/2026/07/29/govt-lowers-petrol-price-by-rs075litre-raises-diesel-by-rs224-for-july-30"
       },
       {
-        "title": "Pakistan increases petrol, diesel prices for July 29 (Dunya News)",
-        "url": "https://dunyanews.tv/en/Business/965126-pakistan-increases-petrol-diesel-prices-for-july-29"
+        "title": "Diesel price up Rs2.24, petrol's down Re0.75 per litre (Business Recorder)",
+        "url": "https://www.brecorder.com/news/40432398/diesel-price-up-rs224-petrols-down-re075-per-litre"
       },
       {
-        "title": "Brent Rebounds as Middle East Tensions Flare (Trading Economics, 29 Jul)",
+        "title": "Brent Holds Gains Amid US-Iran Tensions (Trading Economics, 30 Jul)",
         "url": "https://tradingeconomics.com/commodity/brent-crude-oil"
       },
       {
-        "title": "Oil jumps as U.S.-Iran resume strikes after a brief pause (CNBC, 29 Jul)",
-        "url": "https://www.cnbc.com/2026/07/29/oil-prices-today-brent-wti-iran-us-hormuz.html"
+        "title": "Russia Extends Gasoline Export Ban, Plans to Lift Diesel Ban After Recovery (Bloomberg)",
+        "url": "https://www.bloomberg.com/news/articles/2026-07-25/russia-says-it-will-end-diesel-export-ban-when-market-recovers"
       },
       {
-        "title": "Latest Oil Market News and Analysis for July 29 (Bloomberg)",
-        "url": "https://www.bloomberg.com/news/articles/2026-07-28/latest-oil-market-news-and-analysis-for-july-29"
-      },
-      {
-        "title": "EIA Short-Term Energy Outlook",
-        "url": "https://www.eia.gov/outlooks/steo/"
+        "title": "Russia's diesel export ban deepens global supply crunch (Hydrocarbon Processing)",
+        "url": "https://www.hydrocarbonprocessing.com/news/2026/07/russias-diesel-export-ban-deepens-global-supply-crunch/"
       },
       {
         "title": "USD/PKR interbank (hamariweb.com)",
@@ -309,12 +305,30 @@
       "dieselAnchor": 388.38,
       "predictedPetrol": 336.46,
       "predictedDiesel": 389.18,
+      "actualPetrol": 335.06,
+      "actualDiesel": 390.62,
+      "verdict": "neutral",
+      "newsSignal": "up",
+      "model": "roll",
+      "note": "New OGRA revision graded the 28 Jul call (both misses, crack-driven). Crack terms lifted to 0.90 petrol / 1.05 diesel. Brent rebounded ~4% to ~$87 as US-Iran strikes resumed and drones hit Saudi Eastern Region oil facilities. Next single revision +Rs0.65 petrol to 336.46 and +Rs0.80 diesel to 389.18 (about +Rs36 / +Rs44 per 55 L). If Brent holds ~$87 the ~3-revision cumulative is only +Rs0.80 petrol / +Rs1.25 diesel, because the late-July $96-100 days rolling out of the window offset the firmer cracks. Verdict neutral with an upward tilt - no urgency, but the easing case has gone. GRADED vs the 30 Jul revision (petrol Rs335.06, diesel Rs390.62): petrol off +Rs1.40 with the direction wrong, diesel off -Rs1.44 with the direction right. Crude leg -Rs0.25 shared; residuals -Rs0.50 petrol / +Rs2.49 diesel - the fuels have decoupled.",
+      "petrolErr": 1.4,
+      "dieselErr": -1.44
+    },
+    {
+      "date": "2026-07-30",
+      "brentBasis": 91.47,
+      "brentSpot": 89.7,
+      "fx": 279.3,
+      "petrolAnchor": 335.06,
+      "dieselAnchor": 390.62,
+      "predictedPetrol": 335.31,
+      "predictedDiesel": 392.27,
       "actualPetrol": null,
       "actualDiesel": null,
       "verdict": "neutral",
       "newsSignal": "up",
       "model": "roll",
-      "note": "New OGRA revision graded the 28 Jul call (both misses, crack-driven). Crack terms lifted to 0.90 petrol / 1.05 diesel. Brent rebounded ~4% to ~$87 as US-Iran strikes resumed and drones hit Saudi Eastern Region oil facilities. Next single revision +Rs0.65 petrol to 336.46 and +Rs0.80 diesel to 389.18 (about +Rs36 / +Rs44 per 55 L). If Brent holds ~$87 the ~3-revision cumulative is only +Rs0.80 petrol / +Rs1.25 diesel, because the late-July $96-100 days rolling out of the window offset the firmer cracks. Verdict neutral with an upward tilt - no urgency, but the easing case has gone."
+      "note": "Split call. Petrol crack cut to 0.20/rev and diesel raised to 1.60/rev after the 30 Jul revision moved the two fuels Rs3 apart on a Rs0.25 crude leg. Brent held above $90 after an 8% rally as US-Iran fighting widened into the Red Sea. Next revision: petrol +Rs0.25 to 335.31 (about +Rs14 per 55 L, effectively flat) and diesel +Rs1.65 to 392.27 (about +Rs91). If Brent holds ~$89.70 the ~3-revision cumulative diverges: petrol -Rs1.28 as the late-July $96-100 days roll out of the window, diesel +Rs2.92 as the record gasoil crack carries. Practical read: top up diesel, no rush on petrol."
     }
   ]
 }
@@ -905,63 +919,63 @@
 const { chromium } = require('playwright');
 
 const d = {
-  "date": "Wednesday, 29 July 2026",
-  "fileDate": "2026-07-29",
-  "headline": "Prices turn up again — cracks, not crude, are driving it",
+  "date": "Thursday, 30 July 2026",
+  "fileDate": "2026-07-30",
+  "headline": "Petrol and diesel split — top up diesel, wait on petrol",
   "tank": 55,
   "live": {
-    "petrolAnchor": 335.81, "dieselAnchor": 388.38,
-    "petrolPrev": 334.18, "dieselPrev": 386.83,
-    "brentSpot": 87, "basis": 91.23, "fx": 278.8, "effective": "29 Jul 2026",
-    "window": [88, 89.5, 91.1, 96, 100.4, 86.6, 87]
+    "petrolAnchor": 335.06, "dieselAnchor": 390.62,
+    "petrolPrev": 335.81, "dieselPrev": 388.38,
+    "brentSpot": 89.7, "basis": 91.47, "fx": 279.3, "effective": "30 Jul 2026",
+    "window": [89.5, 91.1, 96, 100.4, 86.6, 87, 89.7]
   },
-  "calib": { "kP": 1.0, "kD": 1.0, "ckP": 0.9, "ckD": 1.05 },
-  "mae": { "p": 2.42, "dl": 0.71 },
+  "calib": { "kP": 1.0, "kD": 1.0, "ckP": 0.2, "ckD": 1.6 },
+  "mae": { "p": 2.17, "dl": 0.89 },
   "verdict": {
-    "cls": "neutral", "tag": "No urgency — mild upward tilt",
-    "head": "Small rises ahead, not worth a special trip",
-    "body": "OGRA raised petrol Rs 1.63 to Rs 335.81 and diesel Rs 1.55 to Rs 388.38 today — driven by refining margins, not crude. The next revision adds roughly +Rs 0.65/L petrol (to Rs 336.46) and +Rs 0.80/L diesel (to Rs 389.18), about Rs 36 and Rs 44 on a 55 L tank. If Brent holds ~$87 the cumulative over ~3 revisions is only +Rs 0.80 petrol / +Rs 1.25 diesel, because the late-July $96–100 days rolling out of the window offset the firmer cracks. Top up if you're passing a pump; there's no case to wait.",
-    "timing": "2-day ▲ Rising · 4-day ◆ Firm · 1-week ◆ Firm — the easing case has closed; risk is skewed slightly up."
+    "cls": "neutral", "tag": "Split call",
+    "head": "Fill diesel, no rush on petrol",
+    "body": "OGRA moved the two fuels in opposite directions today — petrol down Re0.75 to Rs 335.06, diesel up Rs 2.24 to Rs 390.62 — on a crude leg worth only Rs 0.25. Next revision: petrol effectively flat at +Rs 0.25/L (Rs 14 a tank), diesel +Rs 1.65/L (Rs 91 a tank). If Brent holds ~$89.70 they keep diverging over ~3 revisions: petrol −Rs 1.28 as the late-July $96–100 days roll out of the window, diesel +Rs 2.92 as the record gasoil crack carries. Worth filling diesel today; petrol can wait.",
+    "timing": "2-day ▲ Rising · 4-day ◆ Firm · 1-week ◆ Firm — crude risk premium is back; the one easing catalyst is Russia's diesel ban lapsing 31 Jul."
   },
-  "petrol": { "cls": "neutral", "tag": "Top up", "tankLine": "≈ +Rs 36 on a 55 L tank · if Brent holds $87: Rs 336.61 after 3 revisions" },
-  "diesel": { "cls": "neutral", "tag": "Top up", "tankLine": "≈ +Rs 44 on a 55 L tank · if Brent holds $87: Rs 389.63 after 3 revisions" },
+  "petrol": { "cls": "neutral", "tag": "No rush", "tankLine": "≈ +Rs 14 on a 55 L tank · if Brent holds $89.70: Rs 333.78 after 3 revisions (−Rs 1.28)" },
+  "diesel": { "cls": "fill", "tag": "Fill now", "tankLine": "≈ +Rs 91 on a 55 L tank · if Brent holds $89.70: Rs 393.54 after 3 revisions (+Rs 2.92)" },
   "horizons": [
-    { "t": "Next 2 days", "s": "up", "label": "▲ Rising", "n": "Brent rebounded 4%+ to ~$87 as US-Iran strikes resumed, drones hit Saudi Eastern Region oil facilities for a second day and API crude stocks fell 3.3 mb." },
-    { "t": "Next 4 days", "s": "firm", "label": "◆ Firm", "n": "Two-sided: Russia's diesel-export ban lapses 31 Jul (crack-easing) against Gulf refinery outages and the collapse of Oman's Hormuz proposal." },
-    { "t": "Next 1 week", "s": "firm", "label": "◆ Firm", "n": "EIA ~$74 Q3, JPMorgan $86 Q3 / $80 Q4 and OPEC+ barrels still point lower — but that was conditional on a de-escalation that has just reversed." }
+    { "t": "Next 2 days", "s": "up", "label": "▲ Rising", "n": "Brent above $90 with a hard risk premium: an attack on US forces in Jordan, a promised US response, Houthi threats to blockade Saudi Arabia, and the largest US crude draw since mid-June." },
+    { "t": "Next 4 days", "s": "firm", "label": "◆ Firm", "n": "Russia's diesel-export ban nominally lapses 31 Jul, which would ease the gasoil crack — but Moscow will only lift it 'once the market recovers' and drone strikes keep taking Russian refining offline." },
+    { "t": "Next 1 week", "s": "firm", "label": "◆ Firm", "n": "Two-sided but skewed up. EIA's ~$74 Q3 and JPMorgan's $86 assumed a de-escalation that keeps failing; Trading Economics models now imply ~$101 by quarter-end. OPEC+ barrels are the main offset." }
   ],
-  "why": "No urgency either way — the next revision moves both fuels less than Rs 1/L, and the crude and crack legs now pull against each other: the window is shedding the late-July $96–100 spike while refining margins firm. <span class='amber'>Today's hike came almost entirely from product cracks — Houthi strikes on Aramco's 400 kbd Jazan refinery and drones at Abqaiq — not from Brent.</span>",
-  "newsSummary": "Brent snapped a three-day, ~16% slide and jumped more than 4% to ~$87/bbl on 29 Jul after the US intercepted a surprise Iranian ballistic-missile attack on its Middle East bases, Iran-backed militias flew drones at Saudi Eastern Region oil facilities for a second consecutive day, and Iran rejected Oman's 50-50 Strait of Hormuz proposal. Pakistan's 29 Jul revision had already turned up — petrol +Rs 1.63, diesel +Rs 1.55 — but for a different reason: refining cracks, not crude.",
-  "dieselCrack": "Cracks widened across the whole barrel this week, not just diesel. With Brent down 4–5% on 28 Jul, RBOB gasoline still rose 1.2% and heating oil 1.0–2.8% — that divergence is what pushed petrol and diesel up almost identically on the 29 Jul revision. Drivers: the Houthi strike on Aramco's 400 kbd Jazan refinery, drones at Abqaiq, and Moscow's gasoline-export ban now extended to year-end. The offsetting relief is Russia's diesel-export ban lapsing 31 Jul, which is why the diesel crack carry (1.05/rev) is decayed harder than petrol's (0.90/rev).",
+  "why": "The two fuels are no longer in the same regime. <span class='amber'>Diesel is the one to act on — Russia's export ban has taken ~11% of seaborne diesel supply out, holding European gasoil near a record $60.77/bbl premium to Brent.</span> Petrol's crack is flat, so its pump price is being pulled down by the late-July crude spike rolling out of OGRA's 7-day window.",
+  "newsSummary": "Brent held above $90 on 30 Jul after rallying more than 8% the previous session, as fighting between the US and Iran widened. Trump pledged a strong response to an attack on US forces in Jordan, Tehran continues to insist on control of the Strait of Hormuz, and the conflict has spread into the Red Sea where the Houthis have threatened to blockade Saudi Arabia — prompting Riyadh to join US strikes on Tehran-backed militants in Iraq. US commercial crude inventories posted their largest draw since mid-June and the SPR fell for an 18th straight week to its lowest level since 1983.",
+  "dieselCrack": "This is now the dominant driver, and it is diesel-specific. Russia's ban took roughly 11% of seaborne diesel supply off the market, pushing European low-sulphur gasoil to an all-time-high premium of about $60.77/bbl over Brent. Gasoline is not in the same regime — RBOB fell 1.0% on 30 Jul against Brent's 1.2% — which is exactly why OGRA could cut petrol and raise diesel on the same day. The diesel crack carry is 1.60/rev; the 31 Jul ban lapse is the one catalyst that could unwind it, but Moscow has attached a condition to lifting it.",
   "drivers": [
-    "Brent rebounded 4%+ to ~$87 on 29 Jul, snapping a three-day ~16% slide — the biggest such decline since 2020",
-    "US says it intercepted a surprise Iranian ballistic-missile attack on its Middle East bases; strikes have resumed",
-    "Drones hit Saudi Eastern Region oil facilities for a second day — Abqaiq and the East-West pipeline targeted, Jazan refinery (400 kbd) damaged",
-    "Iran rejected Oman's 50-50 Strait of Hormuz proposal, insisting on full control of the inbound lane",
-    "OGRA 29 Jul: petrol +Rs 1.63 to Rs 335.81, diesel +Rs 1.55 to Rs 388.38 — crack-driven, not crude-driven",
-    "Offsetting: Russia's diesel-export ban lapses 31 Jul; API crude stocks −3.3 mb; EIA still sees ~$74 Brent in Q3"
+    "Brent held above $90 on 30 Jul after rallying more than 8% the session before",
+    "Attack on US forces in Jordan; Trump pledged a strong response, and Iran still insists on controlling the Strait of Hormuz",
+    "Conflict widened into the Red Sea — Houthis threatened to blockade Saudi Arabia, and Riyadh joined US strikes on Tehran-backed militants in Iraq",
+    "US commercial crude inventories posted their largest draw since mid-June; the SPR fell for an 18th straight week to its lowest since 1983",
+    "OGRA 30 Jul: petrol −Re0.75 to Rs 335.06 but diesel +Rs 2.24 to Rs 390.62 — a Rs 3 divergence from a Rs 0.25 crude leg",
+    "European gasoil still near a record ~$60.77/bbl premium to Brent; Russia's diesel-export ban nominally lapses 31 Jul"
   ],
-  "waitAdvice": "Top up if convenient, but don't make a trip. The next revision costs about Rs 36 (petrol) or Rs 44 (diesel) on a full 55 L tank, and even three revisions at Brent ~$87 only add Rs 0.80–1.25/L. The easing case that held for the last two days has gone, so there is no reason to wait either.",
+  "waitAdvice": "Split. Fill diesel today — it rises Rs 1.65/L at the next revision (Rs 91 a tank) and about Rs 2.92/L over three if Brent holds. Petrol can wait: it is flat next revision and drifts about Rs 1.28/L lower over three as the late-July crude spike leaves OGRA's averaging window.",
   "analysis": {
-    "title": "Under-called both fuels as product cracks — not crude — drove the 29 Jul hike",
-    "summary": "The 28 Jul call read Brent's slide to ~$85 and projected small cuts. OGRA instead raised both fuels. The crude leg was right; the crack term was far too small.",
+    "title": "Petrol and diesel have decoupled — one call right, one wrong, on the same crude",
+    "summary": "Yesterday's call had both fuels rising ~Rs 0.65–0.80. OGRA instead cut petrol and raised diesel. With a crude leg of only −Rs 0.25, that Rs 3 spread is entirely product cracks.",
     "graded": [
-      { "date": "29 Jul", "fuel": "Petrol — roll model", "predicted": 333.48, "actual": 335.81, "err": -2.33 },
-      { "date": "29 Jul", "fuel": "Diesel — roll model", "predicted": 386.78, "actual": 388.38, "err": -1.60 }
+      { "date": "30 Jul", "fuel": "Petrol — roll model", "predicted": 336.46, "actual": 335.06, "err": 1.40 },
+      { "date": "30 Jul", "fuel": "Diesel — roll model", "predicted": 389.18, "actual": 390.62, "err": -1.44 }
     ],
-    "backtestNote": "Unlike the 28 Jul miss, this one is not a crude-timing artefact: the 7-working-day Platts window behind the 29 Jul price closes before this week's Brent swings, and both fuels moved almost identically (+Rs 1.63 / +Rs 1.55) on a crude leg of only −Rs 0.50. Two products with different crude betas moving in lockstep is a crack signature. Independent confirmation: on 28 Jul, with Brent down 4–5%, RBOB gasoline rose 1.2% and heating oil 1.0–2.8%.",
-    "root": "The model carried a near-zero petrol crack (−0.20/rev) and a modest diesel crack (0.45/rev) on the assumption that July's product squeeze was fading with Russia's export ban. Instead the squeeze broadened from diesel to gasoline as Gulf refining capacity itself came under attack. Refinery outages hit products directly and never show up in the Brent window, so the crack term has to carry them.",
+    "backtestNote": "The crude leg was small and shared (−Rs 0.25 for both fuels), so the entire Rs 2.99 gap between petrol's cut and diesel's rise is product-crack. Confirmation from the product futures: on 30 Jul RBOB gasoline fell 1.0% against Brent −1.2% (crack flat) while European gasoil held its record ~$60/bbl premium. The model was carrying too much petrol crack (0.90) and too little diesel crack (1.05).",
+    "root": "Treating the two fuels as sharing a crack regime. July's squeeze was never symmetric: Russia's diesel-export ban removed ~11% of seaborne diesel supply, while gasoline was only affected indirectly. The 28 Jul cycle — where both fuels rose together — misled the model into lifting the petrol crack, and the 30 Jul revision immediately unwound it.",
     "fixes": [
-      "Graded the 28 Jul call vs the 29 Jul revision: petrol off −Rs 2.33, diesel off −Rs 1.60; direction wrong on both.",
-      "Petrol crack lifted from −0.20 to +0.90/rev — the residual was product-side, and Moscow's gasoline-export ban now runs to year-end.",
-      "Diesel crack lifted from 0.45 to 1.05/rev, decayed below the raw 1.25 smoothing because Russia's diesel-export ban lapses 31 Jul.",
-      "k held at 1.0: the crude leg explained its share correctly, and only 3 roll cycles are scored (re-fit threshold is 4).",
-      "Direction hit-rate flagged at 50%. Both recent misses trace to shocks the Brent window cannot see — crude gapping (28 Jul) and refinery outages (29 Jul)."
+      "Graded the 29 Jul call: petrol off +Rs 1.40 (direction wrong), diesel off −Rs 1.44 (direction right, magnitude under-called).",
+      "Petrol crack cut 0.90 → 0.20/rev; the 28 Jul spike now looks like a one-off rather than a regime change.",
+      "Diesel crack raised 1.05 → 1.60/rev (smoothed 1.77, decayed for the 31 Jul ban lapse). Positive four cycles running.",
+      "Ran the ≥4-cycle pass-through re-fit check and declined it: petrol residuals alternate sign, and diesel's crude legs switched sign between cycles, so no single k explains them. k stays 1.0.",
+      "Direction hit-rate 50% (4 of 8). Diesel's direction is being called well; petrol is the weak side, and its wider error band reflects that."
     ]
   },
-  "accuracy": { "scored": 3, "avgErr": "P 2.42 / D 0.71", "dirRight": "50%", "note": "Three roll-model cycles graded. Petrol MAE Rs 2.42 (bias +Rs 0.87), diesel MAE Rs 0.71 (bias −Rs 0.36); direction right on 3 of 6 fuel-cycles, down from 75% after today's double miss. The crude leg was tiny (−Rs 0.50) while both fuels rose ~Rs 1.6 together, so the error is product-crack, not pass-through — k stays 1.0 and the crack terms absorb it." },
-  "footShort": "Model (v6): roll OGRA's 7-working-day Brent window one day per revision + FX + per-fuel crack/rev. Estimate, not the official OGRA number.<br>Sources: OGRA/ARY/Dunya · Trading Economics · CNBC/Bloomberg · hamariweb.",
-  "footFull": "Since 1 Jul 2026 OGRA sets prices daily off a 7-working-day average of Platts Gulf assessments + fixed levies/margins (GST zero). v6 advances that window one day per revision (drop oldest, add today's spot) rather than projecting the whole crude gap, plus a decaying per-fuel crack term, self-correcting each morning. Estimate, not the official number.<br>Sources: OGRA via ARY News &amp; Dunya News · Trading Economics, CNBC &amp; Bloomberg (Brent) · Trading Economics product futures (refining margins) · hamariweb (FX)."
+  "accuracy": { "scored": 4, "avgErr": "P 2.17 / D 0.89", "dirRight": "50%", "note": "Four roll-model cycles scored. Petrol MAE Rs 2.17 (bias +Rs 1.00), diesel MAE Rs 0.89 (bias −Rs 0.63); direction right on 4 of 8 fuel-cycles. The pass-through re-fit check at the 4-cycle threshold was run and declined — the residuals are crack-shaped, not scaling errors — so k stays 1.0 and the per-fuel crack terms carry the divergence." },
+  "footShort": "Model (v6): roll OGRA's 7-working-day Brent window one day per revision + FX + per-fuel crack/rev. Estimate, not the official OGRA number.<br>Sources: OGRA via Profit &amp; Business Recorder · Trading Economics · Bloomberg · hamariweb.",
+  "footFull": "Since 1 Jul 2026 OGRA sets prices daily off a 7-working-day average of Platts Gulf assessments + fixed levies/margins (GST zero). v6 advances that window one day per revision (drop oldest, add today's spot) rather than projecting the whole crude gap, plus a decaying per-fuel crack term, self-correcting each morning. Estimate, not the official number.<br>Sources: OGRA via Profit/Pakistan Today &amp; Business Recorder · Trading Economics (Brent, product futures) · Bloomberg &amp; Hydrocarbon Processing (Russian export bans) · hamariweb (FX)."
 };
 
 
