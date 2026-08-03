@@ -103,13 +103,25 @@
   "nextRevisionLabel": "Tuesday 4 August"
  },
  "accuracy": {
-  "petrolMAE": 1.66,
-  "dieselMAE": 0.97,
-  "petrolBias": 0.45,
-  "dieselBias": -0.32,
-  "directionHitRate": 0.58,
-  "nScored": 6,
-  "note": "Six roll-model cycles scored; nothing added today because OGRA's 1-3 August block left no revision to grade. Petrol MAE Rs 1.66 (bias +Rs 0.45), diesel MAE Rs 0.97 (bias -Rs 0.32), direction right on 7 of 12 fuel-cycles (58%). Three history entries (31 July, 1 and 2 August) are now open or superseded and all resolve against Tuesday 4 August. Worth stating plainly what today does to the error band: the model's typical miss is about Rs 1.3/L averaged across the two fuels, and the next-revision move it is calling is Rs 1.27 and Re 0.97 - i.e. inside its own noise. The three-revision figure of -Rs 7.35 / -Rs 6.45 is the number carrying the actual signal, and it rests on the arithmetic of three known spike days leaving the window rather than on a forecast of where Brent goes. PRESENTATION CHANGE made after today's run, at Asad's request: the self-analysis backtest table is now a rolling scorecard covering every v6 cycle since 24 July rather than only the cycle graded that day. It shows each locked call against the OGRA revision that answered it, per fuel, with a mean-absolute-error footer, and renders still-open calls as 'open' instead of dropping them — so a quiet cycle like today's shows an honest open row rather than an empty table. The petrol MAE is restated from Rs 1.65 to Rs 1.66 to match the figure the table computes from the log (9.95/6 = 1.6583); the previous value was a rounding artefact, not a different measurement."
+  "petrolMAE": 1.7,
+  "dieselMAE": 2.47,
+  "petrolBias": 0.9,
+  "dieselBias": 1.61,
+  "directionHitRate": 0.7222,
+  "nScored": 9,
+  "scope": "lifetime",
+  "since": "2026-07-21",
+  "currentModel": {
+   "model": "v6 incremental-7wd-roll",
+   "since": "2026-07-24",
+   "petrolMAE": 1.66,
+   "dieselMAE": 0.97,
+   "petrolBias": 0.46,
+   "dieselBias": -0.32,
+   "directionHitRate": 0.5833,
+   "nScored": 6
+  },
+  "note": "Lifetime track record: 9 scored predictions since 2026-07-21, petrol MAE Rs 1.70 (bias +Rs 0.90), diesel MAE Rs 2.47 (bias +Rs 1.61), direction right on 13 of 18 fuel-cycles (72%). That is the whole history and it is the honest headline, but it mixes two models and the split matters. The first three cycles (21-23 July) ran the older full-gap model, which over-called badly on a rising tape - diesel was Rs 5.88 and Rs 8.15 too high on 22 and 23 July - and those two rows alone account for most of the lifetime diesel error. Since the roll model went in on 24 July the same figures are 6 cycles, petrol MAE Rs 1.66 and diesel MAE Rs 0.97 - diesel error cut by roughly 60%. Direction reads worse on the current model (58% against 72% lifetime) but that is mostly the tape, not the model: the July run-up was a one-way market where calling the sign was easy, and the last two weeks have been choppy. Nothing was added today because OGRA's 1-3 August block left no revision to grade; the open calls resolve against Tuesday 4 August."
  },
  "analysis": {
   "asOf": "2026-08-03",
@@ -124,7 +136,67 @@
    "Brent taken at $83.63 (Trading Economics daily value, -4.89% from $87.93). The intraday range was roughly $86.79-$90.80 and the live CFD reads near $83.49, so there is genuine settle risk in this input - flagged rather than smoothed away, since the whole point of the model is that one noisy print gets averaged over seven days.",
    "FX held at 278.20 interbank (forextrading.pk TT selling, unchanged from Friday). hamariweb showed 279.30; the 0.4% spread is worth under 2 paisa/L and switching source mid-series would add more noise than it removes.",
    "v7 shadow rolled on today's product prints - RBOB $3.0077/gal = $126.32/bbl, ULSD $4.0081/gal = $168.34/bbl. Both products fell less than Brent, so cracks widened marginally on the day even as levels fell."
-  ]
+  ],
+  "scorecard": [
+   {
+    "date": "24 Jul",
+    "model": "roll",
+    "pPred": 336.12,
+    "pAct": 335.18,
+    "dPred": 383.76,
+    "dAct": 383.46
+   },
+   {
+    "date": "27 Jul",
+    "model": "roll",
+    "pPred": 338.18,
+    "pAct": 334.18,
+    "dPred": 387.06,
+    "dAct": 386.83
+   },
+   {
+    "date": "28 Jul",
+    "model": "roll",
+    "pPred": 333.48,
+    "pAct": 335.81,
+    "dPred": 386.78,
+    "dAct": 388.38
+   },
+   {
+    "date": "29 Jul",
+    "model": "roll",
+    "pPred": 336.46,
+    "pAct": 335.06,
+    "dPred": 389.18,
+    "dAct": 390.62
+   },
+   {
+    "date": "30 Jul",
+    "model": "roll",
+    "pPred": 335.25,
+    "pAct": 336.15,
+    "dPred": 392.21,
+    "dAct": 393.04
+   },
+   {
+    "date": "31 Jul",
+    "model": "roll",
+    "pPred": 335.65,
+    "pAct": 336.03,
+    "dPred": 393.79,
+    "dAct": 392.38
+   },
+   {
+    "date": "3 Aug",
+    "model": "roll",
+    "pPred": 334.76,
+    "pAct": null,
+    "dPred": 391.41,
+    "dAct": null
+   }
+  ],
+  "scorecardNote": "The last six scored cycles plus today's open call - a rolling window onto the lifetime log, not the whole record. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a positive number means the model was too high. Today's row is open because OGRA's 1-3 August notification is a three-day block, so no new price has been published since the call was locked; it resolves tomorrow along with the identical 1 and 2 August calls it supersedes. Full lifetime figures (9 cycles since 2026-07-21) are in the self-correction panel below, and every entry is in the prediction log.",
+  "gradedNote": "Nothing new to grade this cycle - OGRA's 1-3 August block means no revision has been published since the last call was locked."
  },
  "news": {
   "asOf": "2026-08-03",
@@ -706,7 +778,7 @@
         <p id="anTitle" style="font-size:14px;font-weight:600;margin:0 0 6px"></p>
         <p id="anSummary" style="font-size:13px;color:var(--muted);margin:0 0 10px"></p>
         <table id="anTable">
-          <thead><tr><th>Backtest</th><th>Fuel / model</th><th>Predicted</th><th>Actual</th><th>Error (Rs/L)</th></tr></thead>
+          <thead><tr><th>Call locked</th><th>Petrol pred → actual</th><th>Err</th><th>Diesel pred → actual</th><th>Err</th></tr></thead>
           <tbody></tbody>
         </table>
         <p class="note" id="anBacktest"></p>
@@ -880,22 +952,53 @@
     $("anTitle").textContent=AN.title||"";
     $("anSummary").textContent=AN.summary||"";
     var at=$("anTable").querySelector("tbody"); at.innerHTML="";
-    var graded=AN.graded||[];
-    if(!graded.length){ at.innerHTML="<tr><td colspan='5' style='color:var(--muted)'>No graded predictions yet.</td></tr>"; }
-    graded.forEach(function(r){
-      var tr=document.createElement("tr");
-      tr.innerHTML="<td>"+r.date+"</td><td>"+r.fuel+"</td><td>"+r.predicted.toFixed(2)+"</td><td>"+r.actual.toFixed(2)+"</td><td class='"+cls(r.err)+"'>"+signRs(r.err)+"</td>";
-      at.appendChild(tr);
-    });
+    var sc=AN.scorecard||[];
+    if(sc.length){
+      var _pair=function(pred,act){
+        if(act==null) return "<td>"+pred.toFixed(2)+" \u2192 <span style='color:var(--accent)'>open</span></td><td style='color:var(--muted)'>\u2014</td>";
+        var e=pred-act;
+        return "<td>"+pred.toFixed(2)+" \u2192 "+act.toFixed(2)+"</td><td class='"+cls(e)+"'>"+signRs(e)+"</td>";
+      };
+      var _sd=sc.filter(function(r){return r.pAct!=null;});
+      var _mae=function(a){var t=0;a.forEach(function(x){t+=Math.abs(x);});return a.length?t/a.length:0;};
+      sc.forEach(function(r){
+        var tr=document.createElement("tr");
+        if(r.pAct==null) tr.style.opacity=".72";
+        tr.innerHTML="<td>"+r.date+"</td>"+_pair(r.pPred,r.pAct)+_pair(r.dPred,r.dAct);
+        at.appendChild(tr);
+      });
+      var sum=document.createElement("tr");
+      sum.style.background="var(--panel2,#1e2c3c)";
+      sum.innerHTML="<td><b>"+_sd.length+" scored</b></td><td style='color:var(--muted)'>mean abs. error</td><td><b>"
+        +_mae(_sd.map(function(r){return r.pPred-r.pAct;})).toFixed(2)+"</b></td><td style='color:var(--muted)'>mean abs. error</td><td><b>"
+        +_mae(_sd.map(function(r){return r.dPred-r.dAct;})).toFixed(2)+"</b></td>";
+      at.appendChild(sum);
+      if(AN.scorecardNote){
+        var cap=document.createElement("tr");
+        cap.innerHTML="<td colspan='5' style='color:var(--muted);font-size:11.5px;line-height:1.5;text-align:left'>"+AN.scorecardNote+"</td>";
+        at.appendChild(cap);
+      }
+    } else {
+      var graded=AN.graded||[];
+      if(!graded.length){ at.innerHTML="<tr><td colspan='5' style='color:var(--muted)'>"+(AN.gradedNote||"No graded predictions yet.")+"</td></tr>"; }
+      graded.forEach(function(r){
+        var tr=document.createElement("tr");
+        tr.innerHTML="<td>"+r.date+"</td><td>"+r.fuel+"</td><td>"+r.predicted.toFixed(2)+"</td><td>"+r.actual.toFixed(2)+"</td><td class='"+cls(r.err)+"'>"+signRs(r.err)+"</td>";
+        at.appendChild(tr);
+      });
+    }
     $("anBacktest").innerHTML=AN.backtestNote?("<b>Why the fix matters:</b> "+AN.backtestNote):"";
-    $("anRoot").innerHTML="<b>Root cause:</b> "+(AN.rootCause||"");
+    $("anRoot").innerHTML="<b>Root cause:</b> "+(AN.rootCause||AN.root||"");
     var fx=$("anFix"); fx.innerHTML="";
-    (AN.fix||[]).forEach(function(f){var li=document.createElement("li");li.textContent=f;fx.appendChild(li);});
+    (AN.fix||AN.fixes||[]).forEach(function(f){var li=document.createElement("li");li.textContent=f;fx.appendChild(li);});
 
     // accuracy
     var scored=A.nScored||0;
     $("aObs").textContent=scored;
+    var _cm=A.currentModel;
+    if(_cm){ var _o=$("aObs").parentNode.querySelector(".l"); if(_o) _o.textContent="Predictions scored (all time)"; }
     $("aHit").textContent=(A.directionHitRate==null)?"—":(Math.round(A.directionHitRate*100)+"%");
+    if(_cm&&_cm.directionHitRate!=null){ var _hl=$("aHit").parentNode.querySelector(".l"); if(_hl) _hl.innerHTML="Direction called right <span style='opacity:.75'>· "+Math.round(_cm.directionHitRate*100)+"% on v6</span>"; }
     $("accNote").innerHTML = scored>0
       ? "Based on <span class='k'>"+scored+"</span> scored prediction"+(scored===1?"":"s")+". "+(A.note||C.method||"")
       : "No predictions scored yet under the rebuilt model — today's projection is the first, graded against the next official OGRA revision.";
@@ -1106,8 +1209,8 @@ const d = {
     "title": "The crude leg finally does some work",
     "summary": "For six scored cycles the crude leg has been nearly silent — one paisa against a Rs 3.51 move on 31 July — and the per-fuel crack term has carried the model. Today it is the other way round: Brent fell $4.30 from Friday's settle, worth −Rs 1.87 of pass-through on its own, against crack terms of just +Rs 0.60 and +Rs 0.90. Nothing was graded this cycle because OGRA's 1–3 August block means the outstanding prediction is still open; it will be answered by Tuesday's revision, which is now also the first real test of last week's diesel-crack decay.",
     "graded": [],
-    "scorecard": [{"date":"24 Jul","pPred":336.12,"pAct":335.18,"dPred":383.76,"dAct":383.46},{"date":"27 Jul","pPred":338.18,"pAct":334.18,"dPred":387.06,"dAct":386.83},{"date":"28 Jul","pPred":333.48,"pAct":335.81,"dPred":386.78,"dAct":388.38},{"date":"29 Jul","pPred":336.46,"pAct":335.06,"dPred":389.18,"dAct":390.62},{"date":"30 Jul","pPred":335.25,"pAct":336.15,"dPred":392.21,"dAct":393.04},{"date":"31 Jul","pPred":335.65,"pAct":336.03,"dPred":393.79,"dAct":392.38},{"date":"3 Aug","pPred":334.76,"pAct":null,"dPred":391.41,"dAct":null}],
-    "scorecardNote": "Every v6 cycle since the roll model went in on 24 July, each call graded against the OGRA revision that answered it. Error = predicted − actual, so a positive number means the model was too high. Direction was right on 7 of 12 fuel-cycles (58%). Today’s row is open because OGRA’s 1–3 August block means no new price has been published since the call was locked — it resolves tomorrow, together with the identical 1 and 2 August calls it supersedes. The three cycles before 24 July ran on the older full-gap model and are excluded: it over-called badly on a rising tape (diesel +Rs 8.15 on 23 July), which is why it was replaced.",
+    "scorecard": [{"date":"24 Jul","model":"roll","pPred":336.12,"pAct":335.18,"dPred":383.76,"dAct":383.46},{"date":"27 Jul","model":"roll","pPred":338.18,"pAct":334.18,"dPred":387.06,"dAct":386.83},{"date":"28 Jul","model":"roll","pPred":333.48,"pAct":335.81,"dPred":386.78,"dAct":388.38},{"date":"29 Jul","model":"roll","pPred":336.46,"pAct":335.06,"dPred":389.18,"dAct":390.62},{"date":"30 Jul","model":"roll","pPred":335.25,"pAct":336.15,"dPred":392.21,"dAct":393.04},{"date":"31 Jul","model":"roll","pPred":335.65,"pAct":336.03,"dPred":393.79,"dAct":392.38},{"date":"3 Aug","model":"roll","pPred":334.76,"pAct":null,"dPred":391.41,"dAct":null}],
+    "scorecardNote": "The last six scored cycles plus today's open call - a rolling window onto the lifetime log, not the whole record. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a positive number means the model was too high. Today's row is open because OGRA's 1-3 August notification is a three-day block, so no new price has been published since the call was locked; it resolves tomorrow along with the identical 1 and 2 August calls it supersedes. Full lifetime figures (9 cycles since 2026-07-21) are in the self-correction panel below, and every entry is in the prediction log.",
     "gradedNote": "Nothing to grade this cycle — OGRA’s 1 August notification is a three-day block running through tonight, so no new official price exists to score against. Three predictions (31 Jul, 1 Aug, 2 Aug) are open and all resolve against Tuesday 4 August. Last graded cycle was 1 Aug: petrol −Rs 0.38 (direction right), diesel +Rs 1.41 (direction wrong).",
     "backtestNote": "Accuracy is unchanged at six scored cycles: petrol MAE Rs 1.66 (bias +Rs 0.45), diesel MAE Rs 0.97 (bias −Rs 0.32), direction right on 7 of 12 fuel-cycles (58%). Two open predictions (1 and 2 August, identical by construction) are superseded by today's and all resolve against Tuesday 4 August. The window was deliberately NOT advanced today: it is the seven working days behind the price currently in force, and Monday's $83.63 enters as the spot that rolls into it for Tuesday. Advancing it here would double-count the drop.",
     "root": "Unchanged: v6 proxies a PRODUCT assessment with CRUDE and lets the crack term absorb the gap. Today is the rare day when that proxy is doing the right thing — a crude-level shock passes through cleanly — but it is also the day the two models nearly agree, which is worth noting: v7's product-window shadow puts Tuesday at Rs 334.91 petrol and Rs 391.46 diesel against v6's Rs 334.76 and Rs 391.41, a gap of under 20 paisa.",
@@ -1119,12 +1222,8 @@ const d = {
       "v7 shadow updated on today's product prints — RBOB $3.0077/gal = $126.32/bbl, ULSD $4.0081/gal = $168.34/bbl — still flat-seeded and unscored until roughly 11 August."
     ]
   },
-  "accuracy": {
-    "scored": 6,
-    "avgErr": "P 1.66 / D 0.97",
-    "dirRight": "58%",
-    "note": "Six roll-model cycles scored; nothing added today because OGRA's three-day block left no revision to grade. Petrol MAE Rs 1.66 (bias +Rs 0.45), diesel MAE Rs 0.97 (bias −Rs 0.32), direction right on 7 of 12 fuel-cycles. Tuesday 4 August grades three things at once: the open call, the size of last week's diesel-crack decay from 1.85 to 0.90/rev, and — informally — whether a 5% crude gap passes through as cleanly as the roll model assumes."
-  },
+  "accuracy": {"scored":9,"avgErr":"P 1.70 / D 2.47","dirRight":"72%","note":"Lifetime track record: 9 scored predictions since 2026-07-21, petrol MAE Rs 1.70 (bias +Rs 0.90), diesel MAE Rs 2.47 (bias +Rs 1.61), direction right on 13 of 18 fuel-cycles (72%). That is the whole history and it is the honest headline, but it mixes two models and the split matters. The first three cycles (21-23 July) ran the older full-gap model, which over-called badly on a rising tape - diesel was Rs 5.88 and Rs 8.15 too high on 22 and 23 July - and those two rows alone account for most of the lifetime diesel error. Since the roll model went in on 24 July the same figures are 6 cycles, petrol MAE Rs 1.66 and diesel MAE Rs 0.97 - diesel error cut by roughly 60%. Direction reads worse on the current model (58% against 72% lifetime) but that is mostly the tape, not the model: the July run-up was a one-way market where calling the sign was easy, and the last two weeks have been choppy. Nothing was added today because OGRA's 1-3 August block left no revision to grade; the open calls resolve against Tuesday 4 August."},
+  "accChip": "Typical miss ±Rs 1.31/L on the current model · 9 calls scored all-time",
   "footShort": "Model (v6): roll OGRA's 7-working-day Brent window one day per revision + FX + per-fuel crack/rev. Estimate, not the official OGRA number.<br>Sources: OGRA via Profit &amp; Pakistan Today · Trading Economics · S&amp;P Global · forextrading.pk.",
   "footFull": "Since 1 Jul 2026 OGRA sets prices off a 7-working-day average of Platts Gulf assessments + fixed levies/margins (GST zero). v6 advances that window one day per revision (drop oldest, add today's spot) rather than projecting the whole crude gap, plus a decaying per-fuel crack term, self-correcting each cycle. A v7 product-window shadow (no crack term) runs alongside and is unscored until ~11 Aug. Estimate, not the official number.<br>Sources: OGRA via Profit/Pakistan Today, Minute Mirror &amp; Aaj English · Trading Economics (Brent, RBOB, ULSD) · S&amp;P Global &amp; Hydrocarbon Processing (Russian export bans) · Capital.com/JPMorgan (forecasts) · forextrading.pk (FX)."
 };
