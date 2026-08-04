@@ -26,38 +26,38 @@
 <script type="application/json" id="advisor-state">
 {
  "version": 6,
- "lastUpdated": "2026-08-03",
+ "lastUpdated": "2026-08-04",
  "tankDefault": 55,
  "live": {
-  "brentSpot": 83.63,
-  "basis7d": 91.21,
-  "fx": 278.2,
-  "petrolAnchor": 336.03,
-  "dieselAnchor": 392.38,
-  "anchorEffectiveDate": "2026-08-01",
-  "anchorValidThrough": "2026-08-03",
-  "petrolPrev": 336.15,
-  "dieselPrev": 393.04
+  "brentSpot": 84.54,
+  "basis7d": 90.17,
+  "fx": 278.25,
+  "petrolAnchor": 331.95,
+  "dieselAnchor": 389.93,
+  "anchorEffectiveDate": "2026-08-04",
+  "anchorValidThrough": "2026-08-04",
+  "petrolPrev": 336.03,
+  "dieselPrev": 392.38
  },
  "calibration": {
   "model": "incremental-7wd-roll",
   "window": [
-   91.1,
    96,
    100.4,
    86.6,
    87,
    89.47,
-   87.93
+   87.93,
+   83.77
   ],
-  "windowAsOf": "2026-07-31",
+  "windowAsOf": "2026-08-03",
   "kPetrol": 1,
   "kDiesel": 1,
-  "crackPetrol": 0.6,
-  "crackDiesel": 0.9,
-  "crackNote": "Monday 3 August, first genuinely informative run in three days. Brent broke down: Trading Economics has it at $83.63, -4.89% from Friday's $87.93, after Trump called off the planned strike on Iran and said fresh talks would begin. Crucially the move happened during the Asian session, BEFORE the ~13:30 PKT Platts Gulf close, so it is inside the assessment that feeds tonight's notification - this is precisely the failure mode the 15:30 PKT schedule was created to avoid after the 27 July miss. The window is deliberately NOT advanced today. It holds the seven working days behind the price currently in force (mean $91.21) and today's $83.63 enters as the rolling spot; advancing the window AND rolling the spot would count the drop twice. Crack terms carry forward unchanged at petrol 0.60/rev and diesel 0.90/rev because no revision has occurred since they were set - OGRA's 1 August notification is a three-day block through tonight - so there is nothing to grade and no decay to apply. FX unchanged at 278.20 interbank (forextrading.pk TT selling; hamariweb showed 279.30, a 0.4% spread worth under 2 paisa/L, not enough to justify switching source mid-series). Product prints rolled into the v7 shadow: RBOB gasoline $3.0077/gal = $126.32/bbl (-3.42%), NY Harbor ULSD $4.0081/gal = $168.34/bbl (-2.13%). Note both products fell LESS than Brent, so cracks widened marginally on the day even as the absolute level fell.",
-  "nObs": 9,
-  "method": "No scoring this cycle - the 1-3 August block means the outstanding prediction is still open and will be graded against Tuesday 4 August. What changed today is the crude leg, which for the first time in six scored cycles is doing most of the work: the one-day roll drops the basis from $91.2143 to $90.1471, a -$1.067 move worth -Rs 1.867 of pass-through, against crack terms of only +Rs 0.60 and +Rs 0.90. Accuracy therefore stands unchanged at six scored cycles (petrol MAE Rs 1.66, diesel MAE Rs 0.97, direction 58%). Tuesday grades three things at once: the open call, the size of last week's diesel-crack decay from 1.85 to 0.90/rev, and informally whether a 5% crude gap passes through as cleanly as the roll model assumes.",
+  "crackPetrol": -0.6,
+  "crackDiesel": 0.15,
+  "crackNote": "The first sign-flip in the petrol crack term since the model was rebuilt. OGRA cut petrol Rs 4.08 to Rs 331.95 and diesel Rs 2.45 to Rs 389.93 effective today, against a call of -Rs 1.27 and -Re 0.97. The one-day crude roll that set today's price explains -Rs 1.867 of that, so the residuals are -Rs 2.213 on petrol and -Re 0.583 on diesel: the product side moved further than crude did, in the opposite direction to every prior cycle. Smoothing gives -0.81/rev petrol and +0.16/rev diesel; both were then pulled back toward zero because a single cycle drove the whole swing, landing at petrol -0.60/rev and diesel +0.15/rev. The corroborating evidence is in the tape rather than the arithmetic: Trading Economics has gasoline at a four-week low, down 0.45% to $2.9534/gal on a day Brent rose 0.92%, and heating oil down 0.76% to $3.8478/gal. Both cracks compressed hard. Note also that yesterday's product prints ($3.0077 and $4.0081) were intraday quotes; the settles were $2.9651 and $3.8780, and the v7 window uses the corrected figures. FX moved to 278.25 interbank from 278.20. Window advanced one day: 91.10 drops out, Monday's corrected settle $83.77 enters, basis $91.2143 -> $90.1671.",
+  "nObs": 10,
+  "method": "Seventh scored cycle on the roll model, and the first where the model was too HIGH on both fuels while getting both directions right. Petrol err +Rs 2.81, diesel +Rs 1.48. k held at 1.0: the crude leg has now under-explained twice and over-explained twice across seven cycles, which is noise rather than a systematic bias, and the spec's threshold of four consistent cycles is not met. What did change is the petrol crack term, which flipped negative. That is a real signal - the gasoline crack is at a four-week low - but it is one observation, so the smoothed -0.81 was decayed to -0.60 rather than taken at face value. Current-model accuracy now stands at seven cycles: petrol MAE Rs 1.82, diesel MAE Rs 1.04, direction right on 9 of 14 fuel-cycles.",
   "clampMin": 0.6,
   "clampMax": 2.4,
   "productWindowPetrol": [
@@ -67,7 +67,7 @@
    130.8,
    130.8,
    130.8,
-   130.8
+   124.53
   ],
   "productWindowDiesel": [
    172.01,
@@ -76,76 +76,84 @@
    172.01,
    172.01,
    172.01,
-   172.01
+   162.88
   ],
-  "productWindowAsOf": "2026-07-31",
-  "crackDecayNote": "No decay applied - decay is applied per graded revision and there was no revision. Terms stand at petrol 0.60/rev, diesel 0.90/rev. Tuesday 4 August is the first test of the 1.85 -> 0.90 diesel decay made on 1 August."
+  "productWindowAsOf": "2026-08-03",
+  "crackDecayNote": "Petrol decayed from a smoothed -0.81 to -0.60/rev and diesel from +0.16 to +0.15/rev. The direction of the petrol term is new and is being followed, not resisted - the gasoline crack genuinely broke - but the magnitude is held back because one cycle produced it. The 1.85 -> 0.90 diesel decay made on 1 August was tested today and passed: the diesel residual came in at -Re 0.58, so 0.90 was still slightly too high, and the term has now been cut again to 0.15."
  },
  "projection": {
-  "hold": 83.63,
+  "hold": 84.54,
   "nextRevision": {
-   "petrol": 334.76,
-   "diesel": 391.41,
-   "dPetrol": -1.27,
-   "dDiesel": -0.97,
-   "tankPetrol": -70,
-   "tankDiesel": -53
+   "petrol": 328.48,
+   "diesel": 387.21,
+   "dPetrol": -3.47,
+   "dDiesel": -2.72,
+   "tankPetrol": -191,
+   "tankDiesel": -149
   },
   "cumulativeIfHold3": {
-   "petrol": 328.68,
-   "diesel": 385.93,
-   "dPetrol": -7.35,
-   "dDiesel": -6.45,
-   "tankPetrol": -404,
-   "tankDiesel": -355
+   "petrol": 322.8,
+   "diesel": 383.03,
+   "dPetrol": -9.15,
+   "dDiesel": -6.9,
+   "tankPetrol": -503,
+   "tankDiesel": -379
   },
-  "nextRevisionDate": "2026-08-04",
-  "nextRevisionLabel": "Tuesday 4 August"
+  "nextRevisionDate": "2026-08-05",
+  "nextRevisionLabel": "Wednesday 5 August"
  },
  "accuracy": {
-  "petrolMAE": 1.7,
-  "dieselMAE": 2.47,
-  "petrolBias": 0.9,
-  "dieselBias": 1.61,
-  "directionHitRate": 0.7222,
-  "nScored": 9,
+  "petrolMAE": 1.81,
+  "dieselMAE": 2.37,
+  "petrolBias": 1.09,
+  "dieselBias": 1.6,
+  "directionHitRate": 0.75,
+  "nScored": 10,
   "scope": "lifetime",
   "since": "2026-07-21",
   "currentModel": {
    "model": "v6 incremental-7wd-roll",
    "since": "2026-07-24",
-   "petrolMAE": 1.66,
-   "dieselMAE": 0.97,
-   "petrolBias": 0.46,
-   "dieselBias": -0.32,
-   "directionHitRate": 0.5833,
-   "nScored": 6
+   "petrolMAE": 1.82,
+   "dieselMAE": 1.04,
+   "petrolBias": 0.79,
+   "dieselBias": -0.06,
+   "directionHitRate": 0.6429,
+   "nScored": 7
   },
-  "note": "Lifetime track record: 9 scored predictions since 2026-07-21, petrol MAE Rs 1.70 (bias +Rs 0.90), diesel MAE Rs 2.47 (bias +Rs 1.61), direction right on 13 of 18 fuel-cycles (72%). That is the whole history and it is the honest headline, but it mixes two models and the split matters. The first three cycles (21-23 July) ran the older full-gap model, which over-called badly on a rising tape - diesel was Rs 5.88 and Rs 8.15 too high on 22 and 23 July - and those two rows alone account for most of the lifetime diesel error. Since the roll model went in on 24 July the same figures are 6 cycles, petrol MAE Rs 1.66 and diesel MAE Rs 0.97 - diesel error cut by roughly 60%. Direction reads worse on the current model (58% against 72% lifetime) but that is mostly the tape, not the model: the July run-up was a one-way market where calling the sign was easy, and the last two weeks have been choppy. Nothing was added today because OGRA's 1-3 August block left no revision to grade; the open calls resolve against Tuesday 4 August."
+  "note": "Lifetime: 10 scored predictions since 2026-07-21, petrol MAE Rs 1.81 (bias +Rs 1.09), diesel MAE Rs 2.37 (bias +Rs 1.60), direction right on 15 of 20 fuel-cycles (75%). On the current roll model alone the figures are 7 cycles, petrol MAE Rs 1.82 (bias +Rs 0.79) and diesel MAE Rs 1.04 (bias -Re 0.06) - diesel error still roughly 60% below the retired full-gap model, but petrol error rose this cycle because the model under-called OGRA's Rs 4.08 cut by Rs 2.81. Direction improved to 9 of 14 (64%) with both fuels called correctly today. Worth being plain about the shape of the miss: the model has now been too high on petrol in four of seven cycles, and the running bias of +Rs 0.79 is drifting away from zero rather than toward it. If that persists once the petrol crack term settles, it is a pass-through problem rather than a crack problem and k will need to move."
  },
  "analysis": {
-  "asOf": "2026-08-03",
-  "title": "The crude leg finally does some work - and the schedule change earns its keep",
-  "summary": "Brent fell about 5% to $83.63 on Monday after Trump called off the strike on Iran and announced fresh talks. The move happened in the Asian session, before the ~13:30 PKT Platts close, so it is inside the assessment feeding tonight's notification - which is exactly why this job was moved from 05:30 to 15:30 PKT after the 27 July miss. A morning run today would have locked to Friday's $87.93 and called Tuesday near-flat; the afternoon run calls petrol Rs 334.76 and diesel Rs 391.41. The larger point is that the single next revision is the small part: on a flat $83.63 tape the $96.00 and $100.40 days leaving the window take petrol Rs 7.35 lower and diesel Rs 6.45 lower over roughly three revisions.",
-  "graded": [],
-  "backtestNote": "Accuracy unchanged at six scored cycles: petrol MAE Rs 1.66 (bias +Rs 0.45), diesel MAE Rs 0.97 (bias -Rs 0.32), direction right on 7 of 12 fuel-cycles. For the first time the crude leg is the dominant term - -Rs 1.867 of pass-through against crack terms of +Rs 0.60 and +Rs 0.90 - after six cycles in which it explained almost nothing (one paisa against a Rs 3.51 move on 31 July). That inverts the usual test: Tuesday will say something about the crude leg's calibration rather than the crack term's, which is the more structural of the two.",
-  "root": "Unchanged in principle: v6 proxies a PRODUCT assessment with CRUDE and lets the crack term absorb the gap. Today happens to be the case where the proxy behaves - a crude-level shock passes through directly - and the two models nearly agree, with v7 at Rs 334.91 / Rs 391.46 against v6's Rs 334.76 / Rs 391.41. That agreement is not evidence for either: on a crude-led day the proxy and the product necessarily move together. The discriminating test is a crack-led day, and v7 remains flat-seeded and unscored until about 11 August.",
+  "asOf": "2026-08-04",
+  "title": "OGRA cut harder than the model did - and the biggest days are still in the window",
+  "summary": "OGRA cut petrol Rs 4.08 to Rs 331.95 and diesel Rs 2.45 to Rs 389.93 effective today. The model called -Rs 1.27 and -Re 0.97, so both directions were right and both sizes were too small; the errors are +Rs 2.81 and +Rs 1.48. The crude roll accounts for -Rs 1.87 of the move and the rest is product crack, which flipped negative for the first time - gasoline is at a four-week low even as Brent rebounded 0.92% to $84.54. That combination sets up the largest projected single revision in the log: Wednesday 5 August at petrol Rs 328.48 and diesel Rs 387.21. The reason is arithmetic rather than forecast - the $96.00 day (24 Jul) leaves OGRA's seven-day window on that revision and the $100.40 day (27 Jul) on the one after.",
+  "graded": [
+   {
+    "date": "3 Aug",
+    "fuel": "Petrol",
+    "predicted": 334.76,
+    "actual": 331.95,
+    "err": 2.81
+   },
+   {
+    "date": "3 Aug",
+    "fuel": "Diesel",
+    "predicted": 391.41,
+    "actual": 389.93,
+    "err": 1.48
+   }
+  ],
+  "backtestNote": "Seven scored cycles on the roll model: petrol MAE Rs 1.82 (bias +Rs 0.79), diesel MAE Rs 1.04 (bias -Re 0.06), direction right on 9 of 14 fuel-cycles. Today was a directional success and a magnitude failure - the rarer and more useful kind of miss, because it points at one term rather than at the whole model. The crude leg contributed -Rs 1.87 of a -Rs 4.08 petrol move (46%) and of a -Rs 2.45 diesel move (76%), so the shortfall is concentrated in petrol and matches the gasoline crack hitting a four-week low. The honest caveat is that petrol bias is now +Rs 0.79 and has been positive in four of seven cycles; one more high miss and this stops being noise.",
+  "root": "Still the same structural weakness: v6 proxies a PRODUCT assessment with CRUDE. Today is the clearest illustration yet, and unusually the crack term was pointing the wrong way rather than merely being the wrong size - it carried +0.60 into a cycle where the realised residual was -Rs 2.21. v7, which prices the products directly and carries no crack term, called Rs 334.91 and Rs 391.46 against actuals of Rs 331.95 and Rs 389.93 - errors of +Rs 2.96 and +Rs 1.53, marginally WORSE than v6 on both fuels. That is not a mark against v7: its windows are still flat-seeded at $130.80 and $172.01, so it is carrying stale levels by construction and cannot be judged until the seeds have rolled out around 11 August. It is worth recording that its first informal loss came on the cycle where its structural advantage should have shown.",
   "fixes": [
-   "Window deliberately NOT advanced. It holds the seven working days behind the price in force through tonight (mean $91.21); today's $83.63 enters as the rolling spot. Advancing the window and rolling the spot would count the drop twice - the projection would have read -Rs 3.09 instead of -Rs 1.87.",
-   "No grading and no crack decay: the 1-3 August block means the outstanding call is still open, to be scored against Tuesday 4 August.",
-   "Brent taken at $83.63 (Trading Economics daily value, -4.89% from $87.93). The intraday range was roughly $86.79-$90.80 and the live CFD reads near $83.49, so there is genuine settle risk in this input - flagged rather than smoothed away, since the whole point of the model is that one noisy print gets averaged over seven days.",
-   "FX held at 278.20 interbank (forextrading.pk TT selling, unchanged from Friday). hamariweb showed 279.30; the 0.4% spread is worth under 2 paisa/L and switching source mid-series would add more noise than it removes.",
-   "v7 shadow rolled on today's product prints - RBOB $3.0077/gal = $126.32/bbl, ULSD $4.0081/gal = $168.34/bbl. Both products fell less than Brent, so cracks widened marginally on the day even as levels fell."
+   "Window advanced one working day: $91.10 (21 Jul) drops out, Monday's settle $83.77 enters. Basis $91.2143 -> $90.1671. This is the seven days behind the price notified for today.",
+   "Monday's Brent taken at $83.77 rather than the $83.63 used yesterday - Trading Economics' settled series. The 14-cent correction is worth under a paisa and does not change the grade.",
+   "Petrol crack term flipped to -0.60/rev from +0.60 after a residual of -Rs 2.21. Smoothing alone gave -0.81; it was decayed toward zero because one cycle produced the entire swing.",
+   "Diesel crack cut again to +0.15/rev from +0.90 on a residual of -Re 0.58. The 1.85 -> 0.90 decay made on 1 August was tested today and was still slightly too high.",
+   "Yesterday's product prints were intraday quotes ($3.0077 and $4.0081 per gallon). The settles were $2.9651 and $3.8780, and the v7 windows use the corrected figures.",
+   "k held at 1.0 on both fuels. The crude leg has under-explained twice and over-explained twice in seven cycles - noise, not the four consistent cycles the rule requires."
   ],
   "scorecard": [
-   {
-    "date": "24 Jul",
-    "model": "roll",
-    "pPred": 336.12,
-    "pAct": 335.18,
-    "dPred": 383.76,
-    "dAct": 383.46
-   },
    {
     "date": "27 Jul",
     "model": "roll",
@@ -190,49 +198,57 @@
     "date": "3 Aug",
     "model": "roll",
     "pPred": 334.76,
-    "pAct": null,
+    "pAct": 331.95,
     "dPred": 391.41,
+    "dAct": 389.93
+   },
+   {
+    "date": "4 Aug",
+    "model": "roll",
+    "pPred": 328.48,
+    "pAct": null,
+    "dPred": 387.21,
     "dAct": null
    }
   ],
-  "scorecardNote": "The last six scored cycles plus today's open call - a rolling window onto the lifetime log, not the whole record. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a positive number means the model was too high. Today's row is open because OGRA's 1-3 August notification is a three-day block, so no new price has been published since the call was locked; it resolves tomorrow along with the identical 1 and 2 August calls it supersedes. Full lifetime figures (9 cycles since 2026-07-21) are in the self-correction panel below, and every entry is in the prediction log.",
-  "gradedNote": "Nothing new to grade this cycle - OGRA's 1-3 August block means no revision has been published since the last call was locked."
+  "scorecardNote": "The last six scored cycles plus today's open call - a rolling window onto the lifetime log, not the whole record. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a positive number means the model was too high. The 3 August row closed today at +Rs 2.81 petrol and +Rs 1.48 diesel: right on both directions, too small on both sizes. It also settles the 31 July, 1 August and 2 August calls it superseded. Full lifetime figures (10 cycles since 2026-07-21) are in the self-correction panel below.",
+  "gradedNote": "The 3 August call was graded against today's revision. Petrol predicted Rs 334.76 against Rs 331.95 actual, an error of +Rs 2.81; diesel predicted Rs 391.41 against Rs 389.93, +Rs 1.48. Both directions correct, both magnitudes short - OGRA cut about three times harder on petrol than the model expected."
  },
  "news": {
-  "asOf": "2026-08-03",
-  "headline": "Brent slumps 5% as Trump calls off the Iran strike - Tuesday's cut is only the first",
-  "summary": "The July risk premium started coming out today. Brent fell about 5% to $83.63 after President Trump cancelled a planned military strike on Iran and said fresh negotiations would begin, with Saudi Arabia among the allies urging diplomacy; Iran denied direct talks but said discussions through Oman were progressing on reopening the Strait of Hormuz. Turkey and Iraq extended a pipeline agreement by a year, Kazakhstan resumed crude intake through the Caspian Pipeline Consortium, and OPEC+ approved another modest quota rise that completes the unwind of its 2023 cuts. Pakistani pump prices are fixed through tonight under OGRA's 1-3 August block, so nothing can be acted on before the Tuesday 4 August revision - which now comes in at petrol Rs 334.76 (-Rs 1.27) and diesel Rs 391.41 (-Re 0.97). The bigger number is behind that: three days priced at $91.10, $96.00 and $100.40 are still sitting in OGRA's seven-day window, and on a flat tape their exit is worth roughly -Rs 7.35 on petrol and -Rs 6.45 on diesel over about three revisions.",
+  "asOf": "2026-08-04",
+  "headline": "Petrol cut Rs 4.08 - and Wednesday's revision looks larger still",
+  "summary": "OGRA notified a one-day price for 4 August: petrol Rs 331.95, down Rs 4.08, and high-speed diesel Rs 389.93, down Rs 2.45, the first material cut since the July run-up. The trigger was Monday's roughly 5% slide after President Trump called off the planned strike on Iran and announced fresh talks. Crude steadied today, with Brent recovering 0.92% to $84.54 as Trump called his proposal Tehran's final opportunity and said he expected the Strait of Hormuz to reopen soon, while Iran denied direct talks but reported progress through Oman. The product complex did not follow crude up: gasoline slipped to a four-week low and heating oil eased 0.76%, so refining margins compressed on both fuels. Because the notification runs one day, the next revision is Wednesday 5 August, and it is the one to wait for - the $96.00 barrel from 24 July leaves OGRA's seven-day averaging window on that revision, taking petrol to roughly Rs 328.48 and diesel to Rs 387.21 without needing crude to fall any further.",
   "horizons": {
    "d2": {
     "signal": "ease",
-    "note": "Tuesday 4 August is the next revision and today's $83.63 is the last input to it. Petrol -Rs 1.27, diesel -Re 0.97, unless Brent snaps back before tonight's notification."
+    "note": "Wednesday 5 August: petrol about -Rs 3.47 to Rs 328.48 and diesel -Rs 2.72 to Rs 387.21. The $96.00 day leaving the window does most of that work, so it survives a modest crude rebound."
    },
    "d4": {
     "signal": "ease",
-    "note": "Window arithmetic now compounds the crude drop instead of fighting it: the $96.00 (24 Jul) and $100.40 (27 Jul) days leave over the following two revisions, pulling the basis down even on a flat tape."
+    "note": "The $100.40 day from 27 July leaves on the revision after Wednesday's. Two of the three spike days clear the window inside four days, which keeps the basis falling on a flat tape."
    },
    "w1": {
     "signal": "ease",
-    "note": "Two-sided but clearly skewed down for the first time in three weeks. EIA sees Hormuz-related disruptions falling to 1.4 mb/d by Q4 and OPEC+ has completed restoring its 2023 cuts; J.P. Morgan has Brent averaging $86 in Q3 easing to $80 in Q4, Citi $75 then $70. The risk is symmetric to today's headline - talks collapsing would put the premium straight back."
+    "note": "Still skewed down, though less one-sided than yesterday. J.P. Morgan has Brent averaging $86 in Q3 easing to $80 in Q4 and Citi $75 then $70, and OPEC+ has completed restoring its 2023 cuts. The clear risk is the Iran talks failing - Trump framing his offer as a final opportunity cuts both ways."
    }
   },
   "drivers": [
-   "Brent -4.89% to $83.63 (Trading Economics, 3 Aug) after Trump cancelled the Iran strike and announced fresh talks",
-   "The drop landed in the Asian session, before the ~13:30 PKT Platts close, so it is in the assessment feeding tonight's OGRA notification",
-   "OPEC+ approved another modest quota increase, completing the unwind of its 2023 production cuts",
-   "Turkey-Iraq pipeline deal extended a year; Kazakhstan resumed CPC crude intake - both ease alternative-route risk",
-   "Three spike days ($91.10, $96.00, $100.40) remain in OGRA's 7-working-day window and roll out over the next three revisions",
-   "OGRA's 1 August notification is a three-day block: petrol Rs 336.03 and diesel Rs 392.38 hold through tonight, next change Tuesday 4 August"
+   "OGRA cut petrol Rs 4.08 to Rs 331.95 and HSD Rs 2.45 to Rs 389.93, notified for one day - next revision Wednesday 5 August",
+   "Brent recovered 0.92% to $84.54 after Monday's roughly 5% slide, with Trump calling his talks proposal Iran's final opportunity",
+   "Gasoline fell to a four-week low at $2.9534/gal and heating oil eased 0.76% - product cracks compressed even as crude rose",
+   "The $96.00 (24 Jul) and $100.40 (27 Jul) barrels leave OGRA's seven-day window on the next two revisions",
+   "Turkey-Iraq pipeline extension and resumed Caspian Pipeline Consortium flows keep alternative-route risk contained",
+   "OPEC+ has completed the unwind of its 2023 production cuts, adding supply into a de-escalating market"
   ],
-  "dieselCrack": "Easing in level, marginally wider on the day. Heating oil fell 2.13% and gasoline 3.42% against Brent's 5.04%, so both cracks technically widened on Monday even as absolute prices fell - a normal reaction when crude gaps down faster than products reprice. The structural story is still the one that broke last week: the diesel crack residual collapsed to +Rs 0.13 from +Rs 2.43, +Rs 2.49 and +Rs 2.05 before it, and OGRA cut diesel outright on 1 August, which is why the term was decayed 1.85 -> 0.90/rev. Russia's gasoline export ban runs to end-2026, but Novak said on 25 July the diesel ban would be lifted 'as the market recovers'. If it lapses, the diesel projection turns more negative than shown.",
+  "dieselCrack": "Compressing on both fuels, and petrol now the weaker of the two. Trading Economics has gasoline at a four-week low, down 0.45% to $2.9534/gal, and heating oil down 0.76% to $3.8478/gal, on a day Brent rose 0.92% - so both cracks narrowed outright rather than simply falling with crude. That shows up directly in today's grading: the petrol crack residual came in at -Rs 2.21 and diesel at -Re 0.58, which flipped the petrol term negative to -0.60/rev and cut diesel to +0.15/rev. The structural watch item is unchanged: Russia's gasoline export ban runs to end-2026, but Novak said on 25 July the diesel ban would be lifted 'as the market recovers'. If it lapses the diesel path turns more negative than shown here.",
   "sources": [
+   "Express Tribune, Aaj English, Pakistan Today, ARY News (OGRA 4 August notification)",
    "Trading Economics (Brent, RBOB gasoline, NY Harbor ULSD)",
-   "Profit by Pakistan Today / Minute Mirror / Aaj English (OGRA 1-3 Aug notification)",
-   "S&P Global, CNN, Hydrocarbon Processing (Russian export bans)",
-   "Capital.com, J.P. Morgan, Citi, EIA (price outlooks)",
-   "forextrading.pk (USD/PKR interbank)"
+   "Reuters / Trading Economics news stream (US-Iran talks, OPEC+, Turkey-Iraq pipeline)",
+   "J.P. Morgan, Citi, EIA (price outlooks)",
+   "forextrading.pk, hamariweb (USD/PKR interbank)"
   ],
-  "waitAdvice": "Wait. You cannot act before tonight in any case - Monday's pump price was fixed on Friday - and Tuesday's revision hands you roughly Rs 70 on a 55 L tank of petrol and Rs 53 on diesel for doing nothing. The stronger argument is what follows: on a flat $83.63 tape the late-July spike days leaving OGRA's window are worth about Rs 404 (petrol) and Rs 355 (diesel) a tank over roughly three revisions, and that rests on arithmetic rather than a forecast. If you can run down to a quarter tank into Wednesday or Thursday, do. The one thing that reverses this is the Iran talks collapsing - the same headline that moved Brent 5% today can move it back."
+  "waitAdvice": "Wait, and this is the strongest wait signal the advisor has produced. Today's cut is already in your pocket if you needed fuel this morning, but Wednesday's revision projects a further -Rs 3.47 on petrol and -Rs 2.72 on diesel, which is about Rs 191 and Rs 149 on a 55 L tank for waiting one day. Most of that comes from the $96.00 barrel leaving OGRA's averaging window rather than from any view on crude, so it does not depend on the Iran story continuing to go well. If Brent simply holds $84.54, the three-revision path is petrol Rs 322.80 and diesel Rs 383.03 - roughly Rs 503 and Rs 379 a tank. Run down to a quarter tank into Wednesday and Thursday. The single risk that reverses this is the Iran talks collapsing; Trump has framed the offer as a final opportunity, so the headline risk is genuinely two-sided even though the arithmetic is not."
  },
  "history": [
   {
@@ -433,7 +449,7 @@
    "verdict": "neutral",
    "newsSignal": "firm",
    "model": "roll",
-   "note": "New OGRA revision graded yesterday's call and it split: petrol off -Rs0.38 (direction right), diesel off +Rs1.41 (direction wrong). Diesel crack cut 1.85 -> 0.90/rev on a residual of just +Rs0.13; petrol held at 0.60/rev. Friday's Brent settle corrected 86.70 -> 87.93, basis 91.04 -> 91.21, FX 278.20. CADENCE CHANGE: the 1 Aug notification covers 1-3 August, so the next revision is TUESDAY 4 AUGUST, not Monday - one working day (Mon 3 Aug) rolls into the window. Next revision is near-flat: petrol -Re0.19 to Rs335.84 (about -Rs11 per 55 L) and diesel +Re0.11 to Rs392.49 (about +Rs6). If Brent holds $87.93 the ~3-revision cumulative is clearly negative for both - petrol -Rs4.13 to Rs331.90 and diesel -Rs3.23 to Rs389.15 - as the $91.10, $96.00 and $100.40 days leave the window. Verdict neutral on the single next revision by the +/-Rs2 rule, but the practical call is wait: prices are frozen through Monday anyway. v7 shadow re-seeded on settled product prints ($130.80 / $172.01 per bbl); informally it beat v6 on both fuels this cycle, still unscored until ~11 Aug."
+   "note": "New OGRA revision graded yesterday's call and it split: petrol off -Rs0.38 (direction right), diesel off +Rs1.41 (direction wrong). Diesel crack cut 1.85 -> 0.90/rev on a residual of just +Rs0.13; petrol held at 0.60/rev. Friday's Brent settle corrected 86.70 -> 87.93, basis 91.04 -> 91.21, FX 278.20. CADENCE CHANGE: the 1 Aug notification covers 1-3 August, so the next revision is TUESDAY 4 AUGUST, not Monday - one working day (Mon 3 Aug) rolls into the window. Next revision is near-flat: petrol -Re0.19 to Rs335.84 (about -Rs11 per 55 L) and diesel +Re0.11 to Rs392.49 (about +Rs6). If Brent holds $87.93 the ~3-revision cumulative is clearly negative for both - petrol -Rs4.13 to Rs331.90 and diesel -Rs3.23 to Rs389.15 - as the $91.10, $96.00 and $100.40 days leave the window. Verdict neutral on the single next revision by the +/-Rs2 rule, but the practical call is wait: prices are frozen through Monday anyway. v7 shadow re-seeded on settled product prints ($130.80 / $172.01 per bbl); informally it beat v6 on both fuels this cycle, still unscored until ~11 Aug. NEVER FORMALLY GRADED - superseded by the 2 and 3 August entries, and answered by the 4 August revision (petrol Rs331.95, diesel Rs389.93), against which it would have been +Rs3.89 and +Rs2.56."
   },
   {
    "date": "2026-08-02",
@@ -452,7 +468,7 @@
    "newsSignal": "flat",
    "model": "roll",
    "supersedes": "2026-08-01",
-   "note": "HOLDING RUN - Sunday 2 August, markets and OGRA both idle. No new Brent or product print exists (weekend close), so the 7-working-day window does not roll and the basis holds at $91.21; no OGRA revision has occurred since the last call, because the 1 August notification is written as a three-day block covering 1-3 August. Nothing to grade, no crack decay applied - petrol 0.60/rev and diesel 0.90/rev carry forward from yesterday's recalibration. The next revision is TUESDAY 4 AUGUST and remains a ONE-day roll, since only Monday 3 August falls between the 31 July assessment date and the Tuesday notification. Call unchanged: petrol -Re0.19 to Rs335.84 (about -Rs11 per 55 L) and diesel +Re0.11 to Rs392.49 (about +Rs6) - flat on the +/-Rs2 rule. If Brent holds $87.93 the ~3-revision cumulative is clearly down for both, petrol -Rs4.13 to Rs331.90 and diesel -Rs3.23 to Rs389.15, as the $91.10, $96.00 and $100.40 days leave the window. This entry supersedes the 1 August entry, which carried the identical prediction; both will be answered by Tuesday's revision. Monday's settle is the last input that can still move the Tuesday call."
+   "note": "HOLDING RUN - Sunday 2 August, markets and OGRA both idle. No new Brent or product print exists (weekend close), so the 7-working-day window does not roll and the basis holds at $91.21; no OGRA revision has occurred since the last call, because the 1 August notification is written as a three-day block covering 1-3 August. Nothing to grade, no crack decay applied - petrol 0.60/rev and diesel 0.90/rev carry forward from yesterday's recalibration. The next revision is TUESDAY 4 AUGUST and remains a ONE-day roll, since only Monday 3 August falls between the 31 July assessment date and the Tuesday notification. Call unchanged: petrol -Re0.19 to Rs335.84 (about -Rs11 per 55 L) and diesel +Re0.11 to Rs392.49 (about +Rs6) - flat on the +/-Rs2 rule. If Brent holds $87.93 the ~3-revision cumulative is clearly down for both, petrol -Rs4.13 to Rs331.90 and diesel -Rs3.23 to Rs389.15, as the $91.10, $96.00 and $100.40 days leave the window. This entry supersedes the 1 August entry, which carried the identical prediction; both will be answered by Tuesday's revision. Monday's settle is the last input that can still move the Tuesday call. NEVER FORMALLY GRADED - superseded by the 3 August entry; against today's actuals it would have been +Rs3.89 petrol and +Rs2.56 diesel."
   },
   {
    "date": "2026-08-03",
@@ -465,13 +481,35 @@
    "predictedDiesel": 391.41,
    "shadowPredictedPetrol": 334.91,
    "shadowPredictedDiesel": 391.46,
+   "actualPetrol": 331.95,
+   "actualDiesel": 389.93,
+   "verdict": "wait",
+   "newsSignal": "ease",
+   "model": "roll",
+   "supersedes": "2026-08-02",
+   "petrolErr": 2.81,
+   "dieselErr": 1.48,
+   "shadowPetrolErr": 2.96,
+   "shadowDieselErr": 1.53,
+   "note": "Brent broke down: $83.63, -4.89% from Friday's $87.93, after Trump called off the planned strike on Iran and announced fresh talks. The move happened in the Asian session, before the ~13:30 PKT Platts close, so it feeds tonight's notification - the afternoon schedule doing exactly what it was moved for. Window NOT advanced (it is the seven days behind the price in force, mean $91.21); today's spot rolls into it for Tuesday, giving a basis of $90.1471 and a crude leg of -Rs 1.867. Next revision TUESDAY 4 AUGUST: petrol -Rs 1.27 to Rs 334.76, diesel -Re 0.97 to Rs 391.41. GRADED vs the 4 Aug revision (petrol Rs331.95, diesel Rs389.93): petrol off +Rs2.81 and diesel +Rs1.48, BOTH DIRECTIONS RIGHT but both magnitudes far too small - OGRA cut petrol Rs4.08 and diesel Rs2.45. The crude roll explained -Rs1.87; residuals of -Rs2.21 petrol and -Re0.58 diesel are product-crack, and the petrol residual is the first clearly negative one in the log. Gasoline hit a four-week low on 4 August, which corroborates it. The petrol crack term flips 0.60 -> -0.60/rev and diesel 0.90 -> 0.15/rev as a result. Monday's settle also corrected 83.63 -> 83.77 in the window. v7 shadow called Rs334.91 / Rs391.46, errors of +Rs2.96 and +Rs1.53 - marginally worse than v6 on both, its first informal loss, though its windows remain flat-seeded. This entry supersedes 2 August; the 31 Jul, 1 Aug and 2 Aug calls all resolved against today."
+  },
+  {
+   "date": "2026-08-04",
+   "brentBasis": 90.17,
+   "brentSpot": 84.54,
+   "fx": 278.25,
+   "petrolAnchor": 331.95,
+   "dieselAnchor": 389.93,
+   "predictedPetrol": 328.48,
+   "predictedDiesel": 387.21,
+   "shadowPredictedPetrol": 330.26,
+   "shadowPredictedDiesel": 387.33,
    "actualPetrol": null,
    "actualDiesel": null,
    "verdict": "wait",
    "newsSignal": "ease",
    "model": "roll",
-   "supersedes": "2026-08-02",
-   "note": "Brent broke down: $83.63, -4.89% from Friday's $87.93, after Trump called off the planned strike on Iran and announced fresh talks. The move happened in the Asian session, before the ~13:30 PKT Platts close, so it feeds tonight's notification - the afternoon schedule doing exactly what it was moved for. Window NOT advanced (it is the seven days behind the price in force, mean $91.21); today's spot rolls into it for Tuesday, giving a basis of $90.1471 and a crude leg of -Rs 1.867. Crack terms unchanged at 0.60/0.90 - no revision since they were set, so nothing to grade. Next revision TUESDAY 4 AUGUST: petrol -Rs 1.27 to Rs 334.76 (about -Rs 70 per 55 L), diesel -Re 0.97 to Rs 391.41 (about -Rs 53). Strictly neutral on the +/-Rs 2 rule and inside the model's own error band, but the three-revision case is the signal: if Brent holds $83.63, petrol -Rs 7.35 to Rs 328.68 and diesel -Rs 6.45 to Rs 385.93 as the $91.10, $96.00 and $100.40 days leave the window - about -Rs 404 and -Rs 355 a tank. Verdict wait. v7 shadow rolled on RBOB $126.32/bbl and ULSD $168.34/bbl, calling Rs 334.91 / Rs 391.46 - within 20 paisa of v6, which is expected on a crude-led day and so not discriminating. This entry supersedes 2 August; the 31 Jul, 1 Aug and 2 Aug calls all resolve against Tuesday."
+   "note": "New OGRA revision effective today: petrol Rs331.95 (-Rs4.08) and diesel Rs389.93 (-Rs2.45), notified for ONE day, so the next revision is WEDNESDAY 5 AUGUST. It graded the 3 August call at +Rs2.81 petrol and +Rs1.48 diesel - directions right, magnitudes far too small - and flipped the petrol crack term negative (0.60 -> -0.60/rev) with diesel cut again (0.90 -> 0.15/rev). Window advanced one working day: $91.10 out, Monday's corrected settle $83.77 in, basis $91.2143 -> $90.1671. Brent recovered 0.92% to $84.54 today but products did not follow - gasoline hit a four-week low at $2.9534/gal and heating oil eased 0.76% - so both cracks compressed. Next revision Wednesday: petrol -Rs3.47 to Rs328.48 (about -Rs191 per 55 L) and diesel -Rs2.72 to Rs387.21 (about -Rs149). This is the largest projected single revision in the log and it is mostly arithmetic: the $96.00 barrel from 24 July leaves the averaging window on that revision. If Brent holds $84.54 the ~3-revision cumulative is petrol -Rs9.15 to Rs322.80 and diesel -Rs6.90 to Rs383.03, roughly -Rs503 and -Rs379 a tank, as the $100.40 day also clears. Verdict WAIT on both fuels - the first time the single next revision alone clears the -Rs2 threshold on both. v7 shadow calls Rs330.26 / Rs387.33, now Rs1.78 above v6 on petrol; still flat-seeded and unscored until ~11 August, but the two models have finally diverged enough for the next few cycles to be discriminating."
   }
  ],
  "shadow": {
@@ -479,22 +517,22 @@
   "seededOn": "2026-07-31",
   "reseededOn": "2026-08-01",
   "warmingUp": true,
-  "note": "v7 keeps a 7-working-day window of the PRODUCT price per fuel and rolls it exactly as v6 rolls crude, with NO crack term, because OGRA's FOB basis IS the product assessment. Today's prints roll in as the spot: RBOB gasoline $3.0077/gal = $126.32/bbl and NY Harbor ULSD $4.0081/gal = $168.34/bbl, against flat seeds of $130.80 and $172.01. That gives a Tuesday call of petrol Rs 334.91 and diesel Rs 391.46 - within 20 paisa of v6's Rs 334.76 and Rs 391.41. The two models agreeing on a large-move day is mildly reassuring for both, but it is not evidence either way: on a crude-led shock the proxy and the product move together almost by construction, and the interesting divergence will come on a crack-led day. Still flat-seeded and formally unscored until roughly 11 August. The one informal read remains the 1 August cycle, where v7 was closer on both fuels (+Rs 0.12 / +Rs 0.66 against v6's -Rs 0.38 / +Rs 1.41).",
-  "productPetrolBbl": 126.32,
-  "productDieselBbl": 168.34,
-  "productPetrolGal": 3.0077,
-  "productDieselGal": 4.0081,
+  "note": "v7 keeps a 7-working-day window of the PRODUCT price per fuel and rolls it exactly as v6 rolls crude, with NO crack term, because OGRA's FOB basis IS the product assessment. The windows advanced one day today: Monday's corrected settles enter at $124.53/bbl gasoline (RBOB $2.9651/gal) and $162.88/bbl ULSD ($3.8780/gal), replacing the intraday quotes recorded yesterday. Today's prints - RBOB $2.9534/gal = $124.04/bbl, a four-week low, and ULSD $3.8478/gal = $161.61/bbl - roll in as the spot, giving a Wednesday call of petrol Rs 330.26 and diesel Rs 387.33. That is Rs 1.78 above v6 on petrol and Rs 0.12 above on diesel, the first material divergence between the two models, so the next few cycles will finally discriminate. Six of seven slots in each window are still the flat seed ($130.80 and $172.01), which mechanically holds v7's levels high and is why it is not yet scored. Formal scoring begins once the seeds have rolled out, around 11 August. Informal record so far: v7 won the 1 August cycle (+Rs 0.12 / +Rs 0.66 against v6's -Rs 0.38 / +Rs 1.41) and lost the 4 August cycle (+Rs 2.96 / +Rs 1.53 against v6's +Rs 2.81 / +Rs 1.48). One each, both inside the warm-up, neither meaningful.",
+  "productPetrolBbl": 124.04,
+  "productDieselBbl": 161.61,
+  "productPetrolGal": 2.9534,
+  "productDieselGal": 3.8478,
   "informalErrs": {
-   "petrol": 0.12,
-   "diesel": 0.66,
-   "v6Petrol": -0.38,
-   "v6Diesel": 1.41
+   "petrol": 2.96,
+   "diesel": 1.53,
+   "v6Petrol": 2.81,
+   "v6Diesel": 1.48
   },
   "nextRevision": {
-   "petrol": 334.91,
-   "diesel": 391.46,
-   "dPetrol": -1.12,
-   "dDiesel": -0.92
+   "petrol": 330.26,
+   "diesel": 387.33,
+   "dPetrol": -1.69,
+   "dDiesel": -2.6
   },
   "accuracy": {
    "petrolMAE": null,
