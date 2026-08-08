@@ -969,17 +969,16 @@
     var m=maeFor(f); if(m==null) return null;
     return m*Math.sqrt(Math.max(1,Nrev));
   }
-  // Label for the projected price. OGRA freezes prices Sat/Sun, so the next change
-  // after a Friday price is Monday's. If the page is being read on a later day than
-  // the last auto-update, fall back to the neutral "next revision" wording.
+  // Label for the projected price. Since August 2026 OGRA revises DAILY with no
+  // weekend hold (confirmed by the Saturday 8 Aug 2026 notification), so the next
+  // change is always tomorrow's price. If the page is being read on a later day
+  // than the last auto-update, fall back to the neutral "next revision" wording.
   function nextRevLabel(Nrev){
     if(Nrev>1) return "After "+Nrev+" revisions";
     var stamp=STATE.lastUpdated||L.anchorEffectiveDate||"";
     var now=new Date(), p=function(n){return (n<10?"0":"")+n};
     var todayStr=now.getFullYear()+"-"+p(now.getMonth()+1)+"-"+p(now.getDate());
     if(stamp!==todayStr) return "At the next revision";
-    var dow=now.getDay(); // 0 Sun … 6 Sat
-    if(dow===5||dow===6) return "Monday's price";
     return "Tomorrow's price";
   }
 
@@ -1340,11 +1339,9 @@ const d = {
   const roll = (anchor,k,crack,S,N)=>{ let w=d.live.window.slice(); const b=mn(w);
     for(let i=0;i<N;i++){w.shift();w.push(S);} return anchor+(mn(w)-b)*d.live.fx/LPBx*k+crack*N; };
 
-  // OGRA freezes prices Sat/Sun, so the next change after a Friday price is Monday's.
-  if(!d.projLabel){
-    const dt = new Date(d.fileDate+"T12:00:00"), dow = dt.getDay(); // 0 Sun … 6 Sat
-    d.projLabel = (dow===5||dow===6) ? "Monday's price" : "Tomorrow's price";
-  }
+  // OGRA revises daily with no weekend hold (since Aug 2026), so the next change
+  // is always tomorrow's price unless the caller overrides d.projLabel.
+  if(!d.projLabel){ d.projLabel = "Tomorrow's price"; }
   d.mae = d.mae || {};
   if(!d.accChip){
     const parts=[]; if(d.mae.p!=null) parts.push(Math.abs(d.mae.p)); if(d.mae.dl!=null) parts.push(Math.abs(d.mae.dl));
