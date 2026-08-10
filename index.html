@@ -129,7 +129,7 @@
   "title": "Three days, no revision - and the cadence rule was wrong again",
   "summary": "Nothing was graded this run because nothing was notified. OGRA's 8 August cut was issued for 8 August through 10 August, so Sunday and Monday passed without a revision and the Sunday 9 August print the last brief projected never existed. The 8 August prediction (petrol Rs 325.82, diesel Rs 379.11) is therefore superseded rather than scored - it has been marked as such and excluded from the accuracy statistics, and today's entry replaces it as the live call against Tuesday 11 August. Two corrections came out of this. The cadence rule is wrong for the third time in a fortnight: the last brief inferred 'daily, no weekend hold' from a Saturday notification when that notification was itself the weekend hold. And Friday's Brent was misread again - locked at $82.27 against a $83.55 settle - which is the second intraday-for-settle error in three runs and the largest recurring source of avoidable error in this system. Both window slots have been corrected, which raises the basis behind the anchor to $83.7171 and shrinks Tuesday's projected cut to -Rs 1.48 petrol and -Rs 1.43 diesel.",
   "graded": [],
-  "gradedNote": "Nothing to grade. OGRA's 8 August notification ran 8–10 August, so no revision has landed since the call was locked and there is no official price to score against. The 8 August entry stays marked superseded and excluded from accuracy — its target revision (Sunday 9 August) never existed — and the 10 August entry carries the single open call, which resolves against Tuesday 11 August. This second run of 10 August deliberately did NOT append a duplicate entry, because two entries predicting the same revision would double-count that cycle.",
+  "gradedNote": "Nothing to grade. OGRA's 8 August notification ran 8–10 August, so no revision has landed since the call was locked and there is no official price to score against. The 8 August entry stays marked superseded and excluded from accuracy — its target revision (Sunday 9 August) never existed — and the 10 August entry carries the single open call, which resolves against Tuesday 11 August. This second run of 10 August deliberately did NOT append a duplicate entry, because two entries predicting the same revision would double-count that cycle. The rolling table now shows 7, 8 and 9 August explicitly rather than hiding them: 7 August as a revision with no call locked against it (the run did not fire), 8 August as a superseded call, and 9 August as a day with neither. All three are excluded from the scored average.",
   "backtestNote": "Unchanged from 8 August because no cycle was scored. Roll model: ten scored cycles, petrol MAE Rs 2.40 (bias -Rs 0.29), diesel MAE Rs 1.21 (bias -Rs 0.24), direction right on 14 of 20 fuel-cycles (70%). Lifetime across both models: 13 cycles, petrol MAE Rs 2.26, diesel MAE Rs 2.19, direction 20 of 26 (77%). One row, the 5 August call, still contributes Rs 9.75 of the petrol total; strip it and petrol MAE is about Rs 1.58.",
   "root": "The binding constraint on this advisor is no longer the model - it is the two inputs the model is fed. First, the revision calendar. OGRA has changed its notification duration three times in a fortnight: three-day blocks in early August, one-day notifications from 5 to 7 August, then a three-day block again from 8 to 10 August. Each time the brief has inferred the rule from the most recent notification and each time the inference has been wrong by the next run. The correct discipline is to read the effective-date range off the notification text every single run and never to generalise from it. Second, the price input. Brent has been taken from an intraday quote twice in three runs - $3.02 low on 6 August, $1.28 low on 7 August - and both errors fed straight into a window slot. At roughly Rs 0.25 of projected move per dollar of window error per revision, that is comparable to the entire crack term the model spends its time calibrating. The known blind spot flagged on 6 August also stands: neither v6 nor v7 can see a petroleum-levy change, and with transporters now striking over fuel taxes the fiscal side is live.",
   "fixes": [
@@ -139,7 +139,8 @@
    "Window NOT advanced - it advances one step per revision and there has been none. No new working-day settle has arrived either; Friday remains the last close.",
    "The 8 August history entry is marked superseded and excluded from accuracy, so the 11 August revision is graded against exactly one prediction rather than two.",
    "No parameter moved: k = 1.0 both fuels, petrol crack 0.00/rev, diesel crack 0.05/rev. Decaying diesel again on a timer, with no scored residual and cracks at record highs, would be fitting noise.",
-   "One-week horizon upgraded from flat to up: three consecutive up sessions in Brent, Hormuz still closed, refinery and tanker attacks resumed, and the July spike nearly out of the window."
+   "One-week horizon upgraded from flat to up: three consecutive up sessions in Brent, Hormuz still closed, refinery and tanker attacks resumed, and the July spike nearly out of the window.",
+   "Scorecard gap closed: 7-9 August were silently absent from the rolling table. The renderer could only draw a row that had a locked call, so a missed run left no trace at all. It now draws 'no call', 'superseded' and 'no revision' rows, which is how a missed run and a withdrawn cadence should look."
   ],
   "scorecard": [
    {
@@ -183,15 +184,43 @@
     "dAct": 382.36
    },
    {
+    "date": "7 Aug",
+    "model": "roll",
+    "pPred": null,
+    "pAct": 327.62,
+    "dPred": null,
+    "dAct": 380.86,
+    "status": "nocall"
+   },
+   {
+    "date": "8 Aug",
+    "model": "roll",
+    "pPred": 325.82,
+    "pAct": null,
+    "dPred": 379.11,
+    "dAct": null,
+    "status": "superseded"
+   },
+   {
+    "date": "9 Aug",
+    "model": "roll",
+    "pPred": null,
+    "pAct": null,
+    "dPred": null,
+    "dAct": null,
+    "status": "norevision"
+   },
+   {
     "date": "10 Aug",
     "model": "roll",
     "pPred": 326.14,
     "pAct": null,
     "dPred": 379.43,
-    "dAct": null
+    "dAct": null,
+    "status": "open"
    }
   ],
-  "scorecardNote": "Five scored cycles plus today's open call against Tuesday 11 August. Error = predicted - actual, so a positive number means the model was too high. No row was added or closed this run because no revision was notified between 8 and 10 August. The 8 August call has been dropped from this table rather than left open, because its target revision - Sunday 9 August - never happened; today's row replaces it and is the only prediction outstanding against Tuesday's print."
+  "scorecardNote": "Every day from 31 July is now shown, including the three that used to be missing - and the gaps are the interesting part. Error = predicted minus actual, so a positive number means the model was too high. Only rows with BOTH a locked call and a realised revision count toward the scored average. 7 Aug has no call because the scheduled run did not fire that day; the revision still happened, so the 8 August price (petrol Rs 327.62, diesel Rs 380.86) is recorded here as an actual but is excluded from accuracy, exactly as the rules require for a missed run. 8 Aug has a call but no actual: it predicted a Sunday 9 August revision that never existed, so it is marked SUPERSEDED rather than graded against Tuesday - grading it there would double-count a cycle that today's row also predicts. 9 Aug is blank on both sides because OGRA's 8 August notification ran 8-10 August: no run, and no revision to run against. 10 Aug is the single open call, and it resolves against Tuesday 11 August."
  },
  "news": {
   "headline": "Still no revision — the 8 Aug price holds a third day, next change Tuesday 11 August",
@@ -580,7 +609,8 @@
    "newsSignal": "ease",
    "model": "roll",
    "note": "No OGRA revision since 8 August: that notification was effective 8 August THROUGH 10 August, so the Sunday 9 August revision projected in the last brief never happened and nothing could be scored. The 8 August entry is marked superseded and excluded from accuracy; this entry carries the live call. The cadence rule adopted on 8 August - daily revisions with no weekend hold - is withdrawn: the Saturday notification WAS the weekend hold. NEXT REVISION TUESDAY 11 AUGUST. Friday's Brent was corrected in the window from the intraday $82.27 to the $83.55 settle, the second intraday-for-settle error in three runs; basis behind the anchor rises $83.5343 -> $83.7171. Window not advanced (no revision, no new settle). Product slots corrected to $2.9853/gal ($125.38/bbl) gasoline and $3.9024/gal ($163.90/bbl) ULSD. Brent has now risen three sessions and trades above $84 on Monday as Iran said a shipping-route deal with Oman is near but will not immediately reopen Hormuz, with a Houthi strike on Jazan refinery and an attack on an ADNOC tanker over the weekend. Next revision Tuesday: petrol -Rs 1.48 to Rs 326.14 (about -Rs 81 per 55 L) and diesel -Rs 1.43 to Rs 379.43 (about -Rs 79) as the $89.47 barrel from 30 July clears - both inside the +/-Rs 2 band, so the verdict is NEUTRAL. If Brent holds $83.55 the ~3-revision cumulative is petrol -Rs 2.63 to Rs 324.99 and diesel -Rs 2.48 to Rs 378.38, roughly -Rs 145 and -Rs 136 a tank. One-week signal upgraded flat -> UP: once the July spike finishes clearing, a tape that has risen three sessions starts pushing pump prices back up. v7 shadow calls Rs 326.27 / Rs 378.83, still unscored with two flat seed slots left in each window; formal scoring slips to mid-to-late August with the slower cadence. No parameter changed: k 1.0, petrol crack 0.00/rev, diesel crack 0.05/rev. FX unchanged at 278.10 interbank. | Re-run 10:05 PKT: all inputs re-verified unchanged (no revision for 9/10/11 Aug, prices Rs 327.62 / Rs 380.86, FX 278.10, Friday settle $83.55). No duplicate entry appended — this row remains the single open call against Tuesday 11 August. Monday is trading $84.42 intraday; if it settles there rather than at $83.55, trim about Rs 0.22 off each projected cut. Diesel crack held at 0.05/rev on record refining margins.",
-   "runs": 2
+   "runs": 2,
+   "supersedes": null
   }
  ],
  "shadow": {
@@ -1061,17 +1091,17 @@
     var at=$("anTable").querySelector("tbody"); at.innerHTML="";
     var sc=AN.scorecard||[];
     if(sc.length){
-      var _pair=function(pred,act){
+      var _pair=function(pred,act,status){var M="style='color:var(--muted)'";if(pred==null&&act==null) return "<td "+M+">no revision</td><td "+M+">&#8212;</td>";if(pred==null) return "<td><span "+M+">no call</span> &#8594; "+act.toFixed(2)+"</td><td "+M+">&#8212;</td>";if(act==null&&status==="superseded") return "<td>"+pred.toFixed(2)+" &#8594; <span style='color:var(--accent)'>superseded</span></td><td "+M+">&#8212;</td>";
         if(act==null) return "<td>"+pred.toFixed(2)+" \u2192 <span style='color:var(--accent)'>open</span></td><td style='color:var(--muted)'>\u2014</td>";
         var e=pred-act;
         return "<td>"+pred.toFixed(2)+" \u2192 "+act.toFixed(2)+"</td><td class='"+cls(e)+"'>"+signRs(e)+"</td>";
       };
-      var _sd=sc.filter(function(r){return r.pAct!=null;});
+      var _sd=sc.filter(function(r){return r.pAct!=null&&r.pPred!=null;});
       var _mae=function(a){var t=0;a.forEach(function(x){t+=Math.abs(x);});return a.length?t/a.length:0;};
       sc.forEach(function(r){
         var tr=document.createElement("tr");
-        if(r.pAct==null) tr.style.opacity=".72";
-        tr.innerHTML="<td>"+r.date+"</td>"+_pair(r.pPred,r.pAct)+_pair(r.dPred,r.dAct);
+        if(r.pAct==null||r.pPred==null) tr.style.opacity=".72";
+        tr.innerHTML="<td>"+r.date+"</td>"+_pair(r.pPred,r.pAct,r.status)+_pair(r.dPred,r.dAct,r.status);
         at.appendChild(tr);
       });
       var sum=document.createElement("tr");
@@ -1476,18 +1506,18 @@ const a=d.analysis;
 const sc = a.scorecard || [];
 const eCls = e => e > 0.05 ? 'r' : e < -0.05 ? 'g' : '';
 const eTxt = e => (e > 0 ? '+' : e < 0 ? '\u2212' : '') + Math.abs(e).toFixed(2);
-const pair = (pred, act) => act == null
+const pair = (pred, act, status) => (pred == null && act == null) ? '<td class="mut">no revision</td><td class="mut">&#8212;</td>' : (pred == null) ? '<td><span class="mut">no call</span> &#8594; ' + act.toFixed(2) + '</td><td class="mut">&#8212;</td>' : (act == null && status === 'superseded') ? '<td>' + pred.toFixed(2) + ' &#8594; <span style="color:var(--accent)">superseded</span></td><td class="mut">&#8212;</td>' : act == null
   ? `<td>${pred.toFixed(2)} \u2192 <span style="color:var(--accent)">open</span></td><td class="mut">\u2014</td>`
   : `<td>${pred.toFixed(2)} \u2192 ${act.toFixed(2)}</td><td class="${eCls(pred - act)}">${eTxt(pred - act)}</td>`;
 
 let gradedBody;
 if (sc.length) {
-  const scored = sc.filter(r => r.pAct != null);
+  const scored = sc.filter(r => r.pAct != null && r.pPred != null);
   const mae = arr => arr.reduce((s, x) => s + Math.abs(x), 0) / (arr.length || 1);
   const pMae = mae(scored.map(r => r.pPred - r.pAct));
   const dMae = mae(scored.map(r => r.dPred - r.dAct));
   gradedBody = sc.map(r =>
-    `<tr${r.pAct == null ? ' class="open"' : ''}><td>${r.date}</td>${pair(r.pPred, r.pAct)}${pair(r.dPred, r.dAct)}</tr>`
+    `<tr${(r.pAct == null || r.pPred == null) ? ' class="open"' : ''}><td>${r.date}</td>${pair(r.pPred, r.pAct, r.status)}${pair(r.dPred, r.dAct, r.status)}</tr>`
   ).join('')
   + `<tr class="hl"><td><b>${scored.length} scored</b></td><td class="mut">mean abs. error</td><td><b>${pMae.toFixed(2)}</b></td><td class="mut">mean abs. error</td><td><b>${dMae.toFixed(2)}</b></td></tr>`;
 } else {
