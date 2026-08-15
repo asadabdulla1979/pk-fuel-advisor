@@ -25,28 +25,28 @@
 -->
 <script type="application/json" id="advisor-state">{
  "version": 6,
- "lastUpdated": "2026-08-14",
+ "lastUpdated": "2026-08-15",
  "tankDefault": 55,
  "live": {
-  "brentSpot": 87.21,
+  "brentSpot": 88.49,
   "basis7d": 84.2586,
   "fx": 278.05,
   "petrolAnchor": 325.43,
   "dieselAnchor": 383.95,
   "anchorEffectiveDate": "2026-08-14",
-  "anchorValidThrough": "2026-08-14",
+  "anchorValidThrough": "2026-08-16",
   "petrolPrev": 324.98,
   "dieselPrev": 382.79,
-  "brentIntraday": 87.21,
-  "brentIntradayNote": "The 13 August Brent SETTLE of $87.07 has been written into the window (Trading Economics prior close: today's actual $87.214, +0.17%, +$0.14, back-solves to an $87.07 close). Yesterday's run locked on an intraday $88.72, so the settle discipline caught $1.65 this time - the largest correction since 6 August and worth about Rs 0.41 of projected move. This is the recurring error the task file warns about and it mattered again: Brent was $88.24 at 1558 GMT when Reuters filed, then leaked lower into the close. Today's $87.21 is the 14 August INTRADAY quote at ~15:30 PKT and is UNSETTLED (ICE settles ~23:30 PKT); it is used as the projection spot S only and is NOT written into a window slot. Tomorrow's run corrects it. Brent is up nearly 5% on the week after Treasury Secretary Bessent promised 'unprecedented' economic measures against Iran while maintaining the naval blockade, and the IEA warned of the widest supply deficit in five years. Spot now sits $2.95 above the basis, down from $4.93 yesterday - the gap is closing, but it is still positive, so every remaining revision refills the average with dearer barrels.",
+  "brentIntraday": 88.49,
+  "brentIntradayNote": "TODAY'S NUMBER IS A TRUE SETTLE - THE CLEANEST LOCK THIS ADVISOR HAS EVER HAD. The run fires on a Saturday, ICE is shut, so Trading Economics' $88.488 is Friday 14 August's CLOSE, not an intraday quote. The recurring intraday-for-settle error that cost $3.02 on 6 August and $1.65 on 13 August cannot occur today. It also validates the window retrospectively: $88.488 at +1.63% back-solves to an $87.07 previous close, which is exactly the 13 August slot written yesterday, so no correction was needed for the first time in a week. Brent gained nearly 5% on the week - Treasury Secretary Bessent promised 'unprecedented' economic measures against Iran while the naval blockade holds, the IEA forecast the widest global supply deficit in five years, Iran and Oman still have no Hormuz deal, and the Houthis struck Saudi Arabia's Jazan refinery. Spot now sits $4.23 ABOVE the $84.26 basis, wider than yesterday's $2.95, so the averaging window refills with dearer barrels at every revision from here. Note the window was NOT advanced this run: no OGRA revision occurred, so there is nothing to roll.",
   "productIntraday": {
-   "gasolineGal": 3.1137,
-   "gasolineBbl": 130.78,
-   "gasolineChg": "-0.46%",
-   "ulsdGal": 4.2345,
-   "ulsdBbl": 177.85,
-   "ulsdChg": "-0.49%",
-   "note": "14 August intraday, ~15:30 PKT. The 13 August slots were written at their CLOSES - gasoline $3.1280/gal ($131.38/bbl) and ULSD $4.2554/gal ($178.73/bbl), both back-solved from today's Trading Economics actual and daily change. Yesterday's intraday prints ($3.1472 and $4.2809) were both too high, so the product windows were corrected down as well as rolled. Products are lower for a second session while crude is flat-to-firmer: gasoline -0.46%, ULSD -0.49%, Brent +0.17%. That is cracks compressing on both fuels. Naphtha $726.86/mt, -0.65% (13 Aug)."
+   "gasolineGal": 3.1778,
+   "gasolineBbl": 133.47,
+   "gasolineChg": "+1.59%",
+   "ulsdGal": 4.2723,
+   "ulsdBbl": 179.44,
+   "ulsdChg": "+0.51%",
+   "note": "Friday 14 August CLOSES (markets shut for the weekend, so these are settles, not intraday prints). Gasoline $3.1778/gal = $133.47/bbl, +1.59%; ULSD $4.2723/gal = $179.44/bbl, +0.51%; Naphtha $741.72/t, +2.05%. Both products reversed Thursday's fall. Against Brent's +1.63% the gasoline crack was flat on the day and the diesel crack compressed slightly, but the monthly picture is the one that matters for the crack terms and it is unchanged: ULSD is +8.21% over the month against Brent +4.16%, while gasoline is -3.73%. That is a firm distillate crack and a weak gasoline crack - exactly the shape the +0.24 diesel and -0.68 petrol per-revision terms encode. The 13 August ULSD slot was corrected from $178.73 to $178.53/bbl ($4.2506/gal back-solved from today's close and daily change); the gasoline slot back-solved to $131.38 and needed no change."
   }
  },
  "calibration": {
@@ -81,48 +81,48 @@
    163.9,
    178.61,
    180.77,
-   178.73
+   178.53
   ],
-  "crackNote": "A LEVY HIKE IS BACK IN THE RESIDUAL - CONFIDENCE LOWERED ON DIESEL. The 14 August notification raised petrol Rs 0.45 to Rs 325.43 and diesel Rs 1.16 to Rs 383.95, grading yesterday's call at petrol -Rs 0.19 and diesel +Rs 0.62. The petrol figure is the best single-fuel call in the log and both directions were right for a second straight cycle. But the diesel number is not what it looks like: the petroleum levy on HSD was raised Re 1.00 to Rs 77.28/L in this run of notifications, and the levy on petrol was left alone at Rs 80.00/L. Roughly Rs 1.00 of diesel's Rs 1.16 rise is therefore fiscal, not refining. WINDOW. Advanced one step for the one revision: $83.77 (1 Aug) out, the 13 August settle $87.07 in. Basis $83.7871 -> $84.2586. Note the settle correction was large - yesterday locked on an intraday $88.72 against an $87.07 close, a $1.65 miss - so the crude leg used here is materially smaller than the one the projection assumed. RESIDUAL SPLIT. The one-day roll that set the 14 August price contributed a crude leg of +Rs 0.82. Petrol is clean: realised +Rs 0.45 against +Rs 0.82 leaves -Rs 0.37, so the petrol crack updates on the standard half-weight to -0.98 -> -0.68/rev. It has now decayed twice on its own arithmetic while staying firmly negative - three consecutive independent residuals agree that OGRA is passing through a persistent petrol-vs-crude discount. Diesel is NOT clean. Stripping the Re 1.00 levy leaves a market move of just +Rs 0.16 against a +Rs 0.82 crude leg, a residual of -Rs 0.66. Per the task file's fiscal rule that residual was NOT written in at full weight; it was applied at quarter weight, decaying diesel 0.54 -> 0.24/rev, and the diesel verdict is flagged LOW CONFIDENCE. Two reasons for the caution in both directions: the exact night the Re 1.00 landed is not cleanly attributable from the wire copy (geo.tv reuses one URL across days), and yesterday's run recorded the diesel levy as unchanged at Rs 74.28 when it is now Rs 77.28 - so last cycle's +0.54 diesel crack was itself probably levy-contaminated and is being unwound here rather than compounded. k unchanged at 1.0 on both fuels: with the corrected settle the crude leg over-explains petrol and under-explains raw diesel, no systematic bias. FX unchanged at 278.05 interbank. WHAT IT MEANS NOW. Basis $84.26 against spot $87.21 - the gap has halved from $4.93 to $2.95 as the cheap early-August barrels finish clearing, but it is still positive, so both fuels are projected UP again at the next revision, diesel through the Rs 2 fill threshold."
+  "crackNote": "NOTHING WAS GRADED AND NOTHING WAS RECALIBRATED - THERE WAS NO REVISION. The Ministry of Petroleum issued no notification on 14 August night: 15 August was a gazetted holiday for Independence Day (observed on the Saturday), and the Petroleum Division confirmed early on Saturday that prices hold over the whole weekend and will be reviewed on MONDAY 17 AUGUST. The 14 August price therefore runs 14-16 August, and the '15 August revision' yesterday's brief projected never existed. Per the standing rule, yesterday's entry is marked SUPERSEDED and excluded from accuracy rather than graded against Monday's revision, which today's entry also predicts - grading it would double-count one cycle. Accordingly: the window was NOT advanced (it advances one step per revision, and in any case a weekend produces no new working-day settle beyond Friday's), the basis stays at $84.2586, k stays 1.0 on both fuels, and both crack terms are held unchanged at petrol -0.68/rev and diesel +0.24/rev. Lifetime accuracy is unchanged at 16 scored cycles. Two housekeeping corrections were still made: the 13 August ULSD product slot went $178.73 -> $178.53/bbl on its back-solved settle, and Brent needed no correction at all because Friday's $88.488 close back-solves to exactly the $87.07 already written. FISCAL FLAG, FORWARD-DATED: the ECC approved a Rs 1.34/L increase in dealers' margins on both MS and HSD, from Rs 8.64 to Rs 9.98, which averted the nationwide pump strike - but it takes effect on 1 SEPTEMBER, so it is NOT in Monday's price. It is a known, unmodelled +Rs 1.34 on both pumps from that date, on top of whatever the window does. The petroleum levy is unchanged this run at Rs 80.00/L petrol and Rs 77.28/L HSD."
  },
  "projection": {
-  "hold": 87.21,
+  "hold": 88.49,
   "nextRevision": {
-   "petrol": 326.71,
-   "diesel": 386.15,
-   "dPetrol": 1.28,
-   "dDiesel": 2.2,
-   "tankPetrol": 70,
-   "tankDiesel": 121
+   "petrol": 327.03,
+   "diesel": 386.47,
+   "dPetrol": 1.6,
+   "dDiesel": 2.52,
+   "tankPetrol": 88,
+   "tankDiesel": 139
   },
   "cumulativeIfHold3": {
-   "petrol": 328.47,
-   "diesel": 389.75,
-   "dPetrol": 3.04,
-   "dDiesel": 5.8,
-   "tankPetrol": 167,
-   "tankDiesel": 319
+   "petrol": 329.43,
+   "diesel": 390.71,
+   "dPetrol": 4,
+   "dDiesel": 6.76,
+   "tankPetrol": 220,
+   "tankDiesel": 372
   },
-  "nextRevisionDate": "2026-08-15",
-  "nextRevisionLabel": "Saturday 15 August (today's price was notified for 14 August only, so a new notification is due late tonight - and because tonight is a FRIDAY notification, the cabinet-approved framework holds it over Saturday and Sunday, so expect a 15-17 August block rather than a single day; the exact precedent is 7 August, a Friday, whose notification ran 8-10 August)",
+  "nextRevisionDate": "2026-08-17",
+  "nextRevisionLabel": "Monday 17 August (the 14 August price was extended across the Independence Day holiday and the weekend - the Petroleum Division said on Saturday morning there would be 'no price revision today by OGRA, being a gazetted holiday' and that rates hold until Monday's review, so the effective range is 14-16 August)",
   "sensitivity": {
-   "atBrent": 85,
-   "label": "If the demand downgrades reassert themselves and Brent gives back $2.21 to $85 instead of holding $87.21",
+   "atBrent": 86,
+   "label": "If the OPEC demand downgrades and the US inventory build reassert themselves and Brent gives back $2.49 to $86 instead of holding Friday's $88.49 close",
    "nextRevision": {
-    "petrol": 326.16,
-    "diesel": 385.6,
-    "dPetrol": 0.73,
-    "dDiesel": 1.65,
-    "tankPetrol": 40,
-    "tankDiesel": 91
+    "petrol": 326.41,
+    "diesel": 385.85,
+    "dPetrol": 0.98,
+    "dDiesel": 1.9,
+    "tankPetrol": 54,
+    "tankDiesel": 105
    },
    "cumulativeIfHold3": {
-    "petrol": 326.81,
-    "diesel": 388.09,
-    "dPetrol": 1.38,
-    "dDiesel": 4.14
+    "petrol": 327.56,
+    "diesel": 388.84,
+    "dPetrol": 2.13,
+    "dDiesel": 4.89
    },
-   "note": "The bearish case has weakened since yesterday. OPEC's fourth consecutive demand-growth downgrade (to 580 kb/d) and the 17.4 mb US crude build are still on the tape, but the IEA has now swung the other way and forecasts the widest global supply deficit in five years for 2026, and Washington has escalated rather than settled - Bessent promising 'unprecedented' measures against Iran while the naval blockade stays. Brent finished the week up nearly 5%. Even so, note what a $2.21 break does NOT do: both fuels still rise at the next revision, petrol Rs 0.73 and diesel Rs 1.65, because the basis is nearly $3 below spot. There is no crude path from here that makes the next revision cheaper."
+   "note": "The bear case is real but it cannot turn Monday negative. OPEC has cut 2026 demand growth four times running, to 580 kb/d, and US crude stocks posted a 17.4 mb build. Against that the IEA now sees the widest supply deficit in five years, Washington has escalated rather than settled, and Brent closed the week up nearly 5%. Even a $2.49 give-back leaves petrol +Rs 0.98 and diesel +Rs 1.90 on Monday, because the basis is $4.23 BELOW spot: the cheap $79.45 and $82.49 barrels of early August are still sitting in the window waiting to roll out, and nothing that happens to crude over a closed weekend changes that. There is no crude path from here that makes Monday cheaper than today."
   }
  },
  "accuracy": {
@@ -144,40 +144,22 @@
    "directionHitRate": 0.6923,
    "nScored": 13
   },
-  "note": "Lifetime: 16 scored predictions since 2026-07-21, petrol MAE Rs 1.96 (bias +Rs 0.08), diesel MAE Rs 1.94 (bias +Rs 0.86), direction right on 24 of 32 fuel-cycles (75%). On the roll model alone: 13 cycles, petrol MAE Rs 2.02 (bias -Rs 0.32), diesel MAE Rs 1.13 (bias -Rs 0.21), direction right on 18 of 26 (69%). Every headline figure improved again this cycle and the direction hit rate is at its highest ever on both scopes, because the 13 August call was scored at -Rs 0.19 petrol - the best single-fuel result in the log - and +Rs 0.62 diesel, both directions right. Two consecutive tight cycles is the first back-to-back run the advisor has managed. The usual caveats stand. The petrol figure still carries the 5 August row, which alone contributes Rs 9.75 of absolute error from a levy shock the model cannot see; strip it and lifetime petrol MAE is about Rs 1.44. The diesel figure now carries a second partly-fiscal row: today's +Rs 0.62 looks like a good call but roughly Rs 1.00 of the realised move was a levy hike, so the model was right for a reason it cannot claim credit for. Three revisions - 8, 9 and 12 August - remain excluded because no prediction was locked against them (missed runs), and the 11 August flat print is graded but excluded from calibration because OGRA received no Platts assessment that day."
+  "note": "Lifetime: 16 scored predictions since 2026-07-21, petrol MAE Rs 1.96 (bias +Rs 0.08), diesel MAE Rs 1.94 (bias +Rs 0.86), direction right on 24 of 32 fuel-cycles (75%). On the roll model alone: 13 cycles, petrol MAE Rs 2.02 (bias -Rs 0.32), diesel MAE Rs 1.13 (bias -Rs 0.21), direction right on 18 of 26 (69%). Every headline figure improved again this cycle and the direction hit rate is at its highest ever on both scopes, because the 13 August call was scored at -Rs 0.19 petrol - the best single-fuel result in the log - and +Rs 0.62 diesel, both directions right. Two consecutive tight cycles is the first back-to-back run the advisor has managed. The usual caveats stand. The petrol figure still carries the 5 August row, which alone contributes Rs 9.75 of absolute error from a levy shock the model cannot see; strip it and lifetime petrol MAE is about Rs 1.44. The diesel figure now carries a second partly-fiscal row: today's +Rs 0.62 looks like a good call but roughly Rs 1.00 of the realised move was a levy hike, so the model was right for a reason it cannot claim credit for. No cycle was added this run: the Independence Day weekend produced no OGRA revision, so the 14 August prediction was superseded and excluded rather than graded, and every figure below is carried forward unchanged from yesterday. Three revisions - 8, 9 and 12 August - remain excluded because no prediction was locked against them (missed runs), and the 11 August flat print is graded but excluded from calibration because OGRA received no Platts assessment that day."
  },
  "analysis": {
-  "asOf": "2026-08-14",
-  "title": "The best petrol call in the log - and a levy hike hiding inside the diesel one",
-  "summary": "Two consecutive tight cycles, which the advisor has never managed before. The 13 August call was graded at -Rs 0.19 petrol and +Rs 0.62 diesel, both directions right, and the petrol figure is the smallest single-fuel error in the record. But the diesel number should not be read as a modelling win: the HSD petroleum levy was raised Re 1.00 to Rs 77.28/L in this run of notifications, so roughly Rs 1.00 of diesel's Rs 1.16 rise was fiscal and the model got the right answer partly for a reason it cannot see. That is the third time a levy move has landed inside a scored cycle since 5 August, and it is now the single largest unmodelled term. Two corrections were made rather than fitted: the diesel residual was applied at quarter weight only, decaying the crack 0.54 -> 0.24/rev, and yesterday's Brent slot was corrected from an intraday $88.72 to the $87.07 settle, a $1.65 error worth about Rs 0.41 of projected move.",
-  "graded": [
-   {
-    "date": "13 Aug",
-    "fuel": "Petrol",
-    "pred": 325.24,
-    "act": 325.43,
-    "err": -0.19,
-    "dir": "right"
-   },
-   {
-    "date": "13 Aug",
-    "fuel": "Diesel",
-    "pred": 384.57,
-    "act": 383.95,
-    "err": 0.62,
-    "dir": "right"
-   }
-  ],
-  "gradedNote": "Graded against the 14 August notification (petrol Rs 325.43, HSD Rs 383.95). Petrol -Rs 0.19 and diesel +Rs 0.62, both directions right - the tightest joint cycle in the log, beating the 12 August pair set two days ago. Caveat on the diesel row: about Rs 1.00 of the realised Rs 1.16 move was a petroleum-levy increase, so the market component was only Rs 0.16 against a modelled crude leg of Rs 0.82. The call scored well; the model did not earn all of it.",
-  "backtestNote": "Lifetime now 16 scored cycles: petrol MAE Rs 1.96 (bias +Rs 0.08), diesel MAE Rs 1.94 (bias +Rs 0.86), direction right on 24 of 32 fuel-cycles (75%) - the best direction reading the advisor has recorded. On the roll model alone: 13 cycles, petrol MAE Rs 2.02, diesel MAE Rs 1.13, direction 18 of 26 (69%). Strip the 5 August levy-shock row and lifetime petrol MAE falls to about Rs 1.44. The window was advanced one working day for the one revision since the last run, with the previous slot corrected from an intraday $88.72 to the $87.07 settle before rolling.",
-  "root": "The proxy problem is no longer the binding constraint - the fiscal one is. v6 proxies a PRODUCT assessment with CRUDE and lets a per-fuel crack term absorb the difference, and v7 was built to remove that proxy. In v7's first formally scored cycle it lost both fuels, +Rs 1.46 petrol and +Rs 3.07 diesel against v6's -Rs 0.19 and +Rs 0.62, because a no-crack product window cannot express the persistent petrol discount OGRA passes through and has no way to damp a levy-contaminated diesel print. Meanwhile the HSD petroleum levy has moved Rs 6.46 in nine days, from Rs 70.82 on 5 August to Rs 77.28 today, and neither model can see any of it. Until the advisor reads the levy line off each notification and subtracts it before computing the residual, diesel calibration will keep absorbing fiscal policy as if it were refining margin.",
+  "asOf": "2026-08-15",
+  "title": "A weekend with no revision - so nothing was graded, and nothing was fitted",
+  "summary": "The most useful thing about today's run is what it did NOT do. No OGRA notification was issued for 15 or 16 August because Independence Day was a gazetted holiday, and the Petroleum Division confirmed the 14 August price holds until Monday's review. Yesterday's brief projected a '15 August revision' under the Friday weekend-hold precedent and named a 15-17 August block; the block is real but it starts a day earlier, running 14-16 August, so the target revision that entry was locked against never existed. The standing rule applies: that entry is superseded and excluded, not graded against Monday - grading it would double-count the cycle today's entry also predicts. So the window was not advanced, both crack terms were held, k stayed at 1.0, and lifetime accuracy is unchanged at 16 scored cycles. This is the third time in a fortnight the cadence has surprised the model, and the lesson is the one already written into the task: read the effective range off the notification, never infer it from the last one. The compensating gift is that a Saturday run cannot make the intraday-for-settle error - Friday's $88.49 is a genuine close, and it back-solved to exactly the $87.07 slot written yesterday.",
+  "graded": [],
+  "gradedNote": "Nothing was graded this run. There was no OGRA revision over the Independence Day weekend, so the 14 August prediction (petrol Rs 326.71, diesel Rs 386.15) has no actual to score against and is marked superseded and excluded from accuracy. Monday 17 August will grade today's entry, not yesterday's.",
+  "backtestNote": "Lifetime carries forward unchanged at 16 scored cycles: petrol MAE Rs 1.96 (bias +Rs 0.08), diesel MAE Rs 1.94 (bias +Rs 0.86), direction right on 24 of 32 fuel-cycles (75%). Roll model alone: 13 cycles, petrol MAE Rs 2.02, diesel MAE Rs 1.13, direction 18 of 26 (69%). Strip the 5 August levy-shock row and lifetime petrol MAE falls to about Rs 1.44. No parameter moved this run because no cycle resolved.",
+  "root": "Two unmodelled terms are now visible at once and they behave differently. The fiscal one is the familiar blind spot: the HSD levy has moved Rs 6.46 in nine days and neither model can see it. But today's fiscal news is better behaved than usual - the ECC's Rs 1.34/L dealer-margin increase is announced in advance and dated to 1 September, which means for once the advisor can carry it as a known future step rather than discovering it inside a residual. The second term is cadence. OGRA's effective ranges have changed shape four times this month, and every time the model assumed the next one it was wrong: it assumed daily on 8 August and got a three-day block, assumed a 15-17 block yesterday and got a 14-16 one. Cadence is not a modelling parameter, it is a fact to be read, and the cost of guessing it is an entire wasted prediction cycle rather than a rupee-scale error.",
   "fixes": [
-   "Window advanced one step for the single revision: $83.77 (1 Aug) out, the 13 August settle $87.07 in. Basis $83.7871 -> $84.2586.",
-   "Settle discipline caught a $1.65 error - yesterday locked on an intraday $88.72 against an $87.07 close, worth about Rs 0.41 of projected move. Largest correction since 6 August.",
-   "LEVY FLAGGED, NOT FITTED: HSD petroleum levy now Rs 77.28/L after a Re 1.00 rise; petrol held at Rs 80.00/L. The diesel residual was recomputed levy-adjusted (-Rs 0.66) and applied at QUARTER weight, decaying the crack 0.54 -> 0.24/rev, with the diesel verdict marked low confidence.",
-   "Petrol crack updated normally on a clean -Rs 0.37 residual: -0.98 -> -0.68/rev. Third consecutive residual pointing the same way; k held at 1.0 on both fuels.",
-   "v7 shadow entered formal scoring and lost its first cycle on both fuels (+Rs 1.46 / +Rs 3.07 against v6's -Rs 0.19 / +Rs 0.62). Product slots corrected to closes: gasoline $3.1280/gal ($131.38/bbl), ULSD $4.2554/gal ($178.73/bbl).",
-   "Next-revision date set to Saturday 15 August off the notification, with the Friday-notification weekend rule applied - expect a 15-17 August block, on the precedent of Friday 7 August producing an 8-10 August notification."
+   "NO GRADING, NO RECALIBRATION: no revision occurred, so the 14 August entry is superseded and excluded, the window was NOT advanced, basis held at $84.2586, k held at 1.0, and both crack terms held at petrol -0.68/rev and diesel +0.24/rev.",
+   "TRUE SETTLE USED: the run fires on a Saturday with ICE closed, so $88.488 is Friday's close, not an intraday quote. It back-solves to an $87.07 previous close - exactly the slot written yesterday - so Brent needed no correction for the first time in a week.",
+   "Product settle correction: the 13 August ULSD slot went $178.73 -> $178.53/bbl ($4.2506/gal back-solved). The gasoline slot back-solved to $131.38 and was already correct.",
+   "FISCAL FLAG CARRIED FORWARD, NOT FITTED: ECC approved a Rs 1.34/L dealer-margin rise (Rs 8.64 -> Rs 9.98) effective 1 SEPTEMBER. It is not in Monday's price and was deliberately kept out of every projection; it is recorded as a known step for the September runs. Petroleum levy unchanged at Rs 80.00 / Rs 77.28.",
+   "v7 shadow frozen at one formally scored cycle for the same reason - yesterday's shadow lock is superseded, not graded. v6 still leads on both MAEs; promotion needs five joint cycles."
   ],
   "scorecard": [
    {
@@ -281,54 +263,58 @@
     "pAct": null,
     "dPred": 386.15,
     "dAct": null,
+    "status": "superseded"
+   },
+   {
+    "date": "15 Aug",
+    "model": "roll",
+    "pPred": 327.03,
+    "pAct": null,
+    "dPred": 386.47,
+    "dAct": null,
     "status": "open"
    }
   ],
-  "scorecardNote": "A rolling window onto the lifetime log, not the whole record. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a positive number means the model was too high. The 13 August row is now graded at -Rs 0.19 petrol and +Rs 0.62 diesel - the tightest joint cycle recorded - though roughly Rs 1.00 of the realised diesel move was a petroleum-levy increase rather than a market move. Today's 14 August row is open and resolves against the notification issued tonight, which is expected to run 15-17 August under the Friday weekend-hold rule. Rows marked nocall (7 Aug) had no prediction locked against them and are excluded from accuracy; 8 Aug is superseded; 9 Aug had no revision at all. Full lifetime figures (16 cycles since 2026-07-21) are in the self-correction panel below."
+  "scorecardNote": "A rolling window onto the lifetime log, not the whole record. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a positive number means the model was too high. The 14 August row is now marked SUPERSEDED: the revision it was locked against never happened, because Independence Day was a gazetted holiday and the 14 August price was extended to run 14-16 August. It is excluded from accuracy rather than graded against Monday, which today's 15 August row also predicts - grading both would double-count one cycle. Today's row is open and resolves against the notification issued on Sunday night for Monday 17 August. Rows marked nocall (7 Aug) had no prediction locked against them; 8 and 14 Aug are superseded; 9 Aug had no revision at all. Full lifetime figures (16 cycles since 2026-07-21) are in the self-correction panel below."
  },
  "news": {
-  "headline": "Both fuels up again - and every pump in the country shuts at 6am tomorrow",
-  "summary": "Two separate things point the same way today. On price, OGRA raised petrol Rs 0.45 to Rs 325.43 and HSD Rs 1.16 to Rs 383.95 for 14 August, and the model has both fuels rising again at the next revision - petrol Rs 1.28 and diesel Rs 2.20 - because OGRA's averaging window is still nearly $3 below spot and keeps refilling with dearer barrels as the cheap early-August days clear. Brent is up almost 5% on the week at about $87, with Treasury Secretary Bessent promising 'unprecedented' economic measures against Iran while the US naval blockade stays in place, and the IEA now forecasting the widest global supply deficit in five years. On availability, the Pakistan Petroleum Dealers Association has confirmed an indefinite nationwide shutdown of about 14,000 filling stations from 06:00 on Saturday 15 August after five hours of talks with the Petroleum Ministry collapsed on Wednesday. Those two facts make today's decision easy in a way the price model alone would not: the next revision is dearer AND the pumps may be closed when it lands.",
+  "headline": "No revision until Monday - a free weekend to fill before both fuels go up",
+  "summary": "Nothing moved today and that is the point. The Ministry of Petroleum issued no notification: 15 August was a gazetted holiday for Independence Day, and the Petroleum Division confirmed early Saturday that petrol stays at Rs 325.43 and HSD at Rs 383.95 until Monday's review. So the 14 August price runs 14-16 August, the '15 August revision' yesterday's brief projected never happened, and yesterday's call is superseded rather than graded. What has changed is the tape underneath. Brent CLOSED Friday at $88.49, up 1.63% on the day and nearly 5% on the week, and because the market is shut this is a genuine settle rather than the intraday quote that has been the model's biggest recurring error. Spot is now $4.23 above OGRA's $84.26 averaging basis - the widest gap in this cycle - and the cheap $79.45 and $82.49 barrels of early August are still queued to roll out. Monday's revision therefore looks dearer on both fuels: petrol +Rs 1.60 to Rs 327.03 and diesel +Rs 2.52 to Rs 386.47. Separately, the pump strike is off: the ECC approved a Rs 1.34/L rise in dealers' margins, to Rs 9.98, and the dealers called off the shutdown that was due to start at 06:00 today. That margin takes effect on 1 September, not Monday - but it is a further Rs 1.34 on both pumps that no version of this model can see.",
   "horizons": {
    "d2": {
     "signal": "up",
-    "note": "Saturday 15 August, notified late tonight - and because tonight is a Friday notification the framework holds the price over the weekend, so expect a 15-17 August block, not a single day. Petrol +Rs 1.28 to Rs 326.71, diesel +Rs 2.20 to Rs 386.15. Diesel clears the +Rs 2 fill threshold; petrol is inside the band but firmly positive. Confidence is high on petrol, which has now scored -Rs 0.19 and +Rs 0.46 in consecutive cycles, and deliberately LOWER on diesel because a Re 1.00 levy hike sits inside the residual the crack term is calibrated on."
+    "note": "Monday 17 August, the first revision since Thursday night. Petrol +Rs 1.60 to Rs 327.03 (about +Rs 88 per 55 L), diesel +Rs 2.52 to Rs 386.47 (about +Rs 139). Diesel clears the +Rs 2 threshold so the verdict is FILL; petrol is inside the band but its largest positive since this run began. Confidence is higher than usual on both legs for once: the lock uses a true settle, no levy change was reported in this notification cycle, and the dealer-margin rise is forward-dated to September so it cannot contaminate Monday's print. You have all of Saturday and Sunday to act at today's price."
    },
    "d4": {
-    "signal": "up",
-    "note": "Still compounding, but less violently than yesterday's brief implied. The $79.45 and $82.49 barrels of early August leave the window over the next two revisions and are replaced by roughly $87, so the basis climbs from $84.26 to $87.16 on a flat tape - worth about +Rs 3.04 petrol and +Rs 5.80 diesel over three revisions. The weekend hold stretches those three revisions out to roughly Wednesday 19 August in calendar terms, because Saturday and Sunday produce no working-day settle. The dealers' strike is the live local risk over this horizon."
+    "signal": "firm",
+    "note": "The compounding continues past Monday. Rolling the window three revisions on a flat $88.49 tape lifts the basis from $84.26 to $87.71 and gives petrol +Rs 4.00 to Rs 329.43 and diesel +Rs 6.76 to Rs 390.71 - roughly +Rs 220 and +Rs 372 a tank. In calendar terms three revisions from Monday runs out to about Wednesday 19 August. The bear case, a $2.49 give-back to $86, still leaves both fuels higher on both horizons; the basis gap does the work, not the direction of crude."
    },
    "w1": {
     "signal": "firm",
-    "note": "Two-sided and the bear case has weakened. Against higher prices: OPEC cut 2026 demand growth to 580 kb/d, its fourth consecutive downgrade, and US crude stocks posted their biggest weekly build since January 2023. For: the IEA has swung to forecasting the widest supply deficit in five years, Washington has escalated rather than settled with Tehran, Iran and Oman still have no Hormuz deal, and the Houthis hit Aramco's Jazan refinery again on Thursday. Brent finished the week up nearly 5%. On the products side both cracks compressed today, which is the one genuinely softening input and the reason both crack terms were decayed."
+    "note": "Two-sided but the balance of risk has tilted up. For higher prices: the IEA now forecasts the widest global supply deficit in five years, Bessent has promised further 'unprecedented' measures against Iran with announcements expected next week, Iran and Oman have still not agreed on reopening Hormuz, tankers are transiting with transponders off, and the Houthis hit Aramco's Jazan refinery. Against: OPEC cut 2026 demand growth to 580 kb/d, a fourth consecutive downgrade, US crude stocks built 17.4 mb, and additional Middle Eastern barrels are being routed to the US. The 1 September dealer-margin rise of Rs 1.34/L is a separate, certain, non-market increase already in the diary."
    }
   },
   "drivers": [
-   "OGRA raised petrol Rs 0.45 to Rs 325.43 and HSD Rs 1.16 to Rs 383.95, effective 14 August for 24 hours only",
-   "LEVY: the petroleum levy on HSD is now Rs 77.28/L after a Re 1.00 increase; petrol held at Rs 80.00/L. Roughly Rs 1.00 of diesel's Rs 1.16 rise is fiscal, not refining - the model's known blind spot, flagged not fitted",
-   "Petroleum dealers confirmed an indefinite nationwide shutdown of ~14,000 pumps from 06:00 Saturday 15 August after talks with the Petroleum Ministry failed over a Rs 1.34 margin demand",
-   "Brent settled 13 August at $87.07 and trades $87.21 intraday - up nearly 5% on the week; yesterday's lock used an intraday $88.72, a $1.65 settle error now corrected in the window",
-   "IEA forecasts the widest global oil supply deficit in five years for 2026; OPEC cut demand growth to 580 kb/d for a fourth straight month",
-   "US Treasury Secretary Bessent promised 'unprecedented' economic measures against Iran with the naval blockade maintained; Houthis struck Aramco's Jazan refinery with drones on Thursday"
+   "No OGRA notification for 15 or 16 August - Independence Day gazetted holiday; prices reviewed Monday 17 August (Petroleum Division, Business Recorder, Express Tribune).",
+   "Brent SETTLED at $88.49 Friday, +1.63% on the day and up nearly 5% on the week; because the run is on a closed Saturday this is a true close, not an intraday quote.",
+   "Spot is $4.23 above OGRA's $84.26 seven-working-day basis - the widest gap of this cycle - so the average refills with dearer barrels at every revision.",
+   "IEA forecasts the widest global supply deficit in five years for 2026; Bessent promises further 'unprecedented' economic measures against Iran, blockade maintained, Hormuz talks still deadlocked.",
+   "Against that: OPEC's fourth consecutive 2026 demand-growth downgrade to 580 kb/d and a 17.4 mb US crude build - enough to slow the rise, not to reverse it.",
+   "FISCAL, FORWARD-DATED: ECC approved a Rs 1.34/L dealer-margin increase (Rs 8.64 to Rs 9.98) effective 1 September; the nationwide pump strike due at 06:00 today was called off. Petroleum levy unchanged at Rs 80.00 petrol / Rs 77.28 HSD."
   ],
-  "dieselCrack": "Compressing on both fuels, and that is why both crack terms came down. Gasoline fell 0.46% and ULSD 0.49% today while Brent rose 0.17%, so products underperformed crude for a second session - the first back-to-back compression since the distillate squeeze began. The diesel picture is muddied by fiscal policy rather than refining: the HSD petroleum levy has ratcheted from Rs 70.82 on 5 August to Rs 77.28 now, a Rs 6.46 increase in nine days, and each step lands in the residual the crack term is calibrated on. Stripping the latest Re 1.00 leaves a diesel refining residual of -Rs 0.66, which is why the term was decayed 0.54 -> 0.24/rev at quarter weight rather than held. Structurally distillate remains tight - ULSD is still up 7.1% on the month and 90% on the year, and the Jazan restart has slipped again - so the term was decayed, not zeroed.",
+  "dieselCrack": "Distillate remains the firmer of the two cracks and that is why the diesel term stays positive. On Friday ULSD rose 0.51% against Brent's 1.63%, so the crack compressed slightly on the day, but the day is noise next to the month: ULSD is +8.21% over the past month against Brent's +4.16%, while gasoline is -3.73%. Middle-distillate tightness is being reinforced by the physical disruption itself - Houthi strikes on Saudi Arabia's Jazan refinery and transponder-dark tanker traffic through Hormuz hit refined-product flows harder than crude. The diesel crack term is held at +0.24/rev and the petrol term at -0.68/rev; with no scored cycle this run, neither moved.",
   "sources": [
-   "tribune.com.pk",
-   "geo.tv",
    "brecorder.com",
+   "tribune.com.pk",
+   "tradingeconomics.com",
+   "petrolprice.com.pk",
+   "mashriqtv.pk",
    "dawn.com",
-   "arynews.tv",
-   "samaa.tv",
-   "pakwheels.com",
-   "tradingeconomics.com/commodity/brent-crude-oil",
-   "tradingeconomics.com/commodity/gasoline",
-   "tradingeconomics.com/commodity/heating-oil",
-   "hamariweb.com",
-   "reuters.com",
-   "iea.org",
-   "bloompakistan.com"
+   "geo.tv",
+   "arabnews.com",
+   "hamariweb.com"
   ],
-  "waitAdvice": "Fill today, and fill full. On price alone the case is already positive: the next revision is dearer on both fuels - petrol about Rs 70 a tank, diesel about Rs 121 - and on a flat $87 tape roughly Rs 167 and Rs 319 a tank over about three revisions to 19 August. Waiting has no upside on either fuel at any crude path modelled, including a break back to $85. The availability argument is the stronger one: around 14,000 filling stations are due to close indefinitely from 06:00 tomorrow, so a half tank tonight could become a real problem rather than a Rs 121 problem. Treat the diesel number as directionally right but softer than printed - a Re 1.00 levy hike is doing most of the work in the last two diesel prints and the model cannot see the next one."
+  "waitAdvice": "Fill this weekend. Monday's revision is up on both fuels on a settle-based lock, the averaging basis is $4.23 below spot with two cheap early-August barrels still to roll out, and there is no crude path that makes Monday cheaper - even a $2.49 break to $86 leaves petrol +Rs 0.98 and diesel +Rs 1.90. Diesel is the clearer call at +Rs 2.52 (about Rs 139 a tank) and is where the money is; petrol at +Rs 1.60 (about Rs 88) is inside the neutral band but pointing the same way. You have until Sunday midnight at today's price, and the pumps are open - the strike was called off. Looking further out, the 1 September dealer-margin rise adds a certain Rs 1.34/L to both fuels regardless of what crude does."
  },
  "history": [
   {
@@ -765,7 +751,35 @@
     "petrolRate": 80,
     "note": "Diesel petroleum levy raised Re 1.00 to Rs 77.28/L; petrol held at Rs 80.00/L. Roughly Rs 1.00 of diesel's Rs 1.16 price rise is fiscal. Model blind spot - flagged, not fitted."
    },
-   "note": "OGRA raised petrol Rs 0.45 to Rs 325.43 and HSD Rs 1.16 to Rs 383.95, effective 14 August for 24 hours only. NEXT REVISION SATURDAY 15 AUGUST - read off the notification, and because tonight is a FRIDAY notification the cabinet framework holds it over the weekend, so expect a 15-17 August block; the exact precedent is Friday 7 August, whose notification ran 8-10 August. That revision graded the 13 August call at -Rs 0.19 petrol and +Rs 0.62 diesel, both directions right and the best petrol call in the log. LEVY FLAG: the HSD petroleum levy is now Rs 77.28/L after a Re 1.00 rise, petrol unchanged at Rs 80.00/L, so about Rs 1.00 of diesel's move was fiscal; the diesel residual was applied at quarter weight and the diesel verdict is marked low confidence. Window advanced one working day: $83.77 (1 Aug) out, the 13 August settle $87.07 in; basis $83.7871 -> $84.2586. Yesterday's intraday-for-settle error was $1.65, the largest since 6 August. Crack terms decayed on their own arithmetic - petrol -0.98 -> -0.68/rev on a clean -Rs 0.37 residual, diesel 0.54 -> 0.24/rev on a levy-adjusted -Rs 0.66 residual at quarter weight - k held at 1.0, FX unchanged at 278.05. Next revision: petrol +Rs 1.28 to Rs 326.71 (about +Rs 70 per 55 L) and diesel +Rs 2.20 to Rs 386.15 (about +Rs 121). Diesel clears the +Rs 2 threshold so the verdict is FILL; petrol is inside the band but firmly positive. If Brent holds $87.21 the ~3-revision cumulative is petrol +Rs 3.04 to Rs 328.47 and diesel +Rs 5.80 to Rs 389.75, roughly +Rs 167 and +Rs 319 a tank, running out to about Wednesday 19 August once the weekend hold is allowed for. Even a break to $85 leaves both fuels higher at the next revision. SEPARATE AND MORE URGENT: the Pakistan Petroleum Dealers Association has confirmed an indefinite nationwide shutdown of roughly 14,000 filling stations from 06:00 Saturday 15 August after talks with the Petroleum Ministry collapsed, so the availability case for filling today is stronger than the price case. v7 shadow calls Rs 328.18 / Rs 388.82; in its first formally scored cycle it lost both fuels to v6 by +Rs 1.46 and +Rs 3.07."
+   "note": "[SUPERSEDED 15 Aug 2026: the revision this entry was locked against never happened. No OGRA notification was issued for 15 or 16 August - Independence Day was a gazetted holiday and the Petroleum Division confirmed the 14 August price holds until Monday 17 August, so the effective range is 14-16 August, not the 15-17 block this entry projected. Under the standing rule the entry is excluded from accuracy rather than graded against Monday's revision, which the 15 August entry also predicts. Nothing here was scored and no calibration parameter moved on it.] OGRA raised petrol Rs 0.45 to Rs 325.43 and HSD Rs 1.16 to Rs 383.95, effective 14 August for 24 hours only. NEXT REVISION SATURDAY 15 AUGUST - read off the notification, and because tonight is a FRIDAY notification the cabinet framework holds it over the weekend, so expect a 15-17 August block; the exact precedent is Friday 7 August, whose notification ran 8-10 August. That revision graded the 13 August call at -Rs 0.19 petrol and +Rs 0.62 diesel, both directions right and the best petrol call in the log. LEVY FLAG: the HSD petroleum levy is now Rs 77.28/L after a Re 1.00 rise, petrol unchanged at Rs 80.00/L, so about Rs 1.00 of diesel's move was fiscal; the diesel residual was applied at quarter weight and the diesel verdict is marked low confidence. Window advanced one working day: $83.77 (1 Aug) out, the 13 August settle $87.07 in; basis $83.7871 -> $84.2586. Yesterday's intraday-for-settle error was $1.65, the largest since 6 August. Crack terms decayed on their own arithmetic - petrol -0.98 -> -0.68/rev on a clean -Rs 0.37 residual, diesel 0.54 -> 0.24/rev on a levy-adjusted -Rs 0.66 residual at quarter weight - k held at 1.0, FX unchanged at 278.05. Next revision: petrol +Rs 1.28 to Rs 326.71 (about +Rs 70 per 55 L) and diesel +Rs 2.20 to Rs 386.15 (about +Rs 121). Diesel clears the +Rs 2 threshold so the verdict is FILL; petrol is inside the band but firmly positive. If Brent holds $87.21 the ~3-revision cumulative is petrol +Rs 3.04 to Rs 328.47 and diesel +Rs 5.80 to Rs 389.75, roughly +Rs 167 and +Rs 319 a tank, running out to about Wednesday 19 August once the weekend hold is allowed for. Even a break to $85 leaves both fuels higher at the next revision. SEPARATE AND MORE URGENT: the Pakistan Petroleum Dealers Association has confirmed an indefinite nationwide shutdown of roughly 14,000 filling stations from 06:00 Saturday 15 August after talks with the Petroleum Ministry collapsed, so the availability case for filling today is stronger than the price case. v7 shadow calls Rs 328.18 / Rs 388.82; in its first formally scored cycle it lost both fuels to v6 by +Rs 1.46 and +Rs 3.07.",
+   "superseded": true,
+   "excludedFromAccuracy": true
+  },
+  {
+   "date": "2026-08-15",
+   "model": "roll",
+   "brentBasis": 84.2586,
+   "brentSpot": 88.49,
+   "fx": 278.05,
+   "petrolAnchor": 325.43,
+   "dieselAnchor": 383.95,
+   "predictedPetrol": 327.03,
+   "predictedDiesel": 386.47,
+   "shadowPredictedPetrol": 328.85,
+   "shadowPredictedDiesel": 389.22,
+   "actualPetrol": null,
+   "actualDiesel": null,
+   "verdict": "fill",
+   "newsSignal": "up",
+   "fiscalFlag": {
+    "type": "dealer-margin",
+    "delta": 1.34,
+    "from": 8.64,
+    "to": 9.98,
+    "effective": "2026-09-01",
+    "note": "ECC approved a Rs 1.34/L increase in dealers' margins on MS and HSD, from Rs 8.64 to Rs 9.98, which averted the nationwide pump strike. Effective 1 SEPTEMBER, so NOT in Monday's price and deliberately excluded from every projection here. Carry it as a known +Rs 1.34 step on both fuels for the September runs. Petroleum levy unchanged at Rs 80.00/L petrol and Rs 77.28/L HSD."
+   },
+   "note": "NO REVISION TODAY. The Ministry of Petroleum issued no notification on 14 August night: 15 August was a gazetted holiday for Independence Day and the Petroleum Division stated early Saturday that there would be 'no price revision today by OGRA, being a gazetted holiday' and that rates hold until Monday. Petrol stays Rs 325.43 and HSD Rs 383.95, effective range 14-16 AUGUST, NEXT REVISION MONDAY 17 AUGUST - read off the notification, not inferred. Yesterday's entry predicted a 15 August revision that never existed and is marked superseded and excluded from accuracy rather than graded against Monday, which this entry also predicts. Consequently the window was NOT advanced (basis held at $84.2586), k held at 1.0, and both crack terms held at petrol -0.68/rev and diesel +0.24/rev; lifetime accuracy stays at 16 scored cycles. Because ICE is closed on a Saturday, today's $88.488 Brent is a TRUE SETTLE - the first lock immune to the intraday error that cost $3.02 on 6 August and $1.65 on 13 August - and it back-solves to exactly the $87.07 slot written yesterday, so no crude correction was needed. The 13 August ULSD product slot was corrected $178.73 -> $178.53/bbl. Spot now sits $4.23 above the basis, the widest gap of this cycle. Monday 17 August: petrol +Rs 1.60 to Rs 327.03 (about +Rs 88 per 55 L) and diesel +Rs 2.52 to Rs 386.47 (about +Rs 139). Diesel clears the +Rs 2 threshold so the verdict is FILL, and there is a full weekend of runway at today's price. If Brent holds $88.49 the ~3-revision cumulative is petrol +Rs 4.00 to Rs 329.43 and diesel +Rs 6.76 to Rs 390.71, roughly +Rs 220 and +Rs 372 a tank, running to about Wednesday 19 August. Even a break to $86 leaves both fuels higher on Monday. v7 shadow calls Rs 328.85 / Rs 389.22, hotter than v6 on both for a third straight lock; its formal record is frozen at one cycle, which v6 won on both fuels. SEPARATELY AND FORWARD-DATED: the ECC approved a Rs 1.34/L dealer-margin rise effective 1 September, which called off the nationwide pump strike that was due to start at 06:00 today - a certain, non-market Rs 1.34 on both pumps from that date that no version of this model can see."
   }
  ],
  "shadow": {
@@ -773,11 +787,11 @@
   "seededOn": "2026-07-31",
   "reseededOn": "2026-08-01",
   "warmingUp": false,
-  "note": "v7's FIRST FORMALLY SCORED CYCLE - AND IT LOST BOTH FUELS BADLY. Yesterday's lock was the first prediction made with both product windows clear of seed slots. v7 called petrol Rs 326.89 and diesel Rs 387.02; OGRA delivered Rs 325.43 and Rs 383.95. Errors +Rs 1.46 and +Rs 3.07 against v6's -Rs 0.19 and +Rs 0.62 - v6 won both fuels by a wide margin, and the diesel gap is the largest between the two models since the shadow started. Direction was right on both for both models, so the loss is entirely about size: v7 ran hot, as it has in every cycle where the two disagreed. The diagnosis is unchanged and is now supported by a formal cycle as well as the informal ones. v7's premise was that v6's crack terms are over-fitted artefacts absorbing a crude-for-product proxy error, and that a clean product window would need none. But a no-crack model cannot express the persistent petrol discount OGRA keeps passing through, and it has no way at all to damp a levy-contaminated diesel print - it took the full Rs 4.23 the product window implied when the market component of the actual move was Rs 0.16. Formal record: 1 cycle, v6 ahead on both MAEs. Informal record over the seeded period: v6 5, v7 3. For the 15 August revision v7 calls petrol Rs 328.18 and diesel Rs 388.82 - Rs 1.47 and Rs 2.67 above v6, hotter again. Promotion requires v7 to beat v6 on both MAEs across at least five jointly-scored cycles; after one it is behind on both, so promotion is not close and no headline switch is proposed.",
-  "productPetrolBbl": 130.78,
-  "productDieselBbl": 177.85,
-  "productPetrolGal": 3.1137,
-  "productDieselGal": 4.2345,
+  "note": "NO CYCLE TO SCORE - v7's record is frozen where it was. No OGRA revision occurred over the Independence Day weekend, so yesterday's v7 lock (petrol Rs 328.18, diesel Rs 388.82) is superseded alongside v6's and excluded from the shadow statistics rather than graded against Monday's revision. The formal record therefore stands at ONE jointly-scored cycle, 14 August, which v6 won on both fuels: v7 +Rs 1.46 petrol and +Rs 3.07 diesel against v6's -Rs 0.19 and +Rs 0.62. Promotion needs v7 ahead on both MAEs across at least five joint cycles; after one it is behind on both, so promotion is nowhere near and no headline switch is proposed. For Monday v7 calls petrol Rs 328.85 and diesel Rs 389.22 - Rs 1.82 and Rs 2.75 above v6, hotter on both for the third lock running. The product windows were held rather than rolled for the same reason the crude window was, with one settle correction: the 13 August ULSD slot went to $178.53/bbl. Worth noting for the eventual verdict: today's product closes are the strongest argument v7 has - ULSD is +8.2% on the month against Brent +4.2%, which is precisely the product-vs-crude divergence v7 was built to capture and v6 can only approximate through a crack term.",
+  "productPetrolBbl": 133.47,
+  "productDieselBbl": 179.44,
+  "productPetrolGal": 3.1778,
+  "productDieselGal": 4.2723,
   "informalErrs": {
    "petrol": 1.46,
    "diesel": 3.07,
@@ -785,23 +799,23 @@
    "v6Diesel": 0.62
   },
   "nextRevision": {
-   "petrol": 328.18,
-   "diesel": 388.82,
-   "dPetrol": 2.75,
-   "dDiesel": 4.87
+   "petrol": 328.85,
+   "diesel": 389.22,
+   "dPetrol": 3.42,
+   "dDiesel": 5.27
   },
   "cumulativeIfHold3": {
-   "petrol": 332.9,
-   "diesel": 397.12,
-   "dPetrol": 7.47,
-   "dDiesel": 13.17
+   "petrol": 334.92,
+   "diesel": 398.31,
+   "dPetrol": 9.49,
+   "dDiesel": 14.36
   },
   "accuracy": {
    "petrolMAE": 1.46,
    "dieselMAE": 3.07,
    "directionHitRate": 1,
    "nScored": 1,
-   "note": "One formally scored cycle (14 August). Petrol MAE Rs 1.46, diesel MAE Rs 3.07, direction right on 2 of 2. v6 on the same single cycle: petrol Rs 0.19, diesel Rs 0.62, 2 of 2. v7 is behind on both MAEs and needs at least five joint cycles ahead on both to be promoted."
+   "note": "Still one formally scored cycle (14 August) - the Independence Day weekend produced no revision, so nothing was added. Petrol MAE Rs 1.46, diesel MAE Rs 3.07, direction right on 2 of 2. v6 on the same cycle: petrol Rs 0.19, diesel Rs 0.62. v7 is behind on both MAEs and needs at least five joint cycles ahead on both before promotion is even discussable."
   }
  }
 }</script>
