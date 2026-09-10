@@ -29,17 +29,17 @@
  "tankDefault": 55,
  "live": {
   "brentSpot": 101.21,
-  "brentPrevClose": 97.92,
+  "brentPrevClose": 101.21,
   "basis7d": 95.3786,
-  "fx": 277.46,
+  "fx": 277.379,
   "petrolAnchor": 367.75,
   "dieselAnchor": 392.67,
   "anchorEffectiveDate": "2026-09-10",
   "anchorValidThrough": "2026-09-10",
   "petrolPrev": 364.35,
   "dieselPrev": 385.95,
-  "brentIntraday": 101.21,
-  "brentIntradayNote": "TWO REVISIONS SINCE THE LAST RUN, AND THE BEST PAIR OF CALLS IN THE LOG FOLLOWED BY A CYCLE NOBODY WAS WATCHING. This run fired late - at 01:20 PKT on Thursday 10 September rather than 15:30 PKT on Wednesday - so it opens after BOTH the 9 September and the 10 September notifications. The 9 September revision (petrol Rs 364.35, +Rs 5.58; HSD Rs 385.95, +Rs 4.18) was the one the 8 September brief had locked a call against, and the call was very good: petrol was called Rs 365.25 against Rs 364.35, an error of +Re 0.90, and diesel Rs 385.20 against Rs 385.95, an error of -Re 0.75. After the Rs 12.50 petrol miss of the previous cycle that is a striking recovery, and it is the first cycle in the log where BOTH legs came in under a rupee. The 10 September revision (petrol Rs 367.75, +Rs 3.40; HSD Rs 392.67, +Rs 6.72) had NO prediction locked against it because the run that would have made one never happened, so it is recorded as an actual and EXCLUDED from the accuracy statistics - but its residual is still informative and is used to update the crack terms. And what it says is the opposite of last week: the diesel move (+Rs 6.72) was nearly double the petrol move (+Rs 3.40) for the first time in this sequence, against a tape where heating oil rose 3.34% and gasoline actually FELL 0.42%. Brent settled $101.21 on Wednesday, up 3.4% and the highest close since 22 May, after Iran said it had attacked 10 ships near Hormuz and the US sank five Iranian tankers. No levy, GST or margin change: the Petroleum Division notification carries petroleum levy Rs 80/L and Climate Support Levy Rs 5/L unchanged on both fuels, with the full Rs 5.58 and Rs 4.18 of the 9 September move landing in the ex-refinery import price."
+  "brentIntraday": 102.2,
+  "brentIntradayNote": "SECOND RUN OF THE DAY, AND THE FIRST THING IT ESTABLISHES IS THAT NOTHING HAS HAPPENED YET. The scheduled 15:30 PKT slot fired on time; the previous entry was a catch-up run at 01:20 PKT this morning that covered the two revisions of 9 and 10 September. NO NEW OGRA REVISION HAS OCCURRED SINCE - petrol is still Rs 367.75 and HSD Rs 392.67, notified Wednesday evening for THURSDAY 10 SEPTEMBER ONLY, and the next notification lands tonight for midnight. So nothing is gradeable, the Brent window does NOT advance, the crack terms are NOT updated, and the 01:20 entry is marked SUPERSEDED rather than scored, because today's entry predicts the same Friday revision and grading both would double-count one cycle. What HAS changed is worth the run. Trading Economics now serves a settled prior close for both product legs and both differ from the mid-session quotes the 01:20 run captured: gasoline closed 9 September at $3.2107/gal, not the $3.2409 recorded, and heating oil at $4.8009/gal, not $4.7205 - a 8-cent gasoline correction and an 8-cent diesel correction in the opposite direction, the latter worth $10.29/bbl in the v7 diesel window. Both slots are corrected in place. This is the intraday-versus-settle trap the calibration notes call the biggest recurring source of error, caught this time on the PRODUCT leg rather than the crude one: the 01:20 run read the product tape at 16:20 New York time, after the NYMEX settle but while CFDs were still trading. Brent itself needs no correction - Trading Economics' Previous reads exactly $101.21, confirming the Reuters settle used yesterday. Brent is trading $102.20 intraday as this run locks, a three-month high and up nearly 15% since 1 September, but that is an unsettled quote and enters no window slot."
  },
  "calibration": {
   "model": "incremental-7wd-roll",
@@ -53,7 +53,7 @@
    97.92
   ],
   "windowAsOf": "2026-09-08",
-  "rollSteps": 2,
+  "rollSteps": 0,
   "kPetrol": 1,
   "kDiesel": 1,
   "crackPetrol": 2.4121,
@@ -65,7 +65,7 @@
    151.19,
    155.03,
    155.03,
-   156.858
+   154.848
   ],
   "productWindowDiesel": [
    194.52,
@@ -74,10 +74,10 @@
    202.72,
    200.37,
    200.37,
-   201.588
+   211.881
   ],
-  "crackNote": "TWO WINDOW STEPS AND TWO CRACK UPDATES, AND THE TWO FUELS HAVE SWAPPED PLACES. The window advances one step per revision, twice. Step one drops $88.52 and appends the 7 September settle $97.16, giving the seven days behind the 9 September price (mean $93.9757). Step two drops $88.10 and appends the 8 September settle $97.92, giving the seven days behind today's 10 September price: $90.49/$94.65/$95.63/$95.52/$96.28/$97.16/$97.92, mean $95.3786 as of 8 September. GRADING, CYCLE ONE (9 September, scored): the one-day crude increment was +Rs 2.16, against a petrol move of +Rs 5.58 and a diesel move of +Rs 4.18, leaving residuals of +Rs 3.42 and +Rs 2.02. No settle surprise - the 8 September lock had appended the confirmed $97.16, which is exactly what entered - and no fiscal change. Blend takes petrol 4.32 -> 3.87 and diesel 1.27 -> 1.65. CYCLE TWO (10 September, UNGRADED but calibrating): the crude increment was +Rs 2.45, against a petrol move of only +Rs 3.40 and a diesel move of +Rs 6.72, leaving residuals of +Re 0.95 on petrol and +Rs 4.27 on diesel. Blend takes petrol 3.87 -> 2.41 and diesel 1.65 -> 2.96. THE READ: the petrol crack term has now gone +1.32 -> -1.93 -> +4.32 -> +2.41 and the diesel term +0.59 -> +1.14 -> +1.27 -> +2.96. Petrol is mean-reverting off last week's spike, which is what the low-confidence label anticipated; diesel is climbing steadily and for a visible reason - heating oil rose 3.34% on Wednesday to $4.72/gal while gasoline FELL 0.42%, US diesel is closing on $6/gal at a record, distillate stocks are 14% below the five-year average, US refineries are running at 98% of capacity, and Ukrainian strikes on Russian refineries plus the Jazan outage keep removing distillate capacity. NO DECAY on either term: the rule withholds decay while refining margins are firming, and on the distillate leg they are firming hard. k stays 1.00 on both fuels - the residuals are product-crack effects, not crude over- or under-explaining. CAVEAT ON CYCLE TWO: it is one revision with no prediction attached, so it gets half the weight of a scored cycle by construction of the blend, and the diesel term it produces is the largest in the log.",
-  "gradedThisRun": true
+  "crackNote": "NO ROLL, NO RECALIBRATION - AND THAT IS THE CORRECT ANSWER, NOT A SKIPPED STEP. The window advances one step per OGRA revision. No revision has occurred since the 01:20 run, so the window stays exactly where it was: $90.49/$94.65/$95.63/$95.52/$96.28/$97.16/$97.92, mean $95.3786 as of the 8 September settle. Nothing was scored, so under the standing rule the crack terms are NOT touched - they move only on the evidence of a graded cycle, never on a timer. Petrol holds at +Rs 2.41 and diesel at +Rs 2.96, and k stays 1.00 on both. THE ONE SUBSTANTIVE CHANGE IS A DATA CORRECTION IN THE v7 PRODUCT WINDOWS. The 9 September slots were appended at 01:20 this morning from mid-session CFD quotes; the settled closes are now published and both were wrong. Gasoline: $3.2409/gal recorded, $3.2107 actual, so the petrol slot moves $156.858 -> $154.848/bbl. Heating oil: $4.7205/gal recorded, $4.8009 actual, so the diesel slot moves $201.588 -> $211.881/bbl. That second correction is large - $10.29 a barrel, the single biggest slot revision in the series - and it matters because it is the slot carrying the distillate shock. Corrected, the diesel product window mean rises to $203.24 and the v7 diesel call for Friday rises from Rs 396.11 to Rs 397.00, closing about a third of its gap to v6. The petrol correction runs the other way and takes v7 petrol from Rs 369.73 to Rs 369.36. Neither is scored, because the cycle they belong to has not been answered yet. WHAT TO WATCH TONIGHT: the diesel crack term is the largest in the log and it was built half on an ungraded cycle, so Friday's notification is the first real test of it. If HSD comes in near Rs 398 the term is real; if it comes in near Rs 395 the term is over-fitted to one unpredicted observation and should be decayed hard.",
+  "gradedThisRun": false
  },
  "projection": {
   "hold": 101.21,
@@ -86,20 +86,20 @@
    "diesel": 398.3,
    "dPetrol": 5.08,
    "dDiesel": 5.63,
-   "tankPetrol": 280,
+   "tankPetrol": 279,
    "tankDiesel": 310
   },
   "cumulativeIfHold3": {
-   "petrol": 380.69,
+   "petrol": 380.68,
    "diesel": 407.25,
-   "dPetrol": 12.94,
+   "dPetrol": 12.93,
    "dDiesel": 14.58,
    "tankPetrol": 711,
    "tankDiesel": 802
   },
   "nextRevisionDate": "2026-09-11",
-  "nextRevisionLabel": "Friday 11 September - the 9 September evening notification set rates effective for THURSDAY 10 SEPTEMBER ONLY ('New prices will be effective for Thursday, September 10', Business Recorder quoting the Petroleum Division notification; Express Tribune and Islamabad Post/DNA carry the same single date, and Business Recorder describes the mechanism as a 'daily revision'). That is a one-day block, so the next revision is Friday 11 September, notified this evening for midnight. Read off the notification every run and never carried forward - the cadence has been three-day, one-day, three-day and one-day again inside five weeks.",
-  "settleRiskNote": "THE NEXT REVISION CARRIES REAL SETTLE RISK AGAIN, UNLIKE THE LAST ONE. Wednesday's notification was issued at about 22:10 PKT, before the 23:30 ICE settle, so Wednesday's $101.21 close is the last input to FRIDAY's price and it already exists - but Thursday's own settle lands before Friday's notification too, and on a tape that has moved $3.29 in a day the band matters. Across a $95-$108 Brent band the Friday petrol number runs Rs 371.29 to Rs 374.53 and diesel Rs 396.75 to Rs 400.00: both fuels rise at every point in the band, so the DIRECTION of the fill call is robust even though the magnitude is not."
+  "nextRevisionLabel": "Friday 11 September - the Wednesday-evening notification set rates for THURSDAY 10 SEPTEMBER ONLY, a one-day block under what Mashriq TV and TechJuice both describe as the daily pricing mechanism now in force. The next notification is issued this evening for midnight tonight. Read off the notification every run and never carried forward: the cadence has been three-day, one-day, three-day and now daily inside six weeks.",
+  "settleRiskNote": "SETTLE RISK IS LOW AND THE REASON IS TIMING. OGRA has notified at 22:10, 22:49 and 23:00 PKT on the last three cycles - in every case BEFORE the 23:30 PKT ICE settle. Wednesday's $101.21 close is therefore the last complete input to Friday's price and it already exists, confirmed independently by Trading Economics' Previous field. Thursday's own settle almost certainly lands after tonight's notification and so cannot enter it. Across a $95-$108 Brent band the Friday petrol number runs Rs 371.29 to Rs 374.53 and diesel Rs 396.75 to Rs 400.00 - both fuels rise at every point, so the fill call holds regardless. The live uncertainty is not crude at all: it is the Rs 2.96 diesel crack term, which is the largest in the log and half-built on an ungraded cycle."
  },
  "accuracy": {
   "petrolMAE": 2.18,
@@ -122,11 +122,11 @@
    "nScored": 29,
    "nScoredDiesel": 28
   },
-  "note": "ONE CYCLE SCORED AND IT IS THE BEST PAIRED CALL IN THE LOG. Petrol +Re 0.90 and diesel -Re 0.75 - the first cycle in 32 where both legs came in under a rupee. Petrol MAE improves 2.22 -> 2.18 lifetime and 2.27 -> 2.22 on the roll model; diesel improves 1.57 -> 1.54 lifetime and 1.16 -> 1.15. Petrol bias narrows from -Re 0.42 to -Re 0.38 lifetime, diesel from +Re 0.12 to +Re 0.09. Direction right on both legs, lifting the hit rate to 47 of 63 fuel-cycles (75%). The 10 September revision is EXCLUDED from every figure above: no prediction was ever locked against it because the scheduled run did not fire before the notification, and scoring an unpredicted cycle would flatter or damage the record arbitrarily. It is recorded in the log as an actual with predictions null, and it is used only to update the crack terms. The honest summary after 32 cycles: this remains a good diesel forecaster (MAE Rs 1.15 on the current model) and a merely adequate petrol one (Rs 2.22), but last cycle's Rs 12.50 petrol miss looks more like the product-shock outlier the analysis called it than the start of a trend."
+  "note": "NOTHING GRADED THIS RUN. No OGRA revision has occurred since the 01:20 entry, so there is no new actual to score against and every figure is carried forward unchanged: lifetime petrol MAE Rs 2.18 (bias -Re 0.38), diesel MAE Rs 1.54 (bias +Re 0.09), direction right on 47 of 63 fuel-cycles (75%) over 32 scored cycles; on the current roll model alone, petrol MAE Rs 2.22 and diesel MAE Rs 1.15 over 29. The 01:20 entry is marked SUPERSEDED and excluded rather than scored, because it and today's entry predict the SAME Friday 11 September revision and grading both would count one cycle twice - the double-counting rule that the 5-7 September sequence established. The last graded cycle remains the 8 September call against the 9 September notification: petrol +Re 0.90, diesel -Re 0.75, the best paired result in the log."
  },
  "analysis": {
-  "title": "The best paired call in the log, and a cycle nobody was there to call",
-  "summary": "The 8 September prediction was graded against the 9 September notification and both legs came in under a rupee: petrol Rs 365.25 against Rs 364.35 (+Re 0.90), diesel Rs 385.20 against Rs 385.95 (-Re 0.75). That is the first time in 32 cycles both fuels have landed inside Re 1, and it comes directly after the worst petrol call in the log, which supports the reading that the Rs 12.50 miss was a one-off product shock rather than a broken model. The second revision, effective today, had no call attached because this run fired at 01:20 PKT on Thursday rather than 15:30 PKT on Wednesday - after the notification rather than eight hours before it. That cycle is recorded and excluded from the accuracy statistics, as the rule requires, but its residual is used to update the crack terms, and it says something the scored cycle does not: diesel moved Rs 6.72 against petrol's Rs 3.40, reversing the pattern of the whole post-cap period. The administered diesel crack cap that made HSD the well-behaved leg through August appears no longer to bind, which is both why the diesel projection is now the larger of the two and why it is the number that deserves the health warning this week.",
+  "title": "Nothing to grade, and a settle correction worth more than a grade",
+  "summary": "This is the second run of 10 September - the first was a 01:20 catch-up that covered the 9 and 10 September revisions - and it opens on an empty scoreboard. No notification has been issued since, so there is no actual to score, the seven-day window does not advance, and the crack terms stay where they were. The rule for this case is explicit and was applied: the earlier entry is marked superseded rather than graded, because both it and today's entry are calls on the same Friday 11 September revision and scoring both would count one notification twice. What the run did find is a data error worth correcting. The 01:20 entry appended 9 September product prices taken at 16:20 New York time - after the NYMEX settle but while CFDs still traded - and both were wrong: gasoline closed $3.2107 rather than $3.2409, heating oil $4.8009 rather than $4.7205. The heating-oil miss is worth $10.29 a barrel in the v7 diesel window, the largest slot revision the series has recorded, and it moves the v7 diesel call for Friday up nearly a rupee. This is the same intraday-versus-settle trap the calibration notes identify as the biggest recurring source of error, appearing this time on the product leg rather than the crude one, and it is an argument for running the product legs off the Previous field rather than the headline quote in every future run.",
   "graded": [
    {
     "date": "8 Sep",
@@ -195,55 +195,54 @@
     "dAct": null
    }
   ],
-  "scorecardNote": "The last five scored cycles plus today's open call. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a negative number means the model was too low. The 10 September revision does not appear as a row because no prediction was ever locked against it - the scheduled run fired after the notification rather than before it - and inventing a row for it would either flatter or damage the record arbitrarily. Note the 4 and 7 September rows: +Rs 6.51 then -Rs 12.50 on petrol, the whipsaw that the calibration notes flagged in advance, followed now by +Re 0.90. That is what mean reversion in a crack term looks like from the inside.",
-  "gradedNote": "One cycle graded: the 8 September call against the 9 September notification. Petrol +Re 0.90 and diesel -Re 0.75, both directions right, the best paired result in 32 cycles. The 10 September revision is recorded as an actual with predictions null and is EXCLUDED from petrolMAE, dieselMAE, the bias figures and the direction hit rate; it contributes only to the crack-term update, at the half weight the blend rule gives any single observation.",
-  "backtestNote": "Lifetime after 32 scored cycles: petrol MAE Rs 2.18 (bias -Re 0.38), diesel MAE Rs 1.54 (bias +Re 0.09), direction right on 47 of 63 fuel-cycles (75%). On the current roll model alone, 29 cycles: petrol MAE Rs 2.22, diesel MAE Rs 1.15, direction 41 of 57 (72%). Every figure improved this cycle. The v7 product-window shadow lost both legs this time (petrol -Rs 2.36, diesel +Re 0.97) and now stands at petrol MAE Rs 2.04 over 17 cycles and diesel MAE Rs 1.73 over 14; the promotion test - beat v6 on BOTH MAE figures - remains unmet and the diesel gap widened.",
-  "root": "Unchanged in structure but inverted in sign. v6 proxies a PRODUCT assessment with CRUDE and lets a per-fuel crack term absorb the difference. Last week that blew up on petrol, when Gulf gasoline supply was physically destroyed and Brent barely moved. This week the same mechanism is loading onto diesel: heating oil is up 3.34% on a day gasoline fell, distillate stocks are 14% below the five-year average, refineries are at 98% utilisation and the Pakistani diesel crack cap has stopped binding. The crack terms are doing their job as shock absorbers, but a +Rs 2.96 diesel term is a large amount of unexplained variance to be carrying, and it is exactly the quantity v7 was built to remove. That v7 nevertheless keeps LOSING the diesel leg is the standing puzzle of this log.",
+  "scorecardNote": "The last five scored cycles plus the open call on Friday 11 September. Each row is a call locked on that date, graded against the OGRA revision that answered it. Error = predicted - actual, so a negative number means the model was too low. The 10 September row is today's 15:30 call and is still open; the 01:20 call of the same morning is not shown separately because it is superseded by this one and the two answer the same notification. The 10 September revision itself never appears as a row, because no prediction was ever locked against it.",
+  "gradedNote": "Nothing graded. No revision has occurred since the previous entry, so there is no actual to grade against. The last graded cycle remains the 8 September call against the 9 September notification - petrol +Re 0.90, diesel -Re 0.75, both directions right, the best paired result in 32 cycles - and it is shown below unchanged. The 01:20 entry of today is superseded and excluded, not scored: it predicts the same Friday revision this entry does.",
+  "backtestNote": "Carried unchanged - nothing was scored this run. Lifetime after 32 scored cycles: petrol MAE Rs 2.18 (bias -Re 0.38), diesel MAE Rs 1.54 (bias +Re 0.09), direction right on 47 of 63 fuel-cycles (75%). On the current roll model alone, 29 cycles: petrol MAE Rs 2.22, diesel MAE Rs 1.15, direction 41 of 57 (72%). The v7 product-window shadow stands at petrol MAE Rs 2.04 over 17 cycles and diesel MAE Rs 1.73 over 14; the promotion test - beat v6 on BOTH MAE figures - remains unmet. Friday's notification grades six things at once: the v6 pair, the v7 pair, the outsized diesel crack term, and the corrected product windows.",
+  "root": "Unchanged from yesterday in substance, with one addition. v6 proxies a PRODUCT assessment with CRUDE and lets a per-fuel crack term absorb the difference; last week that blew up on petrol when Gulf gasoline supply was physically destroyed and Brent barely moved, and this week the same mechanism is loading onto diesel, which is why the diesel crack term is now the largest in the log at +Rs 2.96 and why it carries the health warning. The addition is a data-hygiene failure rather than a model failure: the product legs were being read off the headline quote rather than the settled Previous field, and on 9 September that put a $10.29/bbl error into the v7 diesel window. v6 has been disciplined about this on crude since early August; v7's product legs had not inherited the same rule. They have now.",
   "fixes": [
-   "Window advanced TWO steps for the two revisions since the last run: drop $88.52 append $97.16, then drop $88.10 append $97.92. Basis $92.7414 -> $93.9757 -> $95.3786 as of 8 September.",
-   "Brent taken at the Reuters settle $101.21 (front-month, +$3.29/3.4%, high $101.58), cross-checked against Trading Economics' CFD reads of $100.72-$101.14. Where the two differ the exchange settle is used and the difference is noted rather than smoothed.",
-   "Crack terms updated twice - once on the scored 9 September cycle and once on the ungraded 10 September cycle - taking petrol 4.32 -> 3.87 -> 2.41 and diesel 1.27 -> 1.65 -> 2.96. No decay applied: the rule withholds decay while refining margins are firming, and on distillate they are firming hard.",
-   "FX moved 277.60 -> 277.46 (Business Recorder interbank, 9 September: selling 277.56, buying 277.36). hamariweb was serving open-market rather than interbank figures near 278.75-279.40 and was not used.",
-   "v7 product windows advanced two steps on real settles for the first time in three runs: RBOB $3.2525 then $3.2409/gal, ULSD $4.5678 then $4.7205/gal, chained to $156.86/$156.30 and $201.59/$208.33 per barrel. The 7 September product gap remains unfilled and is flagged, not back-filled.",
-   "k held at 1.00 on both fuels. Two cycles of product-crack residual are not evidence that crude is systematically over- or under-explaining."
+   "Window NOT advanced and crack terms NOT updated - correct behaviour, not a skipped step. Both move one step per OGRA revision, and no revision has occurred since the previous entry. Basis holds at $95.3786 as of the 8 September settle, petrol crack +Rs 2.41, diesel crack +Rs 2.96, k 1.00 on both fuels.",
+   "The 01:20 entry of today is marked SUPERSEDED and excluded from accuracy rather than graded, because it and this entry are calls on the same Friday 11 September revision. This is the double-counting rule established by the 5-7 September sequence.",
+   "Both 9 September product slots corrected from mid-session quotes to settled closes: gasoline $3.2409 -> $3.2107/gal ($156.858 -> $154.848/bbl) and heating oil $4.7205 -> $4.8009/gal ($201.588 -> $211.881/bbl). New standing rule: product legs are taken from Trading Economics' Previous field, never the headline quote, exactly as crude already is.",
+   "Brent S re-confirmed rather than assumed: Trading Economics reads Actual $102.20 against Previous $101.21, which matches the Reuters settle used yesterday to the cent. No correction needed on the crude leg.",
+   "FX updated 277.46 -> 277.379, cross-checked two ways (Trading Economics USDPKR 277.379, Google/Morningstar 277.38). Worth under a paisa on the projection. hamariweb's rate pages now 404 and have been dropped from the source list."
   ]
  },
  "news": {
-  "headline": "Brent settles above $100 for the first time since May - and diesel, not petrol, is now the fuel to fill",
-  "summary": "Two OGRA revisions have landed since the last brief. On 9 September petrol rose Rs 5.58 to Rs 364.35 and HSD Rs 4.18 to Rs 385.95 - the call the 8 September brief had locked, and it was the best paired call in the log, petrol out by +Re 0.90 and diesel by -Re 0.75. On 10 September, in force now, petrol rose a further Rs 3.40 to Rs 367.75 and HSD jumped Rs 6.72 to Rs 392.67; no prediction existed for that cycle because the scheduled run did not fire before the notification, so it is recorded but excluded from the accuracy record. In three days petrol is up Rs 21.88 and diesel Rs 14.62. The tape behind it: Brent settled $101.21 on Wednesday, up 3.4% and the highest close since 22 May, after Iran said it had attacked ten ships near the Strait of Hormuz and the US sank five Iranian tankers - the biggest wave of attacks on shipping since the war began. Hormuz flows have fallen below 2 million bpd against 8-9 million before the 30 August resumption of fighting. The EIA raised its price forecasts for 2026 and 2027 on Wednesday. Crucially the two products have separated: heating oil rose 3.34% to $4.72/gal while gasoline FELL 0.42%, US diesel is closing on a record $6/gal, distillate stocks sit 14% below the five-year average and refineries are at 98% utilisation. That is why the model now has diesel rising faster than petrol - a reversal of last week - and why the diesel crack term is the largest it has ever been. No levy, GST or margin change: petroleum levy Rs 80/L and Climate Support Levy Rs 5/L are unchanged on both fuels.",
+  "headline": "No new notification yet - the Friday call stands, and both product legs turn out to have been misread",
+  "summary": "Nothing has been notified since this morning's catch-up brief. Petrol remains Rs 367.75 and high-speed diesel Rs 392.67, set on Wednesday evening for Thursday 10 September alone under the daily pricing mechanism now in force, and the next notification is due this evening for midnight. That means no grading, no window roll and no change to the crack terms - the Friday 11 September call is carried forward essentially unchanged: petrol Rs 372.83 (+Rs 5.08) and diesel Rs 398.30 (+Rs 5.63), diesel the larger move for the second call running. The tape has kept moving in the same direction. Brent is trading $102.20 as this brief locks, a three-month high and up nearly 15% since 1 September, after Tehran signalled it will not back down from a military blockade and strikes between the US and Iran continued; Wednesday's $101.21 settle, re-confirmed today, is still the last complete input to Friday's price because OGRA has notified before the ICE settle on each of the last three cycles. The substantive finding is a correction rather than a headline: the 9 September product closes used this morning were mid-session quotes and both were wrong - gasoline settled $3.2107/gal, not $3.2409, and heating oil $4.8009/gal, not $4.7205. The heating-oil error was worth $10.29 a barrel in the diesel window, the largest slot revision in the series, and correcting it lifts the v7 diesel call for Friday from Rs 396.11 to Rs 397.00. Petroleum levy Rs 80/L and Climate Support Levy Rs 5/L are unchanged on both fuels - and could not have changed, since no notification has been issued.",
   "drivers": [
-   "OGRA, in force now: petrol Rs 367.75 (+Rs 3.40) and HSD Rs 392.67 (+Rs 6.72), effective THURSDAY 10 SEPTEMBER ONLY - next revision Friday 11 September",
-   "The 9 September revision (petrol Rs 364.35, HSD Rs 385.95) was scored: petrol +Re 0.90, diesel -Re 0.75, the first cycle in 32 with both legs under a rupee",
-   "Brent settled $101.21 Wednesday (+3.4%, highest close since 22 May) after Iran struck ten ships near Hormuz and the US sank five Iranian tankers",
-   "Products have diverged sharply: heating oil +3.34% to $4.72/gal against gasoline -0.42%; US diesel near a record $6/gal, distillate stocks 14% below the five-year average, refineries at 98% utilisation",
-   "Hormuz transits have collapsed below 2 mb/d from 8-9 mb/d before fighting resumed on 30 August; Kpler counted six commodity vessels on Tuesday against a 10-day average of twelve",
-   "No fiscal change: petroleum levy Rs 80/L (the IMF cap), Climate Support Levy Rs 5/L, dealer Rs 9.98 and OMC Rs 7.87 margins all unchanged; the EIA raised its 2026 and 2027 price forecasts"
+   "No OGRA revision since the last brief: petrol stays Rs 367.75 and HSD Rs 392.67, effective THURSDAY 10 SEPTEMBER ONLY, with the next notification due this evening for midnight",
+   "Friday 11 September call unchanged in substance: petrol Rs 372.83 (+Rs 5.08, about Rs 280 a tank) and diesel Rs 398.30 (+Rs 5.63, about Rs 310) - fill both, diesel first",
+   "Brent trading $102.20 intraday, a three-month high and up almost 15% since 1 September, as Tehran signals it will not lift its military blockade; Wednesday's $101.21 settle is still the last input to Friday's price",
+   "CORRECTION: both 9 September product closes were misread from mid-session quotes - gasoline $3.2107 not $3.2409, heating oil $4.8009 not $4.7205, the latter a $10.29/bbl error in the v7 diesel window",
+   "Heating oil is holding near a record around $4.76-4.80/gal on constrained refined-product supply, while gasoline eased from a two-week high as post-summer demand fades - the distillate-over-gasoline split that is driving the diesel call",
+   "Nothing gradeable this run: the 01:20 entry is superseded rather than scored, because it and this entry both call the same Friday revision"
   ],
   "horizons": {
    "d2": {
     "s": "up",
-    "n": "Friday 11 September is the next revision and Wednesday's $101.21 settle is already the last full input to it. Both fuels rise: petrol Rs 5.08 and diesel Rs 5.63 on the model, and diesel is the larger move for the first time in this sequence."
+    "n": "Friday 11 September is the next revision and Wednesday's $101.21 settle is already the last full input to it, because OGRA has notified before the 23:30 PKT ICE settle on each of the last three cycles. Both fuels rise: petrol Rs 5.08 and diesel Rs 5.63, diesel the larger for the second call running."
    },
    "d4": {
     "s": "up",
-    "n": "Across a $95-$108 Brent band the Friday numbers only run petrol Rs 371.29-374.53 and diesel Rs 396.75-400.00 - direction up at every point. Beyond that the window still has $90.49 and $94.65 to shed, so the basis climbs even on a flat tape."
+    "n": "Across a $95-$108 Brent band the Friday numbers only run petrol Rs 371.29-374.53 and diesel Rs 396.75-400.00 - direction up at every point. Beyond Friday the window still has $94.65 and $95.63 to shed against a spot above $101, so the basis climbs even on a flat tape."
    },
    "w1": {
     "s": "firm",
-    "n": "Skewed up but with a real two-sided tail. The EIA raised its forecasts and Saxo, BOK Financial and Capital Economics all describe the strike-counterstrike pattern as now structural. The downside case is a ceasefire being restored - the US and Iran did agree a temporary halt once already this year, and that is exactly the headline that would take $10 out quickly."
+    "n": "Skewed up with a real two-sided tail, unchanged from yesterday. Brent has added nearly 15% in ten days on Hormuz disruption and the strike-counterstrike pattern now looks structural rather than episodic. The downside case is a restored ceasefire - the US and Iran agreed a temporary halt once already this year - which is the single headline that would take $10 out quickly."
    }
   },
-  "dieselCrack": "Widening hard, and it has flipped the fill case. On Wednesday heating oil rose 3.34% to $4.72/gal against Brent's 2.86-3.4% while gasoline actually fell 0.42%, so the distillate crack widened and the gasoline crack narrowed on the same day. The fundamentals underneath are all one way: US diesel prices are at a record and closing on $6/gal, distillate stocks were 14% below the five-year average in late August, US refineries have run at or above 95% for twelve consecutive weeks and hit 98% in the week to 28 August, the Jazan refinery is offline after Houthi strikes, Ukrainian attacks keep taking Russian refining capacity out and Russia's diesel export restrictions remain. The Pakistani pass-through has now caught up: HSD moved Rs 6.72 on 10 September against petrol's Rs 3.40, the first cycle in this run where diesel led, which suggests the administered crack cap that suppressed diesel through August is no longer binding. The diesel crack term is accordingly the largest in the log at +Rs 2.96 per revision, and unlike the petrol term it has risen monotonically across four observations.",
-  "waitAdvice": "Fill both, and fill diesel first. Diesel is projected to rise Rs 5.63 to Rs 398.30 on Friday - about Rs 310 on a 55-litre tank - and petrol Rs 5.08 to Rs 372.83, about Rs 280. Both are comfortably past the Rs 2 threshold and both rise at every point of a $95-$108 Brent band, so the direction of this call does not depend on Thursday's settle. The three-revision arithmetic is the stronger argument: if Brent simply holds $101.21, petrol reaches Rs 380.69 (+Rs 12.94, about Rs 711 a tank) and diesel Rs 407.25 (+Rs 14.58, about Rs 802). The petrol number is more trustworthy than last week's - its crack term has mean-reverted from +Rs 4.32 to +Rs 2.41 exactly as the low-confidence label anticipated - but the diesel number now carries the health warning, because a +Rs 2.96 crack term is the largest this model has ever run and it is built partly on an ungraded cycle. If the Hormuz situation de-escalates, both numbers overshoot. Nothing about that changes the call today.",
+  "dieselCrack": "Still the widest it has been, and still the reason diesel leads the fill case. Trading Economics' Previous field puts heating oil's 9 September close at $4.8009/gal - eight cents above the mid-session figure used this morning and effectively a record - with the contract holding around $4.766 intraday today on what the exchange commentary calls increasingly constrained refined-product supplies. Gasoline went the other way, easing from a two-week high as the end of the driving season cuts the demand outlook, with the Energy Secretary pointing to inventory rebuilds even though stocks remain about 6% below the five-year average. The structural distillate picture is unchanged: US diesel near a record and closing on $6/gal, distillate stocks around 14% below the five-year average, refineries at 98% utilisation, Jazan offline after Houthi strikes and Ukrainian drones now reaching a Russian Arctic energy facility for the first time. The TE crack-spread index sits at 60.5, up 199% year on year. The caveat is unchanged and important: the Rs 2.96 diesel crack term is the largest in the log and half of it was built on the 10 September cycle, which had no prediction attached. Friday's notification is its first real test.",
+  "waitAdvice": "Fill both tonight, and fill diesel first. Diesel is projected to rise Rs 5.63 to Rs 398.30 at midnight - about Rs 310 on a 55-litre tank - and petrol Rs 5.08 to Rs 372.83, about Rs 280. Together that is roughly Rs 590 across two full tanks, for the cost of stopping on the way home. Both clear the Rs 2 threshold comfortably and both rise at every point of a $95-$108 Brent band, so the call does not depend on tonight's settle, which is expected to land after OGRA notifies in any case. The three-revision arithmetic is the stronger argument for not waiting: if Brent simply holds $101.21, petrol reaches Rs 380.68 (+Rs 12.93, about Rs 711 a tank) and diesel Rs 407.25 (+Rs 14.58, about Rs 802). The honest caveat is on magnitude rather than direction - the diesel crack term carrying Rs 2.96 of that move is the largest in the log and is half-built on an ungraded cycle, so Rs 398.30 could plausibly land anywhere between Rs 395 and Rs 400. Every one of those is above today's Rs 392.67.",
   "sources": [
-   "Business Recorder (notifications, Reuters settle report, interbank FX)",
-   "The Express Tribune",
-   "Islamabad Post / DNA News Agency",
-   "Geo News / Petroleum Division notification",
-   "Trading Economics (Brent, RBOB, ULSD, naphtha)",
-   "Reuters via Business Recorder",
-   "EIA Short-Term Energy Outlook",
-   "Saxo Bank, BOK Financial, Capital Economics, Rystad, Kpler (via Reuters)"
+   "Mashriq TV - Petrol Price in Pakistan Today, 10 September 2026 update",
+   "The News - Govt hikes petrol price by Rs3.40, HSD by Rs6.72 per litre (9 September)",
+   "TechJuice - OGRA daily pricing mechanism",
+   "PetrolPrice.com.pk - live OGRA fuel rates",
+   "Trading Economics - Brent crude oil (Actual $102.20 / Previous $101.21)",
+   "Trading Economics - Gasoline (Actual $3.25 / Previous $3.21) and Heating Oil (Actual $4.78 / Previous $4.80)",
+   "Trading Economics - USDPKR 277.379",
+   "Google Finance / Morningstar - USD/PKR 277.38"
   ]
  },
  "shadow": {
@@ -253,20 +252,20 @@
   "warmingUp": false,
   "dieselSuspended": false,
   "nextRevision": {
-   "petrol": 369.73,
-   "diesel": 396.11
+   "petrol": 369.36,
+   "diesel": 397
   },
   "productSpot": {
    "basis": "September-equivalent, percentage-chained through the 31 August contract roll (unchanged method)",
-   "rbobUsdGal": 3.2409,
-   "rbobUsdBbl": 156.298,
-   "ulsdUsdGal": 4.7205,
-   "ulsdUsdBbl": 208.327,
+   "rbobUsdGal": 3.2107,
+   "rbobUsdBbl": 154.848,
+   "ulsdUsdGal": 4.8009,
+   "ulsdUsdBbl": 211.881,
    "rawPriorClose": {
-    "rbobUsdGal": 3.2409,
-    "ulsdUsdGal": 4.7205
+    "rbobUsdGal": 3.2107,
+    "ulsdUsdGal": 4.8009
    },
-   "note": "THE PRODUCT DATA GAP FROM THE LAST TWO RUNS IS CLOSED. Trading Economics is now serving both product legs cleanly: gasoline settled $3.2525/gal on 8 September and $3.2409/gal on 9 September (-0.42% on the day), heating oil $4.5678/gal then $4.7205/gal (+3.34%), and TE's own 'Previous' of $4.57 confirms the 8 September figure independently. The windows therefore advance two real steps rather than the duplicated stand-in the 8 September run had to use. Monday 7 September's product settles were never published and remain the one gap in the series; the 8 September slot carries the 4 September chained value in the petrol window as a legacy of that, which is flagged rather than back-filled. Naphtha $809.88/t (Sep/08, +2.70%). The chained conversion factors are unchanged at 1.1483 (RBOB) and 1.0508 (ULSD)."
+   "note": "BOTH PRODUCT LEGS CORRECTED TO SETTLED CLOSES. Trading Economics' Previous fields now read gasoline $3.21/gal and heating oil $4.80/gal for 9 September, against the $3.2409 and $4.7205 the 01:20 run captured mid-session. The live intraday reads at 16:37 PKT today are gasoline $3.2486 (+1.18%) and heating oil $4.7659 (-0.73%), which back out to those same prior closes arithmetically, so the correction is confirmed two ways. Chained conversion factors unchanged at 1.1483 (RBOB) and 1.0508 (ULSD), giving corrected window slots of $154.848/bbl petrol and $211.881/bbl diesel. Naphtha $825.61/t (Sep/09, +1.94%). Monday 7 September's product settles were never published and remain the one gap in the series; the 8 September petrol slot still carries the 4 September chained value as a legacy of that, flagged rather than back-filled. Neither window ADVANCES this run - there has been no revision to advance them past."
   },
   "accuracy": {
    "petrolMAE": 2.04,
@@ -275,7 +274,7 @@
    "nScoredPetrol": 17,
    "nScoredDiesel": 14,
    "nScored": 17,
-   "note": "SCORED, AND v7 LOST BOTH LEGS THIS TIME - THE MIRROR IMAGE OF LAST CYCLE. v7 called petrol Rs 361.99 against an actual Rs 364.35 (error -Rs 2.36) where v6 called Rs 365.25 (+Re 0.90), and diesel Rs 386.92 against Rs 385.95 (+Re 0.97) where v6 called Rs 385.20 (-Re 0.75). Both directions right on both models. Running totals: v7 petrol MAE Rs 2.04 over 17 cycles against v6's Rs 2.22 over 29; v7 diesel MAE Rs 1.73 over 14 against v6's Rs 1.15 over 28; direction 26 of 31 fuel-cycles (84%) against v6's 41 of 57 (72%). THE PROMOTION TEST IS STILL NOT MET and the gap on the diesel leg has actually widened. The per-fuel case is unchanged in shape but weaker in evidence this cycle: v7 remains the better petrol model over 17 cycles (2.04 vs 2.22) and clearly the worse diesel model (1.73 vs 1.15), and the standing recommendation is still to run v7 on petrol and v6 on diesel - flagged for Asad to confirm, NOT switched autonomously. One caution worth recording: v7's petrol edge is now only 18 paisa of MAE over 17 cycles, which is inside the noise, whereas its diesel deficit is 58 paisa over 14. If the next two cycles go the same way the per-fuel recommendation itself should be withdrawn."
+   "note": "NOTHING SCORED THIS RUN - NO REVISION HAS OCCURRED SINCE THE LAST ONE, SO THE STANDINGS ARE CARRIED UNCHANGED. v7 petrol MAE Rs 2.04 over 17 cycles against v6's Rs 2.22 over 29; v7 diesel MAE Rs 1.73 over 14 against v6's Rs 1.15 over 28; direction 26 of 31 fuel-cycles (84%) against v6's 41 of 57 (72%). The promotion test - beat v6 on BOTH MAE figures - remains unmet. What did change is the input rather than the score: correcting the 9 September heating-oil slot from $4.72 to $4.80/gal lifts the v7 diesel call for Friday from Rs 396.11 to Rs 397.00 and narrows the v6-v7 diesel gap from Rs 2.19 to Rs 1.30, while the gasoline correction takes v7 petrol from Rs 369.73 to Rs 369.36 and widens the petrol gap to Rs 3.47. Friday's notification will grade both. The standing per-fuel recommendation is unchanged and still flagged rather than actioned: v7 on petrol, v6 on diesel, for Asad to confirm. The caution recorded last run stands too - v7's petrol edge is 18 paisa of MAE over 17 cycles, inside the noise, against a 58-paisa diesel deficit over 14."
   }
  },
  "history": [
@@ -1705,7 +1704,52 @@
     "changed": false,
     "note": "NO FISCAL CHANGE, AND IT WAS CHECKED RATHER THAN ASSUMED. Business Recorder's report on the 9 September notification states explicitly that government levies and fixed profit margins remain unchanged on both products: petroleum levy Rs 80/L, Climate Support Levy Rs 5/L, dealer margin Rs 9.98/L, OMC margin Rs 7.87/L, customs Rs 21.15/L on petrol and Rs 15.68/L on HSD, IFEM Rs 7.60 petrol and Rs 4.02 HSD. The full move landed in the ex-refinery import price. One small carried figure was corrected: customs on petrol is reported at Rs 21.15/L, not the Rs 20.65 carried since early August - a reporting refinement, not a change, since the ex-refinery leg accounts for the entire pump move. Standing forward flag: Pakistan targets deregulating petrol prices by June 2027."
    },
-   "note": "BRENT ABOVE $100 FOR THE FIRST TIME SINCE MAY, AND THE FILL CASE IS NOW LED BY DIESEL. Two revisions since the last brief: 9 September (scored, both legs inside a rupee) and 10 September (unpredicted, excluded, in force now). Friday 11 September is called at petrol Rs 372.83 (+Rs 5.08, about Rs 280 a tank) and diesel Rs 398.30 (+Rs 5.63, about Rs 310) - the first time in this sequence the diesel move is the larger. Both rise at every point of a $95-$108 Brent band, so the direction is robust. If Brent holds $101.21 for three revisions the cumulative is petrol +Rs 12.94 (Rs 711 a tank) and diesel +Rs 14.58 (Rs 802). The uncertainty has migrated from the petrol crack term, which mean-reverted 4.32 -> 2.41 as flagged, to the diesel term, which is now +Rs 2.96 - the largest in the log and built partly on an ungraded cycle."
+   "note": "BRENT ABOVE $100 FOR THE FIRST TIME SINCE MAY, AND THE FILL CASE IS NOW LED BY DIESEL. Two revisions since the last brief: 9 September (scored, both legs inside a rupee) and 10 September (unpredicted, excluded, in force now). Friday 11 September is called at petrol Rs 372.83 (+Rs 5.08, about Rs 280 a tank) and diesel Rs 398.30 (+Rs 5.63, about Rs 310) - the first time in this sequence the diesel move is the larger. Both rise at every point of a $95-$108 Brent band, so the direction is robust. If Brent holds $101.21 for three revisions the cumulative is petrol +Rs 12.94 (Rs 711 a tank) and diesel +Rs 14.58 (Rs 802). The uncertainty has migrated from the petrol crack term, which mean-reverted 4.32 -> 2.41 as flagged, to the diesel term, which is now +Rs 2.96 - the largest in the log and built partly on an ungraded cycle.",
+   "superseded": true,
+   "excludedFromAccuracy": true,
+   "supersededBy": "2026-09-10 15:30 PKT run",
+   "supersededNote": "SUPERSEDED, NOT SCORED. This catch-up entry and the 15:30 PKT entry of the same day both predict the Friday 11 September revision. Only the later one is graded, so that a single notification is scored once."
+  },
+  {
+   "date": "2026-09-10",
+   "runTime": "15:30 PKT",
+   "model": "roll",
+   "brentBasis": 95.3786,
+   "brentSpot": 101.21,
+   "brentIntraday": 102.2,
+   "fx": 277.379,
+   "petrolAnchor": 367.75,
+   "dieselAnchor": 392.67,
+   "predictedPetrol": 372.83,
+   "predictedDiesel": 398.3,
+   "shadowPredictedPetrol": 369.36,
+   "shadowPredictedDiesel": 397,
+   "actualPetrol": null,
+   "actualDiesel": null,
+   "verdict": "fill",
+   "newsSignal": "up",
+   "rollSteps": 0,
+   "windowSource": "ICE Brent front-month settles. Window NOT advanced - no OGRA revision has occurred since the previous entry, and the window moves one step per revision, not one step per run. Unchanged and ending at the 8 September settle $97.92, mean $95.3786. S = WEDNESDAY 9 SEPTEMBER's settle $101.21, re-confirmed this run from Trading Economics' Previous field (Actual $102.20, Previous $101.21) against the Reuters settle report used yesterday. Today's $102.20 is an unsettled intraday and enters no window slot; Thursday's own settle lands at 23:30 PKT, after OGRA is expected to notify.",
+   "levyStatus": {
+    "petrol": 80,
+    "hsd": 80,
+    "totalTaxPetrol": 114,
+    "totalTaxHsd": 100,
+    "changed": false,
+    "note": "No fiscal change to report, and none could have occurred - there has been no notification since the one already logged. Carried unchanged from the 9 September notification as reported by Business Recorder: petroleum levy Rs 80/L on both fuels, Climate Support Levy Rs 5/L, dealer margin Rs 9.98/L, OMC margin Rs 7.87/L, customs Rs 21.15/L petrol and Rs 15.68/L HSD, IFEM Rs 7.60 petrol and Rs 4.02 HSD. Tonight's notification is the next opportunity for a fiscal change to appear, and it is the standing blind spot: neither v6 nor v7 can see a levy move, so if Friday's number misses badly in the same direction on both fuels, suspect the levy before the crack term. Standing forward flag: Pakistan targets deregulating petrol prices by June 2027."
+   },
+   "productCorrection": {
+    "rbobUsdGalOld": 3.2409,
+    "rbobUsdGalNew": 3.2107,
+    "ulsdUsdGalOld": 4.7205,
+    "ulsdUsdGalNew": 4.8009,
+    "petrolSlotOld": 156.858,
+    "petrolSlotNew": 154.848,
+    "dieselSlotOld": 201.588,
+    "dieselSlotNew": 211.881,
+    "note": "The 9 September product slots were appended from mid-session CFD quotes and are corrected here to the settled closes now published by Trading Economics. The diesel correction of $10.29/bbl is the largest slot revision in the series."
+   },
+   "note": "A HOLDING RUN, AND THE MOST USEFUL THING IN IT IS A CORRECTION. No OGRA revision since the 01:20 catch-up entry: petrol stays Rs 367.75 and HSD Rs 392.67, notified for Thursday 10 September alone, with the next notification due this evening for midnight. So the window does not advance, no crack term moves, nothing is graded, and the 01:20 entry is superseded so that Friday's notification is scored exactly once. FRIDAY 11 SEPTEMBER, unchanged in substance from this morning and moved only by a Re 0.08 FX drift: petrol Rs 372.83 (+Rs 5.08, about Rs 280 a tank) and diesel Rs 398.30 (+Rs 5.63, about Rs 310) - diesel the larger move for the second consecutive call. VERDICT: FILL BOTH, DIESEL FIRST. Both clear the Rs 2 threshold, and across a $95-$108 Brent band petrol runs Rs 371.29-374.53 and diesel Rs 396.75-400.00, so the direction does not depend on tonight's settle - which in any case is expected to land after OGRA notifies. Three-revision cumulative if Brent holds $101.21: petrol Rs 380.68 (+Rs 12.93, Rs 711 a tank) and diesel Rs 407.25 (+Rs 14.58, Rs 802). THE CORRECTION: both 9 September product slots were taken mid-session at 01:20 and both were wrong - gasoline $3.2409 against a $3.2107 close, heating oil $4.7205 against a $4.8009 close. Corrected, the v7 shadow reads petrol Rs 369.36 and diesel Rs 397.00, the diesel leg moving nearly a rupee closer to v6. Brent is trading $102.20 as this locks, a three-month high, up almost 15% since 1 September on US-Iran escalation - recorded, not used."
   }
  ]
 }</script>
